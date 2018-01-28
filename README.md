@@ -7,7 +7,6 @@
 ## Getting Setup
 
 > #### Clone Repository 
-
 >  ``git clone https://github.com/nikhilesh2/Restaurant-API.git``
 
 
