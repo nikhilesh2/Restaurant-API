@@ -55,8 +55,8 @@ describe('Restaurant Endpoint', function() {
   			it('Should return return 200 status code', function(done) {
     			request.get('/Restaurants/1')
       			.expect(200)
-      			.end(function(err, res) {
-      				done(err);
+				.end(function(err, res) {
+					done(err);
 				});
 			});
 		});
