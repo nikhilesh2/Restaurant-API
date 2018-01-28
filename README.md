@@ -34,12 +34,26 @@
 * hours (required)
 * menu_ids
 * rating
-### Methods
+### Method Overview
 
 | Resource | GET | POST | PUT | DELETE
 | --- | --- | --- | --- | --- |
 | /restaurants | Get List of Restaurants | Create new Restaurant | Not allowed (405) | Delete all Restaurants
 | /restaurants/:id | Get a specific Restaurant | Not allowed (405) | Update a specific Restaurant | Delete a specific Restaurant
 | /restaurants/search | Search for a specific restaurant | Not allowed (405) | Not allowed (405) | Not allowed (405)
+
+#### ```GET /restaurants```
+##### Parameters
+###### None
+
+
+#### ```POST /restaurants```
+##### Parameters
+| Name | Type | Description |
+| --- | --- | --- |
+| name | string| Required. The name of the restaurant |
+| street_address | string | Required. The street address of the Restaurant |
+
+
 
 
