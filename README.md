@@ -36,7 +36,8 @@
 * rating
 #### The Object
 
-| Resource  | GET | POST | PUT | DELETE
-| ------------- | ------------- | -------------
-| /Restaurants  | Returns list of Restaurants  | Create new Restaurant | N/A | Delete all Restaurants
+| Resource | GET | POST | PUT | DELETE
+| --- | --- | --- | --- | --- |
+| /Restaurants | Get List of Restaurants | Create new Restaurant | N/A | Delete all Restaurants
+
 
