@@ -76,7 +76,8 @@
                 "hours_open_start": "10:00",
                 "hours_open_end":  "13:00",
             }
-        ],
+        ], 
+        ...
 }
 ```
 
