@@ -2,7 +2,7 @@
 
 ## Introduction
 
-> API for an online ordering sysetem
+> API for an online ordering system
 
 ## Getting Setup
 
