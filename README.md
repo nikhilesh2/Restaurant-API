@@ -58,25 +58,25 @@
 | email | string | Required. The email of the Restaurant |
 | hours | object | Required. The hours and days the restaurant is open. Restaurants will be considered closed during a specific day of the week if not provided. Below is an example of how to construct the object  |
 
-###### Example of hours object
-```"hours": {
-                "Monday": [
-                    {
-                        "hours_open_start": "10:00",
-                        "hours_open_end":  "13:00",
-                    },
-                    {
-                        "hours_open_start": "16:00",
-                        "hours_open_end":  "17:00",
-                    }
-                ],
-                "Wednesday": [
-                        {
-                            "hours_open_start": "10:00",
-                            "hours_open_end":  "13:00",
-                        }
-                    ],
-             }```
+##### Example of hours object
+``` "hours": {
+    	"Monday": [
+            {
+                "hours_open_start": "10:00",
+                "hours_open_end":  "13:00",
+            },
+            {
+                "hours_open_start": "16:00",
+                "hours_open_end":  "17:00",
+            }
+        ],
+        "Wednesday": [
+            {
+                "hours_open_start": "10:00",
+                "hours_open_end":  "13:00",
+            }
+        ],
+    }```
 
 
 
