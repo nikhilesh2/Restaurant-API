@@ -42,13 +42,13 @@
 | /restaurants/:id | Get a specific Restaurant | Not allowed (405) | Update a specific Restaurant | Delete a specific Restaurant
 | /restaurants/search | Search for a specific restaurant | Not allowed (405) | Not allowed (405) | Not allowed (405)
 
-> #### ```GET /restaurants```
-> ##### Parameters
-> ###### NONE
+#### ```GET /restaurants```
+##### Parameters
+###### NONE
 
 
-> #### ```POST /restaurants```
-> ##### Parameters
+#### ```POST /restaurants```
+##### Parameters
 | Name | Type | Description |
 | --- | --- | --- |
 | name | string| Required. The name of the restaurant |
