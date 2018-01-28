@@ -48,8 +48,10 @@
 | Name | Type | Description |
 | --- | --- | --- |
 | name | string| Required. The name of the restaurant |
-| street_address | string | Required. The street address of the Restaurant |
-| postal_code | string | Required. The postal code of the Restaurant |
+| address | string | Required. The street address of the Restaurant |
+| city | string | Required. The city the Restaurant is located in |
+| zip_code | string | Required. The zip code of the Restaurant |
+| country | string | Required. The country the Restaurant is located in |
 | phone number | string | Required. The phone number of the Restaurant |
 | email | string | Required. The email of the Restaurant |
 | hours | object | Required. The hours in 24-hour time and days the restaurant is open. Restaurants will be considered closed during a specific day of the week if not provided. Below is an example of how to construct the object  |
