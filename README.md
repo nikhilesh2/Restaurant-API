@@ -59,7 +59,7 @@
 | hours | object | Required. The hours and days the restaurant is open. Restaurants will be considered closed during a specific day of the week if not provided. Below is an example of how to construct the object  |
 
 ##### Example of hours object
-``` "hours": {
+```"hours": {
     	"Monday": [
             {
                 "hours_open_start": "10:00",
@@ -76,7 +76,7 @@
                 "hours_open_end":  "13:00",
             }
         ],
-}```
+    }```
 
 
 
