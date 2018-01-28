@@ -15,11 +15,16 @@
 
 > #### Replace access key id and secret key id
 > 	navigate to ``config.json`` in the root directory <br />
-> 	replace ``"accessKeyId"`` and ``"secretAccessKey"`` with your own <br />
-> 	access keys can be found under IAM users in the AWS console <br />
+> 	replace ``"accessKeyId"`` and ``"secretAccessKey"`` with your own. <br />
+> 	Access keys can be found under IAM users in the AWS console <br />
 
 
 >#### Get downloadable version of DynamoDB
 >	[Download here](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/DynamoDBLocal.html#DynamoDBLocal.DownloadingAndRunning) <br />
 >	Navigate to directory where it is located and run it with the following command: <br />
-> 	``java -jar dynamodb_local_latest/DynamoDBLocal.jar``
+>>``java -jar dynamodb_local_latest/DynamoDBLocal.jar``
+
+
+## The API
+#### The API consists of 4 objects: Restaurants, Menus, MenuItems and Reviews
+### Restaurants
