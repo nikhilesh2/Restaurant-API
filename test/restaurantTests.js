@@ -19,9 +19,9 @@ if (process.env.NODE_ENV == 'test') {
 
 describe('Restaurant Endpoint', function() {
 	beforeEach(function(done) {
-        popTables();
-        done();
-    });
+		popTables();
+		done();
+	});
 
    
 	describe('/Restaurants', function() {
