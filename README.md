@@ -7,7 +7,7 @@
 ## Table of Contents:
 * [Getting Setup](#setup)
 * [The API](#TheAPI) <br />
-	*[Restaurants](#TheAPI)
+	* Tests
 * [Unit Tests](#unittests)
 
 
