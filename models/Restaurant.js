@@ -7,12 +7,12 @@ var dynamodb = new AWS.DynamoDB();
 var params = {
     TableName : "Restaurants",
     KeySchema: [       
-        { AttributeName: "restaurant_id", KeyType: "HASH"},
+        { AttributeName: "id", KeyType: "HASH"},
         { AttributeName: "name", KeyType: "RANGE" },
     ],
     AttributeDefinitions: [       
         // { AttributeName: "created", AttributeType: "S" },
-        { AttributeName: "restaurant_id", AttributeType: "S" },
+        { AttributeName: "id", AttributeType: "S" },
         { AttributeName: "name", AttributeType: "S" },
         // { AttributeName: "country", AttributeType: "S" },
         // { AttributeName: "postal_code", AttributeType: "S" },

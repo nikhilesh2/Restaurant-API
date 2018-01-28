@@ -16,6 +16,7 @@ restaurantRouter.all('*', cors());
 var restaurantRouter = express.Router();
 
 const params = require('../models/Restaurant.js');
+const TABLE_NAME = "Restaurants";
 
 
 
@@ -29,7 +30,7 @@ restaurantRouter.route('/')
     // retrieve all restaurants 
     .get(function (req, res) {
         docClient.scan({
-            TableName : "Restaurants",
+            TableName : TABLE_NAME,
         }, function(err, data) {
             if (err) res.status(err.statusCode || 500).json(err); // an error occurred
             else     res.send(data);           // successful response
@@ -39,13 +40,12 @@ restaurantRouter.route('/')
     // add new restaurant 
     .post(function (req, res) {
         const { name, restaurant_id, street_address, postal_code } = req.body;
-        const id = generateID();
         var params = {
-            TableName: "Restaurants",
+            TableName: TABLE_NAME,
             Item:{
-                "restaurant_id": generateID(),
+                "id": generateID(),
                 "name": "Pizza Mart",
-                "address":{
+                "address": {
                     "street": "83 Aspen Rd",
                     "postal_code": 02067,
                 }
@@ -71,10 +71,37 @@ restaurantRouter.route('/')
     ID can be found using SEARCH endpoint
 */
 restaurantRouter.route('/:restaurant_id')
-     
+
     // Retrieve Restaurant by ID   
     .get(function (req, res) {
 
+        // Set up params for query
+        const params = {
+            TableName : TABLE_NAME,
+            id: req.params.restaurant_id,
+            KeyConditionExpression: "#id = :restaurant_id",
+            ExpressionAttributeNames:{
+                "#id": "id"
+            },
+            ExpressionAttributeValues: {
+                ":restaurant_id": req.params.restaurant_id
+            }
+        }
+
+        // make the query
+        docClient.query(params, function(err, data) {
+            if (err) {
+                console.log(err);
+                console.error("Unable to query. Error:", JSON.stringify(err, null, 2));
+                return res.status(404).end();
+            } else {
+                // console.log("Query succeeded.");
+                // data.Items.forEach(function(item) {
+                //     console.log(" -", item.id + ": " + item.name);
+                // });
+                return res.status(200).end();
+            }
+        });
     })
 
 

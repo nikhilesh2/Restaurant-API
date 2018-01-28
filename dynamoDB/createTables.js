@@ -4,7 +4,6 @@ AWS.config.update(config.aws);
 
 var dynamodb = new AWS.DynamoDB();
 const params = require('../models/Restaurant.js');
-console.log(params.restaurant);
 
 dynamodb.createTable(params.restaurant, function(err, data) {
     if (err) {
