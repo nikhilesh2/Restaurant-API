@@ -8,8 +8,9 @@
 * [Getting Setup](#setup)
 
 
-<a name="setup"/>
-##Getting Setup
+<a name="setup" />
+
+## Getting Setup
 
 > #### Clone Repository 
 >  ```git clone https://github.com/nikhilesh2/Restaurant-API.git```
