@@ -6,6 +6,7 @@
 
 ## Table of Contents:
 * [Getting Setup](#setup)
+* [The API](#TheAPI)
 
 
 <a name="setup" />
@@ -31,6 +32,7 @@
 > ```java -jar dynamodb_local_latest/DynamoDBLocal.jar```
 
 
+<a name="TheAPI" />
 ## The API
 ## Restaurants
 
