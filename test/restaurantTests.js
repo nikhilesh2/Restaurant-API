@@ -23,7 +23,6 @@ describe('Restaurant Endpoint', function() {
 		done();
 	});
 
-   
 	describe('/Restaurants', function() {
 
 		describe('GET', function() {
@@ -33,8 +32,8 @@ describe('Restaurant Endpoint', function() {
       			.expect(200)
       			.end(function(err, res) {
       				done(err);
-    			});
-  			});
+				});
+			});
 		});
 
 		describe('POST', function() {
@@ -44,8 +43,8 @@ describe('Restaurant Endpoint', function() {
       			.expect(200)
       			.end(function(err, res) {
       				done(err);
-    			});
-  			});
+				});
+			});
 		});
 	});
 
@@ -58,8 +57,8 @@ describe('Restaurant Endpoint', function() {
       			.expect(200)
       			.end(function(err, res) {
       				done(err);
-    			});
-  			});
+				});
+			});
 		});
 	});
 
