@@ -4,12 +4,11 @@
 
 > API for an online ordering system
 
-# Table of Contents:
-* [Getting Setup](##Getting Setup)
-* [The API](##The API)
+## Table of Contents:
+* [Getting Setup](# Getting Setup)
 
 
-##Getting Setup
+# Getting Setup
 
 > #### Clone Repository 
 >  ```git clone https://github.com/nikhilesh2/Restaurant-API.git```
