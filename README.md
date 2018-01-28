@@ -20,4 +20,6 @@
 
 
 >#### Get downloadable version of DynamoDB
->[Download here](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/DynamoDBLocal.html#DynamoDBLocal.DownloadingAndRunning)
+>	[Download here](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/DynamoDBLocal.html#DynamoDBLocal.DownloadingAndRunning) <br />
+>	Navigate to directory where it is located and run it with the following command <br />
+> 	java -jar dynamodb_local_latest/DynamoDBLocal.jar
