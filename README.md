@@ -40,6 +40,8 @@
 ##### Parameters
 ###### NONE
 
+##### Response Body
+
 
 #### ```POST /restaurants```
 ##### Parameters
@@ -74,7 +76,7 @@
         ...
 }
 ```
-
+##### Response Body
 
 
 
