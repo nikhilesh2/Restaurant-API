@@ -56,7 +56,7 @@
 | postal_code | string | Required. The postal code of the Restaurant |
 | phone number | string | Required. The phone number of the Restaurant |
 | email | string | Required. The email of the Restaurant |
-| hours | object | Required. The hours and days the restaurant is open. Restaurants will be considered closed during a specific day of the week if not provided. Below is an example of how to construct the object  |
+| hours | object | Required. The hours in 24-hour time and days the restaurant is open. Restaurants will be considered closed during a specific day of the week if not provided. Below is an example of how to construct the object  |
 
 ##### Example of hours object
 ```
@@ -77,7 +77,7 @@
                 "hours_open_end":  "13:00",
             }
         ],
-    }
+}
 ```
 
 
