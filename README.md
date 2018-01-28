@@ -27,13 +27,7 @@
 
 ## The API
 ## Restaurants
-* ID 
-* name (required)
-* address (required)
-* contact (required)
-* hours (required)
-* menu_ids
-* rating
+
 ### Method Overview
 
 | Resource | GET | POST | PUT | DELETE
