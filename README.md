@@ -5,9 +5,10 @@
 > API for an online ordering system
 
 ## Table of Contents:
-* [Getting Setup](# Getting Setup)
+* [Getting Setup](#setup)
 
 
+<a name="setup"/>
 # Getting Setup
 
 > #### Clone Repository 
