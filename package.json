@@ -1,0 +1,25 @@
+{
+  "name": "zappos",
+  "version": "1.0.0",
+  "description": "REST API for Zappos",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "tables": "node dynamoDB/createTables.js"
+  },
+  "author": "Nikhilesh Singh",
+  "license": "ISC",
+  "dependencies": {
+    "aws-sdk": "^2.188.0",
+    "body-parser": "^1.18.2",
+    "cors": "^2.8.4",
+    "express": "^4.16.2",
+    "serverless-http": "^1.5.3",
+    "uuid": "^3.2.1"
+  },
+  "devDependencies": {
+    "chai": "^4.1.2",
+    "http-proxy-middleware": "^0.17.4",
+    "mocha": "^5.0.0"
+  }
+}
