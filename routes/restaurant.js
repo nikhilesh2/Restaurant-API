@@ -48,7 +48,30 @@ restaurantRouter.route('/')
                 "address": {
                     "street": "83 Aspen Rd",
                     "postal_code": 02067,
-                }
+                },
+                "contact": {
+                    "phone_number": "781-322-4440",
+                    "email": "pizzaMart@gmail.com",
+                },
+                "hours": {
+                    "Monday": [
+                        {
+                            "hours_open_start": "10:00",
+                            "hours_open_end":  "13:00",
+                        },
+                        {
+                            "hours_open_start": "16:00",
+                            "hours_open_end":  "17:00",
+                        }
+                    ],
+                    "Wednesday": [
+                        {
+                            "hours_open_start": "10:00",
+                            "hours_open_end":  "13:00",
+                        }
+                    ],
+                } 
+               
             }
         };
         docClient.put(params, function(err, data) {

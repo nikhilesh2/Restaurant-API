@@ -11,13 +11,8 @@ var params = {
         { AttributeName: "name", KeyType: "RANGE" },
     ],
     AttributeDefinitions: [       
-        // { AttributeName: "created", AttributeType: "S" },
         { AttributeName: "id", AttributeType: "S" },
         { AttributeName: "name", AttributeType: "S" },
-        // { AttributeName: "country", AttributeType: "S" },
-        // { AttributeName: "postal_code", AttributeType: "S" },
-        // { AttributeName: "street_address", AttributeType: "S" },
-        // { AttributeName: "score", AttributeType: "N" },
     ],
     ProvisionedThroughput: {       
         ReadCapacityUnits: 10, 
