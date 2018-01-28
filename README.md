@@ -49,7 +49,7 @@
 
 > #### ```POST /restaurants```
 > ##### Parameters
-> | Name | Type | Description |
+| Name | Type | Description |
 | --- | --- | --- |
 | name | string| Required. The name of the restaurant |
 | street_address | string | Required. The street address of the Restaurant |
