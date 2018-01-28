@@ -46,7 +46,7 @@
 #### ```POST /restaurants```
 ##### Parameters
 | Name | Type | Required | Description |
-| --- | --- | --- |
+| --- | --- | --- | --- |
 | name | string | Required | The name of the restaurant |
 | address | string | Required| The street address of the Restaurant |
 | city | string | Required | The city the Restaurant is located in |
