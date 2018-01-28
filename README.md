@@ -7,6 +7,7 @@
 ## Table of Contents:
 * [Getting Setup](#setup)
 * [The API](#TheAPI)
+* [Unit Tests](#unittests)
 
 
 <a name="setup" />
@@ -33,6 +34,7 @@
 
 
 <a name="TheAPI" />
+
 ## The API
 ## Restaurants
 
@@ -89,6 +91,8 @@
 ```
 ##### Response Body
 
+
+<a name="unittests" />
 
 ## Unit Tests
 
