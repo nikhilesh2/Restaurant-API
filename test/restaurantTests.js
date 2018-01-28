@@ -1,14 +1,14 @@
 var chai		= require('chai');
-var supertest 	= require('supertest');
-var app 		= require('../index.js');
-var logger 		= require('morgan');
-var assert 		= chai.assert;
-var request 	= supertest(app);
+var supertest	= require('supertest');
+var app			= require('../index.js');
+var logger		= require('morgan');
+var assert		= chai.assert;
+var request		= supertest(app);
 
 var delTables 	= require('../dynamoDB/deleteTables');
 var popTables 	= require('../dev/populateTables');
 
-global.app 		= app;  
+global.app		= app;  
 global.expect 	= chai.expect;  
 global.request 	= supertest(app);  
 
