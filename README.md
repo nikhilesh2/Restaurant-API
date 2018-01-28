@@ -14,9 +14,9 @@
 > ``npm install``
 
 > #### Replace access key id and secret key id
-> 	navigate to ``config.json`` in the root directory
-> 	replace ``"accessKeyId"`` and ``"secretAccessKey"`` with your own
-> 	access keys can be found under IAM users in the AWS console
+> 	navigate to ``config.json`` in the root directory <br />
+> 	replace ``"accessKeyId"`` and ``"secretAccessKey"`` with your own <br />
+> 	access keys can be found under IAM users in the AWS console <br />
 
 
 >#### Get downloadable version of DynamoDB
