@@ -55,6 +55,7 @@
 | phone number | string | Required. The phone number of the Restaurant |
 | email | string | Required. The email of the Restaurant |
 | hours | object | Required. The hours in 24-hour time and days the restaurant is open. Restaurants will be considered closed during a specific day of the week if not provided. Below is an example of how to construct the object  |
+| image_url | string | Optional. An image of the Restaurant |
 
 ##### Example of hours object
 ```
