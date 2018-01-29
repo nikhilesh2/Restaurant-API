@@ -8,8 +8,8 @@
 * [Getting Setup](#setup)
 * [The API](#TheAPI) <br />
 	* [Restaurants](#restaurants)
-	* [Menu](#menu)
-	* [MenuItem](#menuitem)
+	* [Menu (TODO)](#menu)
+	* [MenuItem (TODO)](#menuitem)
 * [Unit Tests](#unittests)
 
 
@@ -93,7 +93,44 @@
 }
 ```
 ##### Response Body
-
+```
+[
+    {
+        "id": "072e3e40-0486-11e8-8e37-57222499c229",
+        "name": "Pizza Mart",
+        "location": {
+            "address": "83 Aspen Rd",
+            "city": "Sharon",
+            "state": "MA",
+            "zip_code": 1079,
+            "country": "United States"
+        },
+        "contact": {
+            "phone_number": "781-322-4440",
+            "email": "pizzaMart@gmail.com"
+        },
+        "hours": {
+            "Monday": [
+                {
+                    "hours_open_start": "10:00",
+                    "hours_open_end": "13:00"
+                },
+                {
+                    "hours_open_start": "16:00",
+                    "hours_open_end": "17:00"
+                }
+            ],
+            "Wednesday": [
+                {
+                    "hours_open_start": "10:00",
+                    "hours_open_end": "13:00"
+                }
+            ]
+        }
+    },
+    ...
+]
+```
 
 <a name="unittests" />
 

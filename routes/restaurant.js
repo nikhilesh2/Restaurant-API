@@ -3,6 +3,9 @@ var express             = require('express');
 var restaurantRouter    = express.Router();
 var config              = require('../config.json');
 var generateID          = require('../utils/generateID');
+var verifiers           = require('../utils/verifier');
+var formatter           = require('../utils/formatter');
+var util                = require('util')
 
 AWS = require("aws-sdk");
 AWS.config.update(config.aws);
@@ -32,59 +35,72 @@ restaurantRouter.route('/')
         docClient.scan({
             TableName : TABLE_NAME,
         }, function(err, data) {
+            console.log();
+            
+            // var formatted_data = formatRestaurant(data);
             if (err) res.status(err.statusCode || 500).json(err); // an error occurred
-            else     res.send(data);           // successful response
+            else     res.send(formatter.formatRestaurant(data));    // successful response
         });
     })
     
     // add new restaurant 
     .post(function (req, res) {
-        const { name, restaurant_id, street_address, postal_code } = req.body;
+        const verify_response = verifiers.verifyRestaurant_POST(req.body);
+        if(verify_response.statusCode === 400)  res.status(verify_response.statusCode).end(verify_response);
+       
+        req.body.Item.id = generateID();
         var params = {
             TableName: TABLE_NAME,
-            Item:{
-                "id": generateID(),
-                "name": "Pizza Mart",
-                "address": {
-                    "street": "83 Aspen Rd",
-                    "postal_code": 02067,
-                },
-                "contact": {
-                    "phone_number": "781-322-4440",
-                    "email": "pizzaMart@gmail.com",
-                },
-                "hours": {
-                    "Monday": [
-                        {
-                            "hours_open_start": "10:00",
-                            "hours_open_end":  "13:00",
-                        },
-                        {
-                            "hours_open_start": "16:00",
-                            "hours_open_end":  "17:00",
-                        }
-                    ],
-                    "Wednesday": [
-                        {
-                            "hours_open_start": "10:00",
-                            "hours_open_end":  "13:00",
-                        }
-                    ],
-                } 
-               
-            }
-        };
+            Item: req.body.Item,
+        }
+   
         docClient.put(params, function(err, data) {
             if (err) {
                 console.error("Unable to add item. Error JSON:", JSON.stringify(err, null, 2));
                 return res.status(404).end();
             } else {
-                console.log("Added item:", JSON.stringify(data, null, 2));
                 res.send(data);
             }
         });
     });
 
+
+
+/* ======= SEARCH ======= */
+/* 
+    This endpoint allows you search for
+    restaurants based off certain attributes. 
+*/
+restaurantRouter.route('/search')
+
+    // Retrieve based of search values
+    .get(function (req, res) {
+        const params = {
+            TableName : TABLE_NAME,
+
+            FilterExpression: "#name = :name and :email = email",
+            ExpressionAttributeNames:{
+                "#name": "name"
+            },
+            ExpressionAttributeValues: {
+                // ":restaurant_id": '3a266680-0475-11e8-8589-19938989f56d',
+                ":name": 'Pizza Mart',
+                ":email": "pizzaMart@gmail.com"
+            }
+        }
+
+        // perform the scan
+        docClient.scan(params, function(err, data) {
+            if (err) {
+                console.log(err);
+                console.error("Unable to query. Error:", JSON.stringify(err, null, 2));
+                return res.status(404).end();
+            } else {
+                res.status(200);
+                res.json(data);
+            }
+        });
+    })
 
 
 /* ======= RESTAURANT BY ID ======= */
@@ -118,11 +134,8 @@ restaurantRouter.route('/:restaurant_id')
                 console.error("Unable to query. Error:", JSON.stringify(err, null, 2));
                 return res.status(404).end();
             } else {
-                // console.log("Query succeeded.");
-                // data.Items.forEach(function(item) {
-                //     console.log(" -", item.id + ": " + item.name);
-                // });
-                return res.status(200).end();
+                res.status(200);
+                res.json(data);
             }
         });
     })
@@ -138,20 +151,9 @@ restaurantRouter.route('/reviews/:restaurant_id')
     // Retrieve Restaurant by ID   
     .get(function (req, res) {
 
+
     })
 
-
-/* ======= SEARCH ======= */
-/* 
-    This endpoint allows you search for
-    restaurants based off certain attributes. 
-*/
-restaurantRouter.route('/search')
-    
-    // Retrieve Restaurant by ID   
-    .get(function (req, res) {
-   
-    })
 
 /* ======= MENUS ======= */
 /* 

@@ -3,10 +3,13 @@ var supertest	= require('supertest');
 var app			= require('../index.js');
 var logger		= require('morgan');
 var assert		= chai.assert;
+var should 		= chai.should();
 var request		= supertest(app);
 
-var delTables 	= require('../dynamoDB/deleteTables');
+
+// var delTables 	= require('../dynamoDB/deleteTables');
 var popTables 	= require('../dev/populateTables');
+const SAMPLES = require('./restaurantSample');
 
 global.app		= app;  
 global.expect 	= chai.expect;  
@@ -16,6 +19,8 @@ global.process.env.NODE_ENV = 'test';
 if (process.env.NODE_ENV == 'test') {
 	console.error = function() {};
 }
+
+
 
 describe('Restaurant Endpoint', function() {
 	beforeEach(function(done) {
@@ -37,10 +42,28 @@ describe('Restaurant Endpoint', function() {
 		});
 
 		describe('POST', function() {
-		 	// TODO: COMPLETE POST TEST
-  			it('Should run without error', function(done) {
-    			request.get('/Restaurants')
+		 	// Make a valid POST request
+  			it('Should add item successfully', function(done) {
+    			request.post('/Restaurants')
+    			.send(SAMPLES.correct)
       			.expect(200)
+      			.end(function(err, res) {
+      				done(err);
+				});
+			});
+			// Make an invalid POST request
+  			it('Should not add item', function(done) {
+    			request.post('/Restaurants')
+    			.send(SAMPLES.incorrect)
+      			.expect(400)
+      			.end(function(err, res) {
+      				done(err);
+				});
+			});
+			it('Should not add item', function(done) {
+    			request.post('/Restaurants')
+    			.send()
+      			.expect(400)
       			.end(function(err, res) {
       				done(err);
 				});
@@ -52,10 +75,12 @@ describe('Restaurant Endpoint', function() {
 	describe('/Restaurants/:id', function() {
 		describe('GET', function() {
 		 	// Arbitrary GET request
-  			it('Should return return 200 status code', function(done) {
-    			request.get('/Restaurants/1')
+  			it('Should have empty response', function(done) {
+    			request.get('/Restaurants/BLAH')
       			.expect(200)
 				.end(function(err, res) {
+                	res.body.Items.should.be.a('array');
+                	res.body.Items.length.should.be.eql(0);
 					done(err);
 				});
 			});
