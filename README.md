@@ -42,7 +42,7 @@
 > Alternatively, to delete all tables run the following: <br />
 > ```npm run delete-tables```
 
-#### All Done!
+> #### All Done!
 > Just run ```npm run start``` to try out the API
 
 
