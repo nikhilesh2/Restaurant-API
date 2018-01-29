@@ -99,10 +99,10 @@
         "id": "072e3e40-0486-11e8-8e37-57222499c229",
         "name": "Pizza Mart",
         "location": {
-            "address": "83 Aspen Rd",
-            "city": "Sharon",
-            "state": "MA",
-            "zip_code": 1079,
+            "address": "331 Fairwood Road",
+            "city": "Denver",
+            "state": "CO",
+            "zip_code": 12527,
             "country": "United States"
         },
         "contact": {
