@@ -142,6 +142,43 @@
 }
 ```
 
+##### Response Body
+```
+{
+    "statusCode": 201,
+    "message": "Added item successfully",
+    "Item": {
+        "grant_type": "client_credentials",
+        id": "9ebc5350-04a4-11e8-9c13-a7befeda5ee6",
+        "name": "Subway",
+        "address": "556 merry way\n",
+        "city": "Boston",
+        "zip_code": "83831",
+        "state": "MA",
+        "country": "United States",
+        "phone_number": "921-412-6939",
+        "email": "abc@test.com",
+        "hours": {
+            "Monday": [
+                {
+                    "hours_open_start": "10:00",
+                    "hours_open_end": "13:00"
+                },
+                {
+                    "hours_open_start": "16:00",
+                    "hours_open_end": "17:00"
+                }
+            ],
+            "Wednesday": [
+                {
+                    "hours_open_start": "10:00",
+                    "hours_open_end": "13:00"
+                }
+            ]
+        }
+    }
+}
+```
 <a name="unittests" />
 
 ## Unit Tests
