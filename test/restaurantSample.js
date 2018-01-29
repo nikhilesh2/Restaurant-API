@@ -8,6 +8,7 @@ const R_CORRECT =  {
             "email": "pizzaMart@gmail.com",
             "city": "Sharon",
             "state": "MA",
+            "delivers": "yes",
             "country": "United States",
             "hours": {
                 "Monday": [

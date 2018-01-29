@@ -5,7 +5,7 @@ var config              = require('../config.json');
 var generateID          = require('../utils/generateID');
 var verifiers           = require('../utils/verifier');
 var formatter           = require('../utils/formatter');
-var util                = require('util')
+var generateQueryParams = require('../utils/generateQueryParams');
 
 AWS = require("aws-sdk");
 AWS.config.update(config.aws);
@@ -75,19 +75,12 @@ restaurantRouter.route('/search')
 
     // Retrieve based of search values
     .get(function (req, res) {
-        const params = {
-            TableName : TABLE_NAME,
-
-            FilterExpression: "#name = :name and :email = email",
-            ExpressionAttributeNames:{
-                "#name": "name"
-            },
-            ExpressionAttributeValues: {
-                // ":restaurant_id": '3a266680-0475-11e8-8589-19938989f56d',
-                ":name": 'Pizza Mart',
-                ":email": "pizzaMart@gmail.com"
-            }
-        }
+        
+        // Ensure there are parameters to search with
+        if(Object.keys(req.body).length === 0)  return res.status(400).end();
+        
+        // generate the parameters for DB scan using the requested parameters
+        const params = generateQueryParams("Restaurants", req.body);
 
         // perform the scan
         docClient.scan(params, function(err, data) {
@@ -96,8 +89,7 @@ restaurantRouter.route('/search')
                 console.error("Unable to query. Error:", JSON.stringify(err, null, 2));
                 return res.status(404).end();
             } else {
-                res.status(200);
-                res.json(data);
+                res.status(200).send(formatter.formatRestaurant(data));
             }
         });
     })

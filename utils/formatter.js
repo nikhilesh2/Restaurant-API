@@ -7,7 +7,8 @@ module.exports = {
 			formatted_data.push({
 				id: item.id,
 				name: item.name,
-				image_url: item.image_url,
+				image_url: item.image_url ? item.image_url : '',
+				delivers: item.delivers ? item.delivers : 'no',
 				location: {
 					address: item.address,
 					city: item.city,
