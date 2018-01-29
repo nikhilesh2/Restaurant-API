@@ -36,7 +36,7 @@
 > ```java -jar dynamodb_local_latest/DynamoDBLocal.jar```
 
 > #### Creating the tables
-> Create the required tables with the following tables: <br />
+> Create the required tables with the following command: <br />
 > ```npm run create-tables``` <br />
 > <br />
 > Alternatively, to delete all tables run the following: <br />
