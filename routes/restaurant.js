@@ -6,7 +6,6 @@ var generateID          = require('../utils/generateID');
 var verifiers           = require('../utils/verifier');
 var formatter           = require('../utils/formatter');
 var generateQueryParams = require('../utils/generateQueryParams');
-var dynamoCache         = require('dynamo-cache'); 
 
 AWS = require("aws-sdk");
 AWS.config.update(config.aws);
