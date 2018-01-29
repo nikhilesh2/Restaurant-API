@@ -24,14 +24,14 @@ if (process.env.NODE_ENV == 'test') {
 
 describe('Restaurant Endpoint', function() {
 	beforeEach(function(done) {
-		popTables();
+		// popTables();
 		done();
 	});
 
 	describe('/Restaurants', function() {
 
 		describe('GET', function() {
-		 	// Arbitrary GET request
+		 	// GET request
   			it('Should run without error', function(done) {
     			request.get('/Restaurants')
       			.expect(200)
@@ -43,11 +43,25 @@ describe('Restaurant Endpoint', function() {
 		
 		describe('POST', function() {
 		 	// Make a valid POST request
-  			it('Should add item successfully', function(done) {
+  			it('Should add item successfully (includes image_url)', function(done) {
     			request.post('/Restaurants')
     			.send(SAMPLES.correct)
-      			.expect(200)
+      			.expect(201)
+
       			.end(function(err, res) {
+      				expect(res.body.Item[0]).to.have.property('image_url', 'https://google.com');
+      				done(err);
+				});
+			});
+			// Make a valid POST request without image_url
+  			it('Should add item successfully (excludes image_url)', function(done) {
+
+    			request.post('/Restaurants')
+    			.send(SAMPLES.correct_no_url)
+      			.expect(201)
+
+      			.end(function(err, res) {
+      				expect(res.body.Item[0]).to.have.property('image_url', '');
       				done(err);
 				});
 			});
@@ -81,7 +95,7 @@ describe('Restaurant Endpoint', function() {
       			.expect(200)
 				.end(function(err, res) {
                 	res.body.Items.should.be.a('array');
-                	// res.body.Items.length.should.be.eql(0);
+                	res.body.Items.length.should.be.eql(0);
 					done(err);
 				});
 			});
@@ -90,8 +104,7 @@ describe('Restaurant Endpoint', function() {
 
 	describe('/search', function() {
 		describe('GET', function() {
-		 	
-		 	// Arbitrary GET request
+			// Making search with valid attribute but non existent value
   			it('Should have empty response', function(done) {
     			request.get('/Restaurants/search')
     			.send({zip_code: 'blah'})
@@ -102,8 +115,8 @@ describe('Restaurant Endpoint', function() {
 					done(err);
 				});
 			});
-
-			it('Should return 400 status code', function(done) {
+  			// Making search with empty object
+			it('Should return 400 status code (empty object)', function(done) {
     			request.get('/Restaurants/search')
     			.send({})
       			.expect(400)
@@ -111,15 +124,25 @@ describe('Restaurant Endpoint', function() {
 					done(err);
 				});
 			});
+			// Making search with empty string
+			it('Should return 400 status code (empty string)', function(done) {
+    			request.get('/Restaurants/search')
+    			.send('invalid')
+      			.expect(400)
+				.end(function(err, res) {
+					done(err);
+				});
+			});
+			// Making search with empty string
+			it('Should return 200 status code', function(done) {
+    			request.get('/Restaurants/search')
+    			.send({name: 'Pizza Mart', zip_code: '02067'})
+      			.expect(200)
+				.end(function(err, res) {
+					done(err);
+				});
+			});
 		});
 	});
 
-// // Restaurants Table doesn't exist
-//  		it('Should return return 400 status code', function(done) {
-//    		request.get('/Restaurants')
-//      		.expect(400)
-//      		.end(function(err, res) {
-//      			done(err);
-//    		});
-//  		});
 });

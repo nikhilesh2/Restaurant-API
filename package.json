@@ -1,11 +1,12 @@
 {
   "name": "zappos",
   "version": "1.0.0",
-  "description": "REST API for Zappos",
+  "description": "REST API for online food ordering system",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "tables": "node dynamoDB/createTables.js"
+    "test": "mocha",
+    "create-tables": "node dynamoDB/createTables.js",
+    "delete-tables": "node dynamoDB/deleteTables.js"
   },
   "author": "Nikhilesh Singh",
   "license": "ISC",
@@ -16,7 +17,7 @@
     "express": "^4.16.2",
     "serverless-http": "^1.5.3",
     "uuid": "^3.2.1",
-    "morgan": "^1.9.0",
+    "morgan": "^1.9.0"
   },
   "devDependencies": {
     "chai": "^4.1.2",

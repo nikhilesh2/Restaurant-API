@@ -37,7 +37,6 @@ restaurantRouter.route('/')
         }, function(err, data) {
             console.log();
             
-            // var formatted_data = formatRestaurant(data);
             if (err) res.status(err.statusCode || 500).json(err); // an error occurred
             else     res.send(formatter.formatRestaurant(data));    // successful response
         });
@@ -45,21 +44,27 @@ restaurantRouter.route('/')
     
     // add new restaurant 
     .post(function (req, res) {
+        
+        // Ensure the request object is in the right from
         const verify_response = verifiers.verifyRestaurant_POST(req.body);
-        if(verify_response.statusCode === 400)  res.status(verify_response.statusCode).end(verify_response);
-       
-        req.body.Item.id = generateID();
+        if(verify_response.statusCode === 400) {
+            return res.status(400).send(verify_response);
+        }
+
+        req.body.id = generateID(); // create a unique id
+  
         var params = {
             TableName: TABLE_NAME,
-            Item: req.body.Item,
+            Item: req.body,
         }
    
         docClient.put(params, function(err, data) {
             if (err) {
+                console.log(err);
                 console.error("Unable to add item. Error JSON:", JSON.stringify(err, null, 2));
                 return res.status(404).end();
             } else {
-                res.send(data);
+                res.status(201).send({statusCode: 201, message: "Added item successfully", Item: formatter.formatRestaurant([req.body])});
             }
         });
     });
@@ -75,10 +80,15 @@ restaurantRouter.route('/search')
 
     // Retrieve based of search values
     .get(function (req, res) {
-        
+
         // Ensure there are parameters to search with
-        if(Object.keys(req.body).length === 0)  return res.status(400).end();
+        if(Object.keys(req.body).length === 0)          return res.status(400).end();
         
+        //Ensure no empty strings were passed in
+        for(var key in req.body) if(req.body[key] === ''){
+            return res.status(400).end();
+        } 
+
         // generate the parameters for DB scan using the requested parameters
         const params = generateQueryParams("Restaurants", req.body);
 

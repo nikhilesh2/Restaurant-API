@@ -1,5 +1,5 @@
 
-
+// Create a new param object to be a valid DynamoDB param
 module.exports = function(TableName, params) {
 	const adj_params = {};
 
@@ -7,15 +7,9 @@ module.exports = function(TableName, params) {
 	 var ExpressionAttributeNames = {};
 	 var ExpressionAttributeValues = {};
 
-	
-	if(params.name) {
- 		
- 		FilterExpression = params.name ? "#name = :name" : "";
- 		ExpressionAttributeNames["#name"] = ':name';
- 		ExpressionAttributeValues[":name"] = params.name;
-	}
+
 	for(var key in params) {
-		if (FilterExpression !== "") 	FilterExpression += " and ";
+		if (FilterExpression !== "")	FilterExpression += " and ";
 		FilterExpression += '#' + key + ' = ' + ':' + key;
 		ExpressionAttributeNames['#' + key] = key;
 		ExpressionAttributeValues[':' + key] = params[key];

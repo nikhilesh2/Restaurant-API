@@ -1,6 +1,6 @@
 module.exports = {
 	formatRestaurant: function(data) {
-		const items = data.Items;
+		const items = data.Items ? data.Items : data;
 		var formatted_data = [];
 		for(var key in items) {
 			item = items[key]

@@ -1,9 +1,9 @@
 module.exports = {
 	verifyRestaurant_POST: function(params) {
 		const messages = [];
-		if(!params.Item) return {statusCode: 400, message: "Invalid Object"};
-
-		var item = params.Item;
+		if(params == null) return {statusCode: 400, message: "Invalid request object"};
+		
+		var item = params;
 
 		if(item.id) messages.push("ID attribute should not be passed in");
 
@@ -27,6 +27,7 @@ module.exports = {
 			statusCode: messages.length === 0 ? 200 : 400,
 			messages: messages
 		}
+
 		return response;
 	}
 

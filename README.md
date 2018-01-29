@@ -35,6 +35,12 @@
 >	* Navigate to directory where it is located and run it with the following command: <br />
 > ```java -jar dynamodb_local_latest/DynamoDBLocal.jar```
 
+> #### Creating the tables
+> Create the required tables with the following tables:
+> ```npm run create-tables```
+> Alternatively, to delete all tables run the following:
+> ```npm run delete-tables```
+
 
 <a name="TheAPI" />
 
