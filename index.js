@@ -1,8 +1,8 @@
-var express 			= require('express');
-var app 				= express();
-var bodyParser          = require('body-parser');
-var logger 				= require('morgan');
-var port 				= process.env.PORT || 5000;
+var express				= require('express');
+var app					= express();
+var bodyParser			= require('body-parser');
+var logger				= require('morgan');
+var port				= process.env.PORT || 5000;
 
 var restaurantRouter 	= require('./routes/restaurant');
 var devRouter 			= require('./routes/dev');
