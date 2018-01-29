@@ -6,13 +6,13 @@ var generateID          = require('../utils/generateID');
 var verifiers           = require('../utils/verifier');
 var formatter           = require('../utils/formatter');
 var generateQueryParams = require('../utils/generateQueryParams');
+var dynamoCache         = require('dynamo-cache'); 
 
 AWS = require("aws-sdk");
 AWS.config.update(config.aws);
 
 var dynamodb = new AWS.DynamoDB();
 var docClient = new AWS.DynamoDB.DocumentClient();
-
 
 restaurantRouter.all('*', cors());
 
@@ -35,7 +35,6 @@ restaurantRouter.route('/')
         docClient.scan({
             TableName : TABLE_NAME,
         }, function(err, data) {
-            console.log();
             
             if (err) res.status(err.statusCode || 500).json(err); // an error occurred
             else     res.send(formatter.formatRestaurant(data));    // successful response
@@ -111,24 +110,16 @@ restaurantRouter.route('/search')
     restaurants based off certain attributes.
     ID can be found using SEARCH endpoint
 */
-restaurantRouter.route('/:restaurant_id')
+restaurantRouter.route('/:id')
 
     // Retrieve Restaurant by ID   
     .get(function (req, res) {
 
-        // Set up params for query
-        const params = {
-            TableName : TABLE_NAME,
-            id: req.params.restaurant_id,
-            KeyConditionExpression: "#id = :restaurant_id",
-            ExpressionAttributeNames:{
-                "#id": "id"
-            },
-            ExpressionAttributeValues: {
-                ":restaurant_id": req.params.restaurant_id
-            }
-        }
-
+        // generate the parameters for DB scan using the requested parameters
+        const params = generateQueryParams("Restaurants", req.params);
+        params.KeyConditionExpression = "#id = :id";
+        delete params.FilterExpression
+       
         // make the query
         docClient.query(params, function(err, data) {
             if (err) {
@@ -136,19 +127,45 @@ restaurantRouter.route('/:restaurant_id')
                 console.error("Unable to query. Error:", JSON.stringify(err, null, 2));
                 return res.status(404).end();
             } else {
-                res.status(200);
-                res.json(data);
+                res.status(200).send(formatter.formatRestaurant(data)[0])
             }
         });
     })
+    .delete(function (req, res) {
 
+        // TODO
+        // // Set up params for query
+        // const params = {
+        //     TableName : TABLE_NAME,
+        //     id: req.params.restaurant_id,
+        //     KeyConditionExpression: "#id = :restaurant_id",
+        //     ExpressionAttributeNames:{
+        //         "#id": "id"
+        //     },
+        //     ExpressionAttributeValues: {
+        //         ":restaurant_id": req.params.restaurant_id
+        //     }
+        // }
+
+        // // make the query
+        // docClient.query(params, function(err, data) {
+        //     if (err) {
+        //         console.log(err);
+        //         console.error("Unable to query. Error:", JSON.stringify(err, null, 2));
+        //         return res.status(404).end();
+        //     } else {
+        //         res.status(200);
+        //         res.json(data);
+        //     }
+        // });
+    })
 
 /* ======= REVIEWS ======= */
 /* 
     This endpoint allows you to retrieve
     reviews of a restaurant.
 */
-restaurantRouter.route('/reviews/:restaurant_id')
+restaurantRouter.route('/:id/reviews')
     
     // Retrieve Restaurant by ID   
     .get(function (req, res) {
@@ -162,7 +179,7 @@ restaurantRouter.route('/reviews/:restaurant_id')
     This endpoint allows you to retrieve
     a restaurant menu based on restaurant ID
 */
-restaurantRouter.route('/menu/:restaurant_id')
+restaurantRouter.route('/:id/menus')
        
     .get(function (req, res) {
    

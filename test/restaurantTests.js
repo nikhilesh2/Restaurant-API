@@ -94,8 +94,7 @@ describe('Restaurant Endpoint', function() {
     			request.get('/Restaurants/BLAH')
       			.expect(200)
 				.end(function(err, res) {
-                	res.body.Items.should.be.a('array');
-                	res.body.Items.length.should.be.eql(0);
+                	expect(res.body).to.deep.equal({});
 					done(err);
 				});
 			});
