@@ -1,5 +1,5 @@
 {
-  "name": "zappos",
+  "name": "Restaurant API",
   "version": "1.0.0",
   "description": "REST API for online food ordering system",
   "main": "index.js",
