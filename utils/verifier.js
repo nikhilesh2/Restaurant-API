@@ -17,6 +17,7 @@ module.exports = {
 		if(!item.phone_number) 			messages.push("phone_number attribute must be set");
 		if(!item.email) 				messages.push("email attribute must be set");
 		if(!item.hours)					messages.push("hours Attribute must be set");
+		// if(!item.menus)					messages.push("menus Attribute must be set");
 
 		// Optional - however must check if 'delivers' has a value, then it should be either 'yes' or 'no'
 		if(item.delivers && 

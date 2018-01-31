@@ -1,6 +1,7 @@
 module.exports = {
 	formatRestaurant: function(data) {
 		const items = data.Items ? data.Items : data;
+		if (Object.keys(data).length === 0) return {};
 		var formatted_data = [];
 		for(var key in items) {
 			item = items[key]
@@ -8,6 +9,7 @@ module.exports = {
 				id: item.id,
 				name: item.name,
 				image_url: item.image_url ? item.image_url : '',
+				menus: item.menus,
 				delivers: item.delivers ? item.delivers : 'no',
 				location: {
 					address: item.address,

@@ -5,14 +5,14 @@ AWS.config.update(config.aws);
 var dynamodb = new AWS.DynamoDB();
 
 var params = {
-    TableName : "Menu",
+    TableName : "Menus",
     KeySchema: [       
         { AttributeName: "id", KeyType: "HASH"},
-        { AttributeName: "type", KeyType: "RANGE" },
+        { AttributeName: "restaurant_id", KeyType: "RANGE"},
     ],
     AttributeDefinitions: [       
         { AttributeName: "id", AttributeType: "S" },
-        { AttributeName: "type", AttributeType: "S" },
+        { AttributeName: "restaurant_id", AttributeType: "S"},
     ],
     ProvisionedThroughput: {       
         ReadCapacityUnits: 10, 

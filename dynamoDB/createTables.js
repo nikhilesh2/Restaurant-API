@@ -5,7 +5,7 @@ AWS.config.update(config.aws);
 var dynamodb = new AWS.DynamoDB();
 const Restaurant = require('../models/Restaurant');
 const Menu = require('../models/Menu');
-const models = [Restaurant.restaurant,Menu.menu];
+const models = [Restaurant.restaurant, Menu.menu];
 
 
 for(var i in models) {

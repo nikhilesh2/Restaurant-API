@@ -9,7 +9,7 @@ var request		= supertest(app);
 
 // var delTables 	= require('../dynamoDB/deleteTables');
 var popTables 	= require('../dev/populateTables');
-const SAMPLES = require('./restaurantSample');
+const SAMPLES 	= require('./restaurantSample');
 
 global.app		= app;  
 global.expect 	= chai.expect;  
@@ -92,9 +92,9 @@ describe('Restaurant Endpoint', function() {
 		 	// Arbitrary GET request
   			it('Should have empty response', function(done) {
     			request.get('/Restaurants/BLAH')
-      			.expect(200)
+      			.expect(404)
 				.end(function(err, res) {
-                	expect(res.body).to.deep.equal({});
+                	expect(res.body).to.deep.equal({ statusCode: 404 });
 					done(err);
 				});
 			});

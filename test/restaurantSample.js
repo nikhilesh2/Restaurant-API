@@ -10,6 +10,7 @@ const R_CORRECT =  {
             "state": "MA",
             "delivers": "yes",
             "country": "United States",
+            "menus": "4,2,1,42",
             "hours": {
                 "Monday": [
                     {
@@ -40,6 +41,7 @@ const R_CORRECT =  {
             "state": "MA",
             "delivers": "yes",
             "country": "United States",
+            "menus": "9,1,5,20,10",
             "hours": {
                 "Monday": [
                     {

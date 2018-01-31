@@ -5,6 +5,7 @@ var logger				= require('morgan');
 var port				= process.env.PORT || 5000;
 
 var restaurantRouter 	= require('./routes/restaurant');
+var menuRouter 			= require('./routes/menu');
 var devRouter 			= require('./routes/dev');
 
 
@@ -17,6 +18,8 @@ app.use(bodyParser.json());
 // Establish endpoints
 app.use('/dev', devRouter.devRouter);
 app.use('/restaurants', restaurantRouter.restaurantRouter);
+app.use('/menus', menuRouter.menuRouter);
+// app.use('/menu_item', restaurantRouter.restaurantRouter);
 
 
 // Start server
