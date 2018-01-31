@@ -94,7 +94,7 @@ describe('Restaurant Endpoint', function() {
     			request.get('/Restaurants/BLAH')
       			.expect(404)
 				.end(function(err, res) {
-                	expect(res.body).to.deep.equal({ statusCode: 404 });
+                	expect(res.body).to.deep.equal({ statusCode: 404, message: "Unable to perform the request" });
 					done(err);
 				});
 			});

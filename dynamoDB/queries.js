@@ -23,11 +23,8 @@ module.exports = {
 		 docClient.scan({
             TableName : TableName,
         }, function(err, data) {
-            if (err) { 
-            	console.error("Unable to query. Error:", JSON.stringify(err, null, 2));
-            }
+            if (err) console.error("Unable to query. Error:", JSON.stringify(err, null, 2));
            	else {
-				console.log(data);
 				 return_obj = data;
                 //if(data.Items.length !== 0)  
             }
@@ -37,7 +34,6 @@ module.exports = {
 	put_query: function(params, callback) {
 		docClient.put(params, function(err, data) {
             if (err) {
-                console.log(err);
                 console.error("Unable to add item. Error JSON:", JSON.stringify(err, null, 2));
                 callback({statusCode: 400, message: 'Unable to add item.'})
             } else {

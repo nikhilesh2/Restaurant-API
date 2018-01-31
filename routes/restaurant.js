@@ -62,7 +62,7 @@ restaurantRouter.route('/')
                 console.error("Unable to add item. Error JSON:", JSON.stringify(err, null, 2));
                 return res.status(404).end();
             } else {
-                res.status(201).send({statusCode: 201, message: "Added item successfully", Item: formatter.formatRestaurant([req.body])});
+                res.status(201).send({statusCode: 201, message: "Added item successfully", Item: formatter[TABLE_NAME]([req.body])});
             }
         });
     });
@@ -96,7 +96,7 @@ restaurantRouter.route('/search')
                 console.error("Unable to query. Error:", JSON.stringify(err, null, 2));
                 return res.status(404).send([]);
             } else {
-                res.status(200).send(formatter.formatRestaurant(data));
+                res.status(200).send(formatter[TABLE_NAME](data));
             }
         });
     })
@@ -115,17 +115,6 @@ restaurantRouter.route('/:id')
         GET.get_by_id(TABLE_NAME, req.params, function(response) {
             res.status(response.statusCode).send(response.data);
         })
-        // // generate the parameters for DB scan using the requested parameters
-        // const params = generateQueryParams(TABLE_NAME, req.params);
-        // params.KeyConditionExpression = "#id = :id";
-        // delete params.FilterExpression
-       
-        // // make the query
-        // dynamoDB.retrieve_query(params, function(result) {
-        //     const statusCode = result.Items ? 200 : 404;
-        //     res.status(statusCode).send({statusCode: statusCode, Item: formatter.formatRestaurant(result)[0]});
-        // });
-        
     })
 
     // Delete a Restaurant by ID
