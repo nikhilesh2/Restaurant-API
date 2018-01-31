@@ -137,16 +137,10 @@ restaurantRouter.route('/:id')
             Key: { "id": req.params.id }
         };
 
-        // make the query
-        docClient.delete(params, function(err, data) {
-            var formattedItem = formatter.formatRestaurant([data]);
-
-            if (err) {
-                res.status(404).send({statusCode: 404, message: "Deleted item successfully", Item: formattedItem});
-         } else {
-                res.status(204).send({statusCode: 200, message: "Deleted item successfully"});
-            }
-        });
+         // make the query
+        dynamoDB.delete_query(params, function(result) {
+            res.status(result.statusCode).send(result);
+        })
     })
 
 /* ======= REVIEWS ======= */

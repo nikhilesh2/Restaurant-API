@@ -8,11 +8,9 @@ var params = {
     TableName : "Menus",
     KeySchema: [       
         { AttributeName: "id", KeyType: "HASH"},
-        { AttributeName: "restaurant_id", KeyType: "RANGE"},
     ],
     AttributeDefinitions: [       
         { AttributeName: "id", AttributeType: "S" },
-        { AttributeName: "restaurant_id", AttributeType: "S"},
     ],
     ProvisionedThroughput: {       
         ReadCapacityUnits: 10, 

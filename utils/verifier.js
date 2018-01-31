@@ -5,7 +5,7 @@ module.exports = {
 		
 		var item = params;
 
-		if(item.id) messages.push("ID attribute should not be passed in");
+		if(item.id) 					messages.push("ID attribute should not be passed in");
 
 		// Required
 		if(!item.name)					messages.push("name attribute must be set");
@@ -24,14 +24,30 @@ module.exports = {
 		!(item.delivers !== 'yes' 
 		|| item.delivers !== 'no'))		messages.push("delivers must be set to either 'yes' or 'no'");
 
-		const response = {
-			statusCode: messages.length === 0 ? 200 : 400,
-			messages: messages
-		}
+		return formatResponse(messages);
+	},
+	verifyMenu_POST: function(params) {
+		const messages = [];
+		if(params == null) return {statusCode: 400, message: "Invalid request object"};
+		
+		var item = params;
 
-		return response;
+		if(item.id) 					messages.push("ID attribute should not be passed in");
+		
+		// Required
+		if(!item.type)					messages.push("type attribute must be set");
+		if(!item.hours)					messages.push("hours attribute must be set");
+		if(!item.restaurant_id)			messages.push("hours attribute must be set");
+
+		return formatResponse(messages);
+		
 	}
-
 }
 
+var formatResponse = function(messages) {
+	return {
+		statusCode: messages.length === 0 ? 200 : 400,
+		messages: messages
+	}
+}
 

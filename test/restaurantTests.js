@@ -99,6 +99,19 @@ describe('Restaurant Endpoint', function() {
 				});
 			});
 		});
+		describe('DELETE', function() {
+		 	
+		 	// Trying to delete an object that doesn't exist in database
+  			it('Should return 404 (item does not exist)', function(done) {
+    			request.delete('/Restaurants/BLAH')
+      			.expect(404)
+				.end(function(err, res) {
+                	expect(res.body).to.deep.equal({ statusCode: 404, message: 'Item not found' });
+					done(err);
+				});
+			});
+
+		});
 	});
 
 	describe('/search', function() {
