@@ -6,7 +6,8 @@ var generateID          = require('../utils/generateID');
 var verifiers           = require('../utils/verifier');
 var formatter           = require('../utils/formatter');
 var generateQueryParams = require('../utils/generateQueryParams');
-var dynamoDB            = require('../dynamoDB/queries.js')
+var dynamoDB            = require('../dynamoDB/queries.js');
+var GET                 = require('../utils/getResource');
 
 AWS = require("aws-sdk");
 AWS.config.update(config.aws);
@@ -34,11 +35,8 @@ restaurantRouter.route('/')
     .get(function (req, res) {
 
         // perform a scan over all entries
-        docClient.scan({
-            TableName : TABLE_NAME,
-        }, function(err, data) {
-            if (err) res.status(err.statusCode || 500).json(err); // an error occurred
-            else     res.send(formatter.formatRestaurant(data));    // successful response
+        GET.get_all(TABLE_NAME, function(response) {
+            res.status(response.statusCode).send(response.data);
         });
     })
     
@@ -114,17 +112,19 @@ restaurantRouter.route('/:id')
 
     // Retrieve Restaurant by ID   
     .get(function (req, res) {
-
-        // generate the parameters for DB scan using the requested parameters
-        const params = generateQueryParams(TABLE_NAME, req.params);
-        params.KeyConditionExpression = "#id = :id";
-        delete params.FilterExpression
+        GET.get_by_id(TABLE_NAME, req.params, function(response) {
+            res.status(response.statusCode).send(response.data);
+        })
+        // // generate the parameters for DB scan using the requested parameters
+        // const params = generateQueryParams(TABLE_NAME, req.params);
+        // params.KeyConditionExpression = "#id = :id";
+        // delete params.FilterExpression
        
-        // make the query
-        dynamoDB.retrieve_query(params, function(result) {
-            const statusCode = result.Items ? 200 : 404;
-            res.status(statusCode).send({statusCode: statusCode, Item: formatter.formatRestaurant(result)[0]});
-        });
+        // // make the query
+        // dynamoDB.retrieve_query(params, function(result) {
+        //     const statusCode = result.Items ? 200 : 404;
+        //     res.status(statusCode).send({statusCode: statusCode, Item: formatter.formatRestaurant(result)[0]});
+        // });
         
     })
 
@@ -178,18 +178,6 @@ restaurantRouter.route('/:id/menus')
             
         });
     })
-
-    // TODO: Add a menu to a restaurant
-    .post(function (req, res) {
-       
-    })
-
-restaurantRouter.route('/:id/menus/:menu_id')
-    .get(function (req, res) {
-
-    });
-
-
 
 
 module.exports = {

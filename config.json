@@ -2,7 +2,7 @@
 	"aws": {
 		"region": "us-east-2",
 		"endpoint": "http://localhost:8000",
-   		"accessKeyId": "AKIAIQYGULS2MOQN75JQ", 
-   		"secretAccessKey": "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"
+   		"accessKeyId": "AKIAIQR5RSVM3SDL4YZA", 
+   		"secretAccessKey": "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"
 	}
 }

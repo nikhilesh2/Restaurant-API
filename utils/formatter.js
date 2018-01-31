@@ -1,5 +1,5 @@
 module.exports = {
-	formatRestaurant: function(data) {
+	Restaurants: function(data) {
 		const items = data.Items ? data.Items : data;
 		if (Object.keys(data).length === 0) return {};
 		var formatted_data = [];
@@ -9,7 +9,7 @@ module.exports = {
 				id: item.id,
 				name: item.name,
 				image_url: item.image_url ? item.image_url : '',
-				menus: item.menus,
+				menu_ids: item.menu_ids,
 				delivers: item.delivers ? item.delivers : 'no',
 				location: {
 					address: item.address,
@@ -27,7 +27,8 @@ module.exports = {
 		}
 		return formatted_data;
 	},
-	formatMenu: function(data) {
+	Menus: function(data) {
+		console.log("in ere");
 		const items = data.Items ? data.Items : data;
 		if (Object.keys(data).length === 0) return {};
 		var formatted_data = [];
@@ -39,6 +40,31 @@ module.exports = {
 				type: item.type,
 				hours: item.hours,
 				menuItems: [],
+			})
+		}
+		return formatted_data;
+	},
+	MenuItems: function(data) {
+		const items = data.Items ? data.Items : data;
+		if (Object.keys(data).length === 0) return {};
+		var formatted_data = [];
+
+		for(var key in items) {
+			item = items[key];
+			formatted_data.push({
+				id: item.id,
+				type: item.type,
+				name: item.name,
+				price: item.price,
+				food_spec: {
+					vegan: 'yes',
+					vegetarian: 'yes',
+					spicy: '6',
+
+				},
+				combos: {
+					
+				}
 			})
 		}
 		return formatted_data;

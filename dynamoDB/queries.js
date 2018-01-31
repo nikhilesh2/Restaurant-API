@@ -27,7 +27,9 @@ module.exports = {
             	console.error("Unable to query. Error:", JSON.stringify(err, null, 2));
             }
            	else {
-                if(data.Items.length !== 0)   return_obj = data;
+				console.log(data);
+				 return_obj = data;
+                //if(data.Items.length !== 0)  
             }
             callback(return_obj);
         });
@@ -47,7 +49,7 @@ module.exports = {
 		docClient.delete(params, function(err, data) {
             // var formattedItem = formatter.formatRestaurant([data]);
 
-            if (err)				callback({ statusCode: 404, message: "Something went wrong trying to delete the item", err: err });
+            if (err)				callback({ statusCode: 404, message: "Something went wrong trying to delete the item" });
         	else if (!data.Item)	callback({ statusCode: 404, message: "Item not found" });
         	else 					callback({ statusCode: 204, message: "Deleted item successfully", Item: data.Attributes });
         });

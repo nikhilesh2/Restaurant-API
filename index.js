@@ -6,6 +6,7 @@ var port				= process.env.PORT || 5000;
 
 var restaurantRouter 	= require('./routes/restaurant');
 var menuRouter 			= require('./routes/menu');
+var menuItemRouter 		= require('./routes/menuItem');
 var devRouter 			= require('./routes/dev');
 
 
@@ -19,7 +20,7 @@ app.use(bodyParser.json());
 app.use('/dev', devRouter.devRouter);
 app.use('/restaurants', restaurantRouter.restaurantRouter);
 app.use('/menus', menuRouter.menuRouter);
-// app.use('/menu_item', restaurantRouter.restaurantRouter);
+app.use('/menu-items', menuItemRouter.menuItemRouter);
 
 
 // Start server
