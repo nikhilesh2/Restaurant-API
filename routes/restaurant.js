@@ -7,7 +7,7 @@ var verifiers           = require('../utils/verifier');
 var formatter           = require('../utils/formatter');
 var generateQueryParams = require('../utils/generateQueryParams');
 var dynamoDB            = require('../dynamoDB/queries.js');
-var GET                 = require('../utils/getResource');
+var resource            = require('../utils/resourceMethods');
 
 AWS = require("aws-sdk");
 AWS.config.update(config.aws);
@@ -35,7 +35,7 @@ restaurantRouter.route('/')
     .get(function (req, res) {
 
         // perform a scan over all entries
-        GET.get_all(TABLE_NAME, function(response) {
+        resource.get_all(TABLE_NAME, function(response) {
             res.status(response.statusCode).send(response.data);
         });
     })
@@ -49,22 +49,9 @@ restaurantRouter.route('/')
             return res.status(400).send(verify_response);
         }
 
-        req.body.id = generateID(); // create a unique id
-        req.body.menus = req.body.menus ? req.body.menus : " "; // if menus are not set, set it
-  
-        var params = {
-            TableName: TABLE_NAME,
-            Item: req.body,
-        }
-   
-        docClient.put(params, function(err, data) {
-            if (err) {
-                console.error("Unable to add item. Error JSON:", JSON.stringify(err, null, 2));
-                return res.status(404).end();
-            } else {
-                res.status(201).send({statusCode: 201, message: "Added item successfully", Item: formatter[TABLE_NAME]([req.body])});
-            }
-        });
+        resource.create(TABLE_NAME, req.body, function(response) {
+            res.status(response.statusCode).send(response);
+        })
     });
 
 
@@ -112,7 +99,7 @@ restaurantRouter.route('/:id')
 
     // Retrieve Restaurant by ID   
     .get(function (req, res) {
-        GET.get_by_id(TABLE_NAME, req.params, function(response) {
+        resource.get_by_id(TABLE_NAME, req.params, function(response) {
             res.status(response.statusCode).send(response.data);
         })
     })

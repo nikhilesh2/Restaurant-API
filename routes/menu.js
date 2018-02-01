@@ -6,7 +6,7 @@ var generateID          = require('../utils/generateID');
 var verifiers           = require('../utils/verifier');
 var dynamoDB            = require('../dynamoDB/queries.js')
 var generateQueryParams = require('../utils/generateQueryParams');
-var GET                 = require('../utils/getResource');
+var resource            = require('../utils/resourceMethods');
 
 AWS = require("aws-sdk");
 AWS.config.update(config.aws);
@@ -34,7 +34,7 @@ menuRouter.route('/')
     
     // retrieve all menus
     .get(function (req, res) {
-       GET.get_all(TABLE_NAME, function(response) {
+       resource.get_all(TABLE_NAME, function(response) {
             res.status(response.statusCode).send(response.data);
         })
     })
@@ -48,11 +48,8 @@ menuRouter.route('/')
             return res.status(400).send(verify_response);
         }
 
-        req.body.id = generateID(); // create a unique id
-
-        // perform the query
-        dynamoDB.put_query({TableName: TABLE_NAME, Item: req.body}, function(result) {
-            res.status(result.statusCode).send(result);
+        resource.create(TABLE_NAME, req.body, function(response) {
+            res.status(response.statusCode).send(response);
         });
     });
 
@@ -68,7 +65,7 @@ menuRouter.route('/:id')
     
     // retrieve menu based of menu id
     .get(function (req, res) {
-        GET.get_by_id(TABLE_NAME, req.params, function(response) {
+        resource.get_by_id(TABLE_NAME, req.params, function(response) {
             res.status(response.statusCode).send(response.data);
         })
     })

@@ -1,3 +1,5 @@
+// Define and properly format our models here
+
 module.exports = {
 	Restaurants: function(data) {
 		const items = data.Items ? data.Items : data;
@@ -25,10 +27,10 @@ module.exports = {
 				hours: item.hours
 			})
 		}
+
 		return formatted_data;
 	},
 	Menus: function(data) {
-		console.log("in ere");
 		const items = data.Items ? data.Items : data;
 		if (Object.keys(data).length === 0) return {};
 		var formatted_data = [];
@@ -57,10 +59,10 @@ module.exports = {
 				name: item.name,
 				price: item.price,
 				food_spec: {
-					vegan: 'yes',
-					vegetarian: 'yes',
+					isVegan: false,
+					isVegetarian: true,
 					spicy: '6',
-
+					allergies: item.allergies
 				},
 				combos: {
 					

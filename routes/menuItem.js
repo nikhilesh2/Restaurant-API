@@ -6,6 +6,7 @@ var generateID          = require('../utils/generateID');
 var verifiers           = require('../utils/verifier');
 var dynamoDB            = require('../dynamoDB/queries.js')
 var generateQueryParams = require('../utils/generateQueryParams');
+var resource            = require('../utils/resourceMethods');
 
 AWS = require("aws-sdk");
 AWS.config.update(config.aws);
@@ -33,7 +34,7 @@ menuItemRouter.route('/')
     
     // retrieve all menus
     .get(function (req, res) {
-       GET.get_all(TABLE_NAME, function(response) {
+       resource.get_all(TABLE_NAME, function(response) {
             res.status(response.statusCode).send(response.data);
         })
     })
