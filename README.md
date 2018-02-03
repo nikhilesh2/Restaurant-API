@@ -64,46 +64,7 @@
 ###### NONE
 
 ##### Response Body
-```
-[
-    {
-        "id": "072e3e40-0486-11e8-8e37-57222499c229",
-        "name": "Pizza Mart",
-        "image_url": "",
-        "delivers": "no",
-        "location": {
-            "address": "331 Fairwood Road",
-            "city": "Denver",
-            "state": "CO",
-            "zip_code": 12527,
-            "country": "United States"
-        },
-        "contact": {
-            "phone_number": "781-322-4440",
-            "email": "pizzaMart@gmail.com"
-        },
-        "hours": {
-            "Monday": [
-                {
-                    "hours_open_start": "10:00",
-                    "hours_open_end": "13:00"
-                },
-                {
-                    "hours_open_start": "16:00",
-                    "hours_open_end": "17:00"
-                }
-            ],
-            "Wednesday": [
-                {
-                    "hours_open_start": "10:00",
-                    "hours_open_end": "13:00"
-                }
-            ]
-        }
-    },
-    ...
-]
-```
+
 
 
 
@@ -145,48 +106,7 @@
 ```
 
 ##### Response Body
-```
-{
-    "statusCode": 201,
-    "message": "Added item successfully",
-    "Item": {
-        "grant_type": "client_credentials",
-        id": "9ebc5350-04a4-11e8-9c13-a7befeda5ee6",
-        "name": "Subway",
-        "image_url": "",
-        "delivers": "no",
-        "location": {
-                "address": "556 merry way\n",
-                "city": "Boston",
-                "state": "MA",
-                "zip_code": "83831",
-                "country": "United States"
-            },
-        "contact": {
-                "phone_number": "921-412-6939",
-                "email": "abc@test.com"
-        },
-        "hours": {
-            "Monday": [
-                {
-                    "hours_open_start": "10:00",
-                    "hours_open_end": "13:00"
-                },
-                {
-                    "hours_open_start": "16:00",
-                    "hours_open_end": "17:00"
-                }
-            ],
-            "Wednesday": [
-                {
-                    "hours_open_start": "10:00",
-                    "hours_open_end": "13:00"
-                }
-            ]
-        }
-    }
-}
-```
+
 <a name="unittests" />
 
 ## Unit Tests
