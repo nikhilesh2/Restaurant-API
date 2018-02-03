@@ -20,5 +20,29 @@ module.exports = {
 			result[key]
 		}
 		return result;
+	},
+	parse_sections: function(arr) {
+		var result = {};
+
+		const sections = arr.M;
+		for(key in sections) {
+			const section = sections[key].L;
+			result[key] = [];
+			for(index in section) {
+				result[key].push(section[index].S);
+			}
+		}
+		return result;
+	},
+	parse_food_spec: function(arr) {
+		var result = {};
+
+		const food_spec = arr.M;
+		result.isVegan = food_spec.isVegan.BOOL;
+		result.isVegetarian = food_spec.isVegetarian.BOOL;
+		result.spicy = food_spec.isVegetarian.S;
+		result.allergies = this.parse_string_array(food_spec.allergies);
+		
+		return result;
 	}
 }

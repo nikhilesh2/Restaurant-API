@@ -137,7 +137,7 @@ restaurantRouter.route('/:id/reviews')
 /* ======= MENUS ======= */
 /* 
     This endpoint allows you to retrieve
-    a restaurant menus based on restaurant ID
+    a restaurants' menus based on restaurant ID
 */
 restaurantRouter.route('/:id/menus')
        
@@ -159,10 +159,11 @@ restaurantRouter.route('/:id/menus')
                 params.RequestItems.Menus.Keys.push({id: {S: menu_ids[i]}});
 
 
+            // use menu ids to make batch query
             db.batchGetItem(params, function(err, data) {
                 if (err) res.send({statusCode: 400, message: 'Unable to get items.'})
                 else {
-                    const res_menus = data.Responses.Menus;
+                    const res_menus = data.Responses.Menus;             
                     var count = 0;
                     for(i in res_menus) {
                         const res_menu = res_menus[i];
@@ -170,7 +171,8 @@ restaurantRouter.route('/:id/menus')
                         menus.Items.push({
                             id: res_menu.id.S, 
                             restaurant_id: res_menu.restaurant_id.S, 
-                            type: res_menu.type.S,  
+                            type: res_menu.type.S,
+                            sections: batchParser.parse_sections(res_menu.sections),
                             menuItem_ids: batchParser.parse_string_array(res_menu.menuItem_ids),
                             hours: batchParser.parse_hours(res_menu.hours),
                         });

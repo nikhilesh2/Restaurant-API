@@ -10,6 +10,8 @@ module.exports = {
 			formatted_data.push({
 				id: item.id,
 				name: item.name,
+				description: item.description,
+				website: item.website,
 				image_url: item.image_url ? item.image_url : '',
 				menu_ids: item.menu_ids ? item.menu_ids : [],
 				delivers: item.delivers ? item.delivers : 'no',
@@ -41,7 +43,7 @@ module.exports = {
 				id: item.id,
 				type: item.type,
 				hours: item.hours,
-				menuItem_ids: item.menuItem_ids ? item.menuItem_ids : [],
+				sections: item.sections ? item.sections : [],
 			})
 		}
 		return formatted_data;
@@ -60,13 +62,10 @@ module.exports = {
 				price: item.price,
 				description: item.description,
 				food_spec: {
-					isVegan: false,
-					isVegetarian: true,
-					spicy: '6',
+					isVegan: item.isVegan,
+					isVegetarian: item.isVegetarian,
+					spicy: item.spicy,
 					allergies: item.allergies
-				},
-				combos: {
-					
 				}
 			})
 		}

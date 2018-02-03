@@ -66,27 +66,36 @@ const R_CORRECT =  {
 const restaurant_list = [
     {
         "id": "a322ce50-0860-11e8-8ccd-3b24d794a9b3",
-        "name": "Thai Thani",
+        "name": "Thai Hana",
+        "description": "Classic Thai & Japanese mains & clever sushi rolls presented in contemporary, colorful digs.",
         "image_url": " ",
+        "website": "http://thaihana99.com/",
         "delivers": "yes",
-
-        "address": "83 Aspen Rd",
-        "city": "Sharon",
-        "state": "MA",
-        "zip_code": "02067",
+        "address": "3608 Fifth Ave",
+        "city": "Pittsburgh",
+        "state": "PA",
+        "zip_code": "15213",
         "country": "United States",
-        "phone_number": "781-322-4440",
-        "email": "pizzaMart@gmail.com",
+        "phone_number": "412-621-1100",
+        "email": "thaihana99@gmail.com",
         "menu_ids" : ['ea33e70e-1207-499e-bbe9-b9ed2323f932', '41bdd3ce-4b21-4408-adc5-8fbee6484b36'],
         "hours": {
             "Monday": [
                 {
-                    "hours_open_start": "10:00",
-                    "hours_open_end": "13:00"
-                },
+                    "hours_open_start": "11:00",
+                    "hours_open_end": "21:00"
+                }
+            ],
+            "Tuesday": [
                 {
-                    "hours_open_start": "16:00",
-                    "hours_open_end": "17:00"
+                    "hours_open_start": "11:00",
+                    "hours_open_end": "21:00"
+                }
+            ],
+            "Tuesday": [
+                {
+                    "hours_open_start": "11:00",
+                    "hours_open_end": "21:00"
                 }
             ],
             "Wednesday": [
@@ -94,8 +103,28 @@ const restaurant_list = [
                     "hours_open_start": "10:00",
                     "hours_open_end": "13:00"
                 }
+            ],
+            "Thursday": [
+                {
+                    "hours_open_start": "11:00",
+                    "hours_open_end": "21:00"
+                }
+            ],
+            "Friday": [
+                {
+                    "hours_open_start": "11:00",
+                    "hours_open_end": "21:00"
+                }
+            ],
+            "Saturday": [
+                {
+                    "hours_open_start": "12:00",
+                    "hours_open_end": "21:00"
+                }
             ]
-        }
+
+        },
+
     },
     {
         "id": "a867d5e0-0860-11e8-8038-898b27a33038",
