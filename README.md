@@ -112,5 +112,5 @@
 ## Unit Tests
 
 > #### Type in the following command to run the unit tests
->  ```mocha```
+>  ```npm run tests```
 
