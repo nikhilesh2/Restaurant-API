@@ -6,8 +6,10 @@
   "scripts": {
     "test": "mocha",
     "start": "nodemon index.js",
+    "build-tables": "npm run delete-tables && npm run create-tables && npm run populate-tables",
     "create-tables": "node dynamoDB/createTables.js",
-    "delete-tables": "node dynamoDB/deleteTables.js"
+    "delete-tables": "node dynamoDB/deleteTables.js",
+    "populate-tables": "node dev/populateTables.js"
   },
   "author": "Nikhilesh Singh",
   "license": "ISC",
@@ -16,6 +18,7 @@
     "body-parser": "^1.18.2",
     "cors": "^2.8.4",
     "express": "^4.16.2",
+    "express-prettify": "0.0.10",
     "morgan": "^1.9.0",
     "serverless-http": "^1.5.3",
     "uuid": "^3.2.1"

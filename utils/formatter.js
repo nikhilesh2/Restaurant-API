@@ -11,7 +11,7 @@ module.exports = {
 				id: item.id,
 				name: item.name,
 				image_url: item.image_url ? item.image_url : '',
-				menu_ids: item.menu_ids,
+				menu_ids: item.menu_ids ? item.menu_ids : [],
 				delivers: item.delivers ? item.delivers : 'no',
 				location: {
 					address: item.address,
@@ -41,7 +41,7 @@ module.exports = {
 				id: item.id,
 				type: item.type,
 				hours: item.hours,
-				menuItems: [],
+				menuItem_ids: item.menuItem_ids ? item.menuItem_ids : [],
 			})
 		}
 		return formatted_data;
@@ -58,6 +58,7 @@ module.exports = {
 				type: item.type,
 				name: item.name,
 				price: item.price,
+				description: item.description,
 				food_spec: {
 					isVegan: false,
 					isVegetarian: true,

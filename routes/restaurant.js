@@ -8,6 +8,7 @@ var formatter           = require('../utils/formatter');
 var generateQueryParams = require('../utils/generateQueryParams');
 var dynamoDB            = require('../dynamoDB/queries.js');
 var resource            = require('../utils/resourceMethods');
+var batchParser         = require('../utils/batchParser');
 
 AWS = require("aws-sdk");
 AWS.config.update(config.aws);
@@ -141,6 +142,7 @@ restaurantRouter.route('/:id/reviews')
 restaurantRouter.route('/:id/menus')
        
     .get(function (req, res) {
+        const menus = {Items: []};
         const params = generateQueryParams(TABLE_NAME, req.params);
         params.KeyConditionExpression = "#id = :id";
         delete params.FilterExpression
@@ -150,8 +152,36 @@ restaurantRouter.route('/:id/menus')
             const statusCode = result.Items ? 200 : 404;
             if(statusCode !== 200)  res.status(statusCode).send([]);
 
-            var menu_ids = result.Items[0].menus.split(',');
-            
+            var menu_ids = result.Items[0].menu_ids;
+            var params = { RequestItems: {"Menus": {Keys:[] }}};
+
+            for(i in menu_ids)
+                params.RequestItems.Menus.Keys.push({id: {S: menu_ids[i]}});
+
+
+            db.batchGetItem(params, function(err, data) {
+                if (err) res.send({statusCode: 400, message: 'Unable to get items.'})
+                else {
+                    const res_menus = data.Responses.Menus;
+                    var count = 0;
+                    for(i in res_menus) {
+                        const res_menu = res_menus[i];
+                        count++;
+                        menus.Items.push({
+                            id: res_menu.id.S, 
+                            restaurant_id: res_menu.restaurant_id.S, 
+                            type: res_menu.type.S,  
+                            menuItem_ids: batchParser.parse_string_array(res_menu.menuItem_ids),
+                            hours: batchParser.parse_hours(res_menu.hours),
+                        });
+                    }
+                    
+                    // TODO: add avg_rating
+                    var formatted_menus = { count, Menus: formatter.Menus(menus) }
+                    res.send(formatted_menus);
+                } 
+            });
+
         });
     })
 

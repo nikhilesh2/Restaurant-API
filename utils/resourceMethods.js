@@ -20,7 +20,7 @@ module.exports = {
 
 			if (statusCode == 200)		callback({ statusCode, data: data_formatter(data)})
             else callback({statusCode,  data: { statusCode, message: 'Unable to perform the request'}});
-		})
+		});
 	},
 	get_by_id: function(TableName, params, callback) {
 		var data_formatter = formatter[TableName];

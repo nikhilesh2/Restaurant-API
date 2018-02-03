@@ -11,8 +11,8 @@ var resource            = require('../utils/resourceMethods');
 AWS = require("aws-sdk");
 AWS.config.update(config.aws);
 
-var db          = new AWS.DynamoDB();
-var docClient   = new AWS.DynamoDB.DocumentClient();
+var db                  = new AWS.DynamoDB();
+var docClient           = new AWS.DynamoDB.DocumentClient();
 
 
 menuItemRouter.all('*', cors());

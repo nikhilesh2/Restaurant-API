@@ -8,8 +8,9 @@ var request		= supertest(app);
 
 
 // var delTables 	= require('../dynamoDB/deleteTables');
-var popTables 	= require('../dev/populateTables');
-const SAMPLES 	= require('./restaurantSample');
+// var popTables 	= require('../dev/populateTables');
+const SAMPLE_RESTAURANTS 	= require('./restaurantSample');
+const SAMPLE_MENUS 	= require('./menuSample');
 
 global.app		= app;  
 global.expect 	= chai.expect;  
@@ -45,11 +46,12 @@ describe('Restaurant Endpoint', function() {
 		 	// Make a valid POST request
   			it('Should add item successfully (includes image_url)', function(done) {
     			request.post('/Restaurants')
-    			.send(SAMPLES.correct)
+    			.send(SAMPLE_RESTAURANTS.correct)
       			.expect(201)
 
       			.end(function(err, res) {
       				expect(res.body.Item[0]).to.have.property('image_url', 'https://google.com');
+      				request.delete('/Restaurants/' + res.body.Item[0].id) // remove restaurant we just added
       				done(err);
 				});
 			});
@@ -57,11 +59,12 @@ describe('Restaurant Endpoint', function() {
   			it('Should add item successfully (excludes image_url)', function(done) {
 
     			request.post('/Restaurants')
-    			.send(SAMPLES.correct_no_url)
+    			.send(SAMPLE_RESTAURANTS.correct_no_url)
       			.expect(201)
 
       			.end(function(err, res) {
       				expect(res.body.Item[0]).to.have.property('image_url', '');
+      				request.delete('/Restaurants/' + res.body.Item[0].id) // remove restaurant we just added
       				done(err);
 				});
 			});
@@ -69,7 +72,7 @@ describe('Restaurant Endpoint', function() {
 			// Make an invalid POST request
   			it('Should not add item', function(done) {
     			request.post('/Restaurants')
-    			.send(SAMPLES.incorrect)
+    			.send(SAMPLE_RESTAURANTS.incorrect)
       			.expect(400)
       			.end(function(err, res) {
       				done(err);
@@ -87,7 +90,7 @@ describe('Restaurant Endpoint', function() {
 	});
 
 	// Trying to get a Restaurant that doesn't exist
-	describe('/Restaurants/:id', function() {
+	describe('/:id', function() {
 		describe('GET', function() {
 		 	// Arbitrary GET request
   			it('Should have empty response', function(done) {
@@ -113,6 +116,25 @@ describe('Restaurant Endpoint', function() {
 
 		});
 	});
+
+		describe('/:id/menus', function() {
+		beforeEach(function(done) {
+			// popTables();
+			done();
+		});
+		describe('GET', function() {
+		 	// Arbitrary GET request
+  			it('Should return an array of length ' + SAMPLE_RESTAURANTS.data[0].menu_ids.length, function(done) {
+    			request.get('/Restaurants/' + SAMPLE_RESTAURANTS.data[0].id + '/menus')
+      			.expect(200)
+				.end(function(err, res) {
+                	expect(res.body.count).to.equal(SAMPLE_RESTAURANTS.data[0].menu_ids.length);
+					done(err);
+				});
+			});
+		});
+	});
+
 
 	describe('/search', function() {
 		describe('GET', function() {
@@ -156,5 +178,6 @@ describe('Restaurant Endpoint', function() {
 			});
 		});
 	});
+
 
 });
