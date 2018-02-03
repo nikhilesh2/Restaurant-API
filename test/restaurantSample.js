@@ -128,29 +128,36 @@ const restaurant_list = [
     },
     {
         "id": "a867d5e0-0860-11e8-8038-898b27a33038",
-        "name": "Five Guys",
-        "image_url": "https://google.com",
+        "name": "Stack'd",
+        "description": "Build your own burger",
+        "image_url": " ",
+        "website": "http://stack'd.com/",
         "delivers": "yes",
-        "location": {
-            "address": "83 Aspen Rd",
-            "city": "Sharon",
-            "state": "MA",
-            "zip_code": "02067",
-            "country": "United States"
-        },
-        "contact": {
-            "phone_number": "781-322-4440",
-            "email": "pizzaMart@gmail.com"
-        },
+        "address": "200 Fifth Ave",
+        "city": "Pittsburgh",
+        "state": "PA",
+        "zip_code": "15213",
+        "country": "United States",
+        "phone_number": "412-621-1100",
+        "email": "stackd@gmail.com",
+        "menu_ids" : [ ],
         "hours": {
             "Monday": [
                 {
-                    "hours_open_start": "10:00",
-                    "hours_open_end": "13:00"
-                },
+                    "hours_open_start": "11:00",
+                    "hours_open_end": "21:00"
+                }
+            ],
+            "Tuesday": [
                 {
-                    "hours_open_start": "16:00",
-                    "hours_open_end": "17:00"
+                    "hours_open_start": "11:00",
+                    "hours_open_end": "21:00"
+                }
+            ],
+            "Tuesday": [
+                {
+                    "hours_open_start": "11:00",
+                    "hours_open_end": "21:00"
                 }
             ],
             "Wednesday": [
@@ -158,8 +165,9 @@ const restaurant_list = [
                     "hours_open_start": "10:00",
                     "hours_open_end": "13:00"
                 }
-            ]
-        }
+            ],
+        },
+
     },
     {
         "id": "a86cdef0-0860-11e8-8038-898b27a33038",

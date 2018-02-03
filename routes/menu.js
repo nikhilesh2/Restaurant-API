@@ -25,7 +25,6 @@ const params = require('../models/Restaurant.js'); // TODO: replace with menu.js
 const TABLE_NAME = "Menus";
 
 
-
 /* ======= MENUS ======= */
 /* 
     This endpoint allows you to get detailed

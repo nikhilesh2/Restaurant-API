@@ -55,5 +55,21 @@ module.exports = {
             delete data.Items;
             callback(data);
         });
+	},
+	delete_all: function(TableName, callback) {
+		this.get_all(TableName, function(data) {
+            const response = [];
+            const items = data.data;
+            var finished_requests = 0;
+            for(var index in items) {
+
+         		// delete item
+        		dynamoDB.delete_query({TableName, Key: { "id": items[index].id }, "ReturnValues": "ALL_OLD"}, function(result) {
+        			finished_requests++;
+       				response.push(result);
+       				if(finished_requests >= items.length)        callback(response);
+       			})
+            }
+		})
 	}
 }

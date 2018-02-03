@@ -53,8 +53,14 @@ restaurantRouter.route('/')
         resource.create(TABLE_NAME, req.body, function(response) {
             res.status(response.statusCode).send(response);
         })
-    });
-
+    })
+    
+    // delete all restaurants 
+    .delete(function (req, res) {
+        resource.delete_all(TABLE_NAME, function(response) {
+            res.status(200).send(response);
+        })
+    })
 
 
 /* ======= SEARCH ======= */
@@ -111,7 +117,8 @@ restaurantRouter.route('/:id')
         // Set up Params
         var params = {
             TableName: TABLE_NAME,
-            Key: { "id": req.params.id }
+            Key: { "id": req.params.id },
+            ReturnValues: "ALL_OLD"
         };
 
          // make the query
@@ -173,12 +180,10 @@ restaurantRouter.route('/:id/menus')
                             restaurant_id: res_menu.restaurant_id.S, 
                             type: res_menu.type.S,
                             sections: batchParser.parse_sections(res_menu.sections),
-                            menuItem_ids: batchParser.parse_string_array(res_menu.menuItem_ids),
                             hours: batchParser.parse_hours(res_menu.hours),
                         });
                     }
                     
-                    // TODO: add avg_rating
                     var formatted_menus = { count, Menus: formatter.Menus(menus) }
                     res.send(formatted_menus);
                 } 

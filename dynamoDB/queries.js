@@ -33,22 +33,21 @@ module.exports = {
 	},
 	put_query: function(params, callback) {
 		docClient.put(params, function(err, data) {
-            if (err) {
-                console.error("Unable to add item. Error JSON:", JSON.stringify(err, null, 2));
-                callback({statusCode: 400, message: 'Unable to add item.'})
-            } else {
-                callback({statusCode: 201, message: "Added item successfully", Item: params.Item});
-            }
-        });
+        if (err) {
+            console.error("Unable to add item. Error JSON:", JSON.stringify(err, null, 2));
+            callback({statusCode: 400, message: 'Unable to add item.'})
+        } else {
+            callback({statusCode: 201, message: "Added item successfully", Item: params.Item});
+        }
+    });
 	},
 	delete_query: function(params, callback) {
-		docClient.delete(params, function(err, data) {
-            // var formattedItem = formatter.formatRestaurant([data]);
 
-            if (err)				callback({ statusCode: 404, message: "Something went wrong trying to delete the item" });
-        	else if (!data.Item)	callback({ statusCode: 404, message: "Item not found" });
-        	else 					callback({ statusCode: 204, message: "Deleted item successfully", Item: data.Attributes });
-        });
+		docClient.delete(params, function(err, data) {
+        if (err)				            callback({ statusCode: 404, message: "Something went wrong trying to delete the item" });
+        else if (!data.Attributes)	callback({ statusCode: 404, message: "Item not found" });
+        else 					              callback({ statusCode: 200, message: "Deleted item successfully", Item: data.Attributes });
+    });
 	},
 	retrieve_query_batch: function(keys, keyName, TableName, callback) {
 		// var theKeys = [];

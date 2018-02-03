@@ -4,7 +4,7 @@
   "description": "REST API for online food ordering system",
   "main": "index.js",
   "scripts": {
-    "test": "mocha",
+    "test": "mocha --timeout 10000 --slow 150",
     "start": "nodemon index.js",
     "build-tables": "npm run delete-tables && npm run create-tables && npm run populate-tables",
     "create-tables": "node dynamoDB/createTables.js",
@@ -16,6 +16,7 @@
   "dependencies": {
     "aws-sdk": "^2.188.0",
     "body-parser": "^1.18.2",
+    "child_process": "^1.0.2",
     "cors": "^2.8.4",
     "express": "^4.16.2",
     "express-prettify": "0.0.10",
