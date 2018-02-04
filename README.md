@@ -7,15 +7,14 @@
 ## Table of Contents:
 * [Getting Setup](#setup)
 * [The API](#TheAPI) <br />
+* [Unit Tests](#unit-tests)
 	* [Restaurants](#restaurants)
         * [/](#get-restaurants)
-            * [GET](#get-restaurants)
         * [/:id](#get-restaurantsid)
         * [/search](#get-restaurantssearch)
         * [/:id/menus](#get-restaurantsidmenus)
 	* [Menu (TODO)](#menu)
 	* [MenuItem (TODO)](#menuitem)
-* [Unit Tests](#unittests)
 
 
 <a name="setup" />
@@ -49,6 +48,11 @@
 
 > #### All Done!
 > Just run ```npm run start``` to try out the API
+
+## Unit Tests
+### I have created a handful of unit tests for each of the endpoints.
+> #### Type in the following command to run the unit tests
+>  ```npm run tests```
 
 
 <a name="TheAPI" />
@@ -184,11 +188,4 @@
 | /menus/:id | Get a specific menu | Not allowed (405) | Delete a specific menu
 | menus/:id/menu-items | Get all menu items for a specific menu |  Not allowed (405) | Delete all menu items for a specific menu
 
-
-<a name="unittests" />
-
-## Unit Tests
-
-> #### Type in the following command to run the unit tests
->  ```npm run tests```
 
