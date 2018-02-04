@@ -60,6 +60,7 @@ module.exports = {
 		this.get_all(TableName, function(data) {
             const response = [];
             const items = data.data;
+
             var finished_requests = 0;
             for(var index in items) {
 

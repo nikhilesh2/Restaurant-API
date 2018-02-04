@@ -4,6 +4,7 @@ var menuItemRouter      = express.Router();
 var config              = require('../config.json');
 var generateID          = require('../utils/generateID');
 var verifiers           = require('../utils/verifier');
+var formatter           = require('../utils/formatter');
 var dynamoDB            = require('../dynamoDB/queries.js')
 var generateQueryParams = require('../utils/generateQueryParams');
 var resource            = require('../utils/resourceMethods');
@@ -80,7 +81,10 @@ menuItemRouter.route('/:id')
             const statusCode = result.Items ? 200 : 404;
             if(statusCode !== 200) res.status(statusCode).send({});
    
-            else  res.status(statusCode).send({statusCode: statusCode, Item: result.Items[0]});
+            else   {
+                const unformatted_data = { Items: [result.Items[0]] };
+                res.status(statusCode).send(formatter.MenuItems(unformatted_data)[0]); // TODO: refactor this
+            }
         });
     })
     // delete menu based of menu id

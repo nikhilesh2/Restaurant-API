@@ -30,12 +30,12 @@ describe('Setting up Tests', function() {
 		console.log('  Starting tests...' )
 		done();
 	})
-	describe('Restaurant Endpoint', function() {
+	describe('Restaurant Endpoints', function() {
 
 		describe('/Restaurants', function() {
 
 			describe('GET', function() {
-		 	// GET request
+		 		// Make a GET request
 		 		it('Should run without error', function(done) {
 		 			request.get('/Restaurants')
 		 			.expect(200)
@@ -47,7 +47,7 @@ describe('Setting up Tests', function() {
 
 			describe('POST', function() {
 		 		// Make a valid POST request
-		 		it('Should add item successfully (includes image_url)', function(done) {
+		 		it('Should add restaurant successfully (includes image_url)', function(done) {
 		 			request.post('/Restaurants')
 		 			.send(SAMPLE_RESTAURANTS.correct)
 		 			.expect(201)
@@ -59,8 +59,7 @@ describe('Setting up Tests', function() {
       				});
 		 		});
 				// Make a valid POST request without image_url
-				it('Should add item successfully (excludes image_url)', function(done) {
-
+				it('Should add restaurant successfully (excludes image_url)', function(done) {
 					request.post('/Restaurants')
 					.send(SAMPLE_RESTAURANTS.correct_no_url)
 					.expect(201)
@@ -73,7 +72,7 @@ describe('Setting up Tests', function() {
 				});
 
 				// Make an invalid POST request
-				it('Should not add item', function(done) {
+				it('Should not add restaurant', function(done) {
 					request.post('/Restaurants')
 					.send(SAMPLE_RESTAURANTS.incorrect)
 					.expect(400)
@@ -81,7 +80,8 @@ describe('Setting up Tests', function() {
 						done(err);
 					});
 				});
-				it('Should not add item', function(done) {
+				// Make a POST request with empty paramters
+				it('Should not add restaurant', function(done) {
 					request.post('/Restaurants')
 					.send()
 					.expect(400)
@@ -99,6 +99,14 @@ describe('Setting up Tests', function() {
 		 				done(err);
 		 			});
 		 		});
+
+		 		// it('Should delete all restaurants (empty table)', function(done) {
+		 		// 	request.delete('/Restaurants')
+		 		// 	.expect(200)
+		 		// 	.end(function(err, res) {
+		 		// 		done(err);
+		 		// 	});
+		 		// });
 		 		after(function(done) {
 		 			execSync('node dev/populateTables.js');
 		 			done();
@@ -128,10 +136,20 @@ describe('Setting up Tests', function() {
 			 		});
 			 	});
 			 });
+			describe('POST', function() {
+				it('Should return 405, method not allowed', function(done) {
+			 		request.post('/Restaurants/someId')
+			 		.expect(405)
+			 		.end(function(err, res) {
+			 			// expect(res.body).to.deep.equal({ statusCode: 404, message: "Unable to perform the request" });
+			 			done(err);
+			 		});
+			 	});
+			});
 			describe('DELETE', function() {
 
 			 	// Trying to delete an existing restaurant
-			 	it('Should successfully delete item', function(done) {
+			 	it('Should successfully delete restaurant', function(done) {
 			 		request.delete('/Restaurants/' + SAMPLE_RESTAURANTS.data[0].id)
 			 		.expect(200)
 			 		.end(function(err, res) {
@@ -141,7 +159,7 @@ describe('Setting up Tests', function() {
 			 	});
 
 			 	// Trying to delete a restaurant that doesn't exist in database
-			 	it('Should return 404 (item does not exist)', function(done) {
+			 	it('Should return 404 (restaurant does not exist)', function(done) {
 			 		request.delete('/Restaurants/BLAH')
 			 		.expect(404)
 			 		.end(function(err, res) {
@@ -163,7 +181,7 @@ describe('Setting up Tests', function() {
 			});
 			describe('GET', function() {
 			 	// Arbitrary GET request
-			 	it('Should return an array of length ' + SAMPLE_RESTAURANTS.data[0].menu_ids.length, function(done) {
+			 	it('Should return an array of menus with length ' + SAMPLE_RESTAURANTS.data[0].menu_ids.length, function(done) {
 			 		request.get('/Restaurants/' + SAMPLE_RESTAURANTS.data[0].id + '/menus')
 			 		.expect(200)
 			 		.end(function(err, res) {
@@ -172,6 +190,17 @@ describe('Setting up Tests', function() {
 			 		});
 			 	});
 			 });
+			describe('POST', function() {
+				it('Should return 405, method not allowed', function(done) {
+			 		request.post('/Restaurants/' + SAMPLE_RESTAURANTS.data[0].id + '/menus')
+			 		.expect(405)
+			 		.end(function(err, res) {
+			 			res.body.should.have.property('statusCode').eql(405);
+		 				res.body.should.have.property('message').eql('Method not allowed');
+			 			done(err);
+			 		});
+			 	});
+			});
 		});
 
 
@@ -219,6 +248,28 @@ describe('Setting up Tests', function() {
 	  					done(err);
 	  				});
 	  			});
+			});
+			describe('POST', function() {
+				it('Should return 405, method not allowed', function(done) {
+			 		request.post('/Restaurants/search')
+			 		.expect(405)
+			 		.end(function(err, res) {
+			 			res.body.should.have.property('statusCode').eql(405);
+		 				res.body.should.have.property('message').eql('Method not allowed');
+			 			done(err);
+			 		});
+			 	});
+			});
+			describe('DELETE', function() {
+				it('Should return 405, method not allowed', function(done) {
+			 		request.post('/Restaurants/search')
+			 		.expect(405)
+			 		.end(function(err, res) {
+			 			res.body.should.have.property('statusCode').eql(405);
+		 				res.body.should.have.property('message').eql('Method not allowed');
+			 			done(err);
+			 		});
+			 	});
 			});
 		});
 

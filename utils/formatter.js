@@ -41,6 +41,7 @@ module.exports = {
 			item = items[key];
 			formatted_data.push({
 				id: item.id,
+				restaurant_id: item.restaurant_id,
 				type: item.type,
 				hours: item.hours,
 				sections: item.sections ? item.sections : [],

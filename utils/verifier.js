@@ -38,7 +38,7 @@ module.exports = {
 		if(!item.type)					messages.push("type attribute must be set");
 		if(!item.hours)					messages.push("hours attribute must be set");
 		if(!item.restaurant_id)			messages.push("restaurant_id attribute must be set");
-		console.log(messages);
+
 		if (!item.sections)				messages.push("sections attribute must be set");
 		else 							messages.push(verifySections(item.sections));
 
@@ -57,6 +57,7 @@ var formatResponse = function(messages) {
 
 var verifySections = function(sections) {
 	try {	
+		sections = JSON.stringify(sections).replace(/'/g, '"');
 		sections = JSON.parse(sections);	
 	}
  	catch(e) 	{	

@@ -23,6 +23,13 @@ var restaurantRouter = express.Router();
 const params = require('../models/Restaurant.js');
 const TABLE_NAME = "Restaurants";
 
+// TODO: put in own file
+const notAllowed = function() {
+  return function(req, res) { res.status(405).send({statusCode: 405, message: "Method not allowed"}); };
+}
+
+
+
 
 
 /* ======= RESTAURANTS ======= */
@@ -95,6 +102,10 @@ restaurantRouter.route('/search')
         });
     })
 
+    .post(notAllowed())
+
+    .delete(notAllowed())
+
 
 /* ======= RESTAURANT BY ID ======= */
 /* 
@@ -110,6 +121,8 @@ restaurantRouter.route('/:id')
             res.status(response.statusCode).send(response.data);
         })
     })
+
+    .post(notAllowed())
 
     // Delete a Restaurant by ID
     .delete(function (req, res) {
@@ -191,6 +204,8 @@ restaurantRouter.route('/:id/menus')
 
         });
     })
+
+    .post(notAllowed())
 
 
 module.exports = {

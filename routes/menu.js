@@ -24,6 +24,11 @@ var menuRouter = express.Router();
 const params = require('../models/Restaurant.js'); // TODO: replace with menu.js
 const TABLE_NAME = "Menus";
 
+// TODO: put in own file
+const notAllowed = function() {
+  return function(req, res) { res.status(405).send({statusCode: 405, message: "Method not allowed"}); };
+}
+
 
 /* ======= MENUS ======= */
 /* 
@@ -50,9 +55,17 @@ menuRouter.route('/')
         }
 
         resource.create(TABLE_NAME, req.body, function(response) {
+
             res.status(response.statusCode).send(response);
         });
-    });
+    })
+
+    // delete all menus 
+    .delete(function (req, res) {
+        resource.delete_all(TABLE_NAME, function(response) {
+            res.status(200).send(response);
+        })
+    })
 
 
 
@@ -69,6 +82,9 @@ menuRouter.route('/:id')
             res.status(response.statusCode).send(response.data);
         })
     })
+
+    .post(notAllowed())
+
     // delete menu based of menu id
     .delete(function (req, res) {
         // Set up Params
