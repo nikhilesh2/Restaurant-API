@@ -34,7 +34,7 @@
 > 	* Access keys can be found under IAM users in the AWS console <br />
 
 
-> #### Get downloadable version of DynamoDB
+> #### Get and run of DynamoDBLocal
 >	* [Download here](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/DynamoDBLocal.html#DynamoDBLocal.DownloadingAndRunning) <br />
 >	* Navigate to the directory where it is located and run it with the following command: <br />
 > ```java -jar dynamodb_local_latest/DynamoDBLocal.jar```
@@ -44,8 +44,8 @@
 > ```npm run build-tables``` <br />
 > <br />
 > Here are some additional commands: <br />
->   * ```npm run create-tables``` - creates the necessary tables
 >   * ```npm run delete-tables``` - deletes all tables
+>   * ```npm run create-tables``` - creates the necessary tables
 >   * ```npm run populate-tables``` - populates tables with sample data
 
 > #### All Done!
