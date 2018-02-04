@@ -36,20 +36,22 @@
 
 > #### Get downloadable version of DynamoDB
 >	* [Download here](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/DynamoDBLocal.html#DynamoDBLocal.DownloadingAndRunning) <br />
->	* Navigate to directory where it is located and run it with the following command: <br />
+>	* Navigate to the directory where it is located and run it with the following command: <br />
 > ```java -jar dynamodb_local_latest/DynamoDBLocal.jar```
 
-> #### Creating the tables
-> Create the required tables with the following command: <br />
-> ```npm run create-tables``` <br />
+> #### Setting up the database
+> Create and populate the tables with the following commands: <br />
+> ```npm run build-tables``` <br />
 > <br />
-> Alternatively, to delete all tables run the following: <br />
-> ```npm run delete-tables```
+> Here are some additional commands: <br />
+>   * ```npm run create-tables``` - creates the necessary tables
+>   * ```npm run delete-tables``` - deletes all tables
+>   * ```npm run populate-tables``` - populates tables with sample data
 
 > #### All Done!
 > Just run ```npm run start``` to try out the API <br />
 > <br />
-> NOTE: Before using the API, it would be a good idea to run the unit tests to ensure everything is running smoothly using the following command: <br />
+> NOTE: Before trying out the API, it would be a good idea to run the unit tests to ensure everything is running smoothly with the following command: <br />
 >  ```npm run tests```
 
 ## Unit Tests
