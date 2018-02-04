@@ -50,7 +50,7 @@
 > Just run ```npm run start``` to try out the API
 
 ## Unit Tests
-### I have created a handful of unit tests for each of the endpoints.
+#### I have created a handful of unit tests for each of the endpoints.
 > #### Type in the following command to run the unit tests
 >  ```npm run tests```
 
