@@ -150,8 +150,6 @@
 
 
 #### ```GET /restaurants/:id/menus```
-##### Description
-###### Get all menus for a restaurant
 ##### Parameters
 | Name | Type | Required | Description |
 | --- | --- | --- | --- |
@@ -168,6 +166,19 @@
 | id | string | Required | The id of the restaurant |
 
 ##### Response Body
+
+
+
+## Menus
+
+### Method Overview
+
+| Resource | GET | POST | DELETE
+| --- | --- | --- | --- |
+| /menus | Get all menus | Create new menu | Delete all menus
+| /menus/:id | Get a specific menu | Not allowed (405) | Delete a specific menu
+| menus/:id/menu-items | Get all menu items for a specific menu |  Not allowed (405) | Delete all menu items for a specific menu
+
 
 <a name="unittests" />
 
