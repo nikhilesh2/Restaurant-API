@@ -7,10 +7,10 @@ var docClient = new AWS.DynamoDB.DocumentClient();
 
 module.exports = {
 	retrieve_query: function(params, callback) {
-		var return_obj = {};
-        docClient.query(params, function(err, data) {
+    var return_obj = {};
+      docClient.query(params, function(err, data) {
             if (err) {
-                console.error("Unable to query. Error:", JSON.stringify(err, null, 2));
+              console.error("Unable to query. Error:", JSON.stringify(err, null, 2));
             } else {
                 if(data.Items.length !== 0)   return_obj = data;
             }

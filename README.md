@@ -123,7 +123,189 @@
 ###### NONE
 
 ##### Response Body
-
+```
+[
+    {
+        "statusCode": 200,
+        "message": "Deleted item successfully",
+        "Item": {
+            "hours": {
+                "Monday": [
+                    {
+                        "hours_open_start": "10:00",
+                        "hours_open_end": "13:00"
+                    },
+                    {
+                        "hours_open_start": "16:00",
+                        "hours_open_end": "17:00"
+                    }
+                ],
+                "Wednesday": [
+                    {
+                        "hours_open_start": "10:00",
+                        "hours_open_end": "13:00"
+                    }
+                ]
+            },
+            "image_url": "https://google.com",
+            "contact": {
+                "phone_number": "781-322-4440",
+                "email": "pizzaMart@gmail.com"
+            },
+            "name": "Pizza Mart",
+            "location": {
+                "country": "United States",
+                "address": "83 Aspen Rd",
+                "state": "MA",
+                "city": "Sharon",
+                "zip_code": "02067"
+            },
+            "id": "a31cdae0-0860-11e8-8ccd-3b24d794a9b3",
+            "delivers": "yes"
+        }
+    },
+    {
+        "statusCode": 200,
+        "message": "Deleted item successfully",
+        "Item": {
+            "country": "United States",
+            "website": "http://thaihana99.com/",
+            "hours": {
+                "Tuesday": [
+                    {
+                        "hours_open_start": "11:00",
+                        "hours_open_end": "21:00"
+                    }
+                ],
+                "Monday": [
+                    {
+                        "hours_open_start": "11:00",
+                        "hours_open_end": "21:00"
+                    }
+                ],
+                "Thursday": [
+                    {
+                        "hours_open_start": "11:00",
+                        "hours_open_end": "21:00"
+                    }
+                ],
+                "Friday": [
+                    {
+                        "hours_open_start": "11:00",
+                        "hours_open_end": "21:00"
+                    }
+                ],
+                "Wednesday": [
+                    {
+                        "hours_open_start": "10:00",
+                        "hours_open_end": "13:00"
+                    }
+                ],
+                "Saturday": [
+                    {
+                        "hours_open_start": "12:00",
+                        "hours_open_end": "21:00"
+                    }
+                ]
+            },
+            "address": "3608 Fifth Ave",
+            "city": "Pittsburgh",
+            "image_url": " ",
+            "description": "Classic Thai & Japanese mains & clever sushi rolls presented in contemporary, colorful digs.",
+            "zip_code": "15213",
+            "menu_ids": [
+                "ea33e70e-1207-499e-bbe9-b9ed2323f932",
+                "41bdd3ce-4b21-4408-adc5-8fbee6484b36"
+            ],
+            "name": "Thai Hana",
+            "phone_number": "412-621-1100",
+            "id": "a322ce50-0860-11e8-8ccd-3b24d794a9b3",
+            "delivers": "yes",
+            "state": "PA",
+            "email": "thaihana99@gmail.com"
+        }
+    },
+    {
+        "statusCode": 200,
+        "message": "Deleted item successfully",
+        "Item": {
+            "hours": {
+                "Monday": [
+                    {
+                        "hours_open_start": "10:00",
+                        "hours_open_end": "13:00"
+                    },
+                    {
+                        "hours_open_start": "16:00",
+                        "hours_open_end": "17:00"
+                    }
+                ],
+                "Wednesday": [
+                    {
+                        "hours_open_start": "10:00",
+                        "hours_open_end": "13:00"
+                    }
+                ]
+            },
+            "image_url": " ",
+            "contact": {
+                "phone_number": "781-322-4440",
+                "email": "pizzaMart@gmail.com"
+            },
+            "name": "Subway",
+            "location": {
+                "country": "United States",
+                "address": "83 Aspen Rd",
+                "state": "MA",
+                "city": "Sharon",
+                "zip_code": "02067"
+            },
+            "id": "a86cdef0-0860-11e8-8038-898b27a33038",
+            "delivers": "yes"
+        }
+    },
+    {
+        "statusCode": 200,
+        "message": "Deleted item successfully",
+        "Item": {
+            "country": "United States",
+            "website": "http://stack'd.com/",
+            "hours": {
+                "Monday": [
+                    {
+                        "hours_open_start": "11:00",
+                        "hours_open_end": "21:00"
+                    }
+                ],
+                "Tuesday": [
+                    {
+                        "hours_open_start": "11:00",
+                        "hours_open_end": "21:00"
+                    }
+                ],
+                "Wednesday": [
+                    {
+                        "hours_open_start": "10:00",
+                        "hours_open_end": "13:00"
+                    }
+                ]
+            },
+            "address": "200 Fifth Ave",
+            "city": "Pittsburgh",
+            "image_url": " ",
+            "description": "Build your own burger",
+            "zip_code": "15213",
+            "menu_ids": [],
+            "name": "Stack'd",
+            "phone_number": "412-621-1100",
+            "id": "a867d5e0-0860-11e8-8038-898b27a33038",
+            "delivers": "yes",
+            "state": "PA",
+            "email": "stackd@gmail.com"
+        }
+    }
+]
+```
 
 #### ```GET /restaurants/:id```
 ##### Parameters
