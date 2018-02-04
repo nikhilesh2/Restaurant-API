@@ -58,6 +58,7 @@
 | /restaurants | Get List of Restaurants | Create new Restaurant | Delete all Restaurants
 | /restaurants/:id | Get a specific Restaurant | Not allowed (405) | Delete a specific Restaurant
 | /restaurants/search | Search for a specific restaurant |  Not allowed (405) | Not allowed (405)
+| /restaurants/:id/menus | Get all menus for a restaurant |  Not allowed (405) | Delete all menus for a restaurant
 
 #### ```GET /restaurants```
 ##### Parameters
@@ -106,6 +107,23 @@
 ```
 
 ##### Response Body
+
+
+#### ```DELETE /restaurants```
+##### Parameters
+###### NONE
+
+##### Response Body
+
+
+#### ```GET /restaurants/:id```
+##### Parameters
+| Name | Type | Required | Description |
+| --- | --- | --- | --- |
+| id | string | Required | The id of the restaurant |
+
+##### Response Body
+
 
 <a name="unittests" />
 
