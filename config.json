@@ -1,6 +1,6 @@
 {
 	"aws": {
-		"region": "us-east-2",
+		"region": "us-west-2",
 		"endpoint": "http://localhost:8000",
    		"accessKeyId": "YOUR_ACCESS_ID", 
    		"secretAccessKey": "YOUR_SECRET_ACCESS_KEY"
