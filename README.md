@@ -51,6 +51,7 @@
 
 ## Unit Tests
 > #### I have created a handful of unit tests for each of the endpoints. Make sure no other processes are running on the same port.
+
 > #### Type in the following command to run the unit tests
 >  ```npm run tests```
 
@@ -123,111 +124,7 @@
 ###### NONE
 
 ##### Response Body
-```
-[
-    {
-        "statusCode": 200,
-        "message": "Deleted item successfully",
-        "Item": {
-            "country": "United States",
-            "website": "http://thaihana99.com/",
-            "hours": {
-                "Tuesday": [
-                    {
-                        "hours_open_start": "11:00",
-                        "hours_open_end": "21:00"
-                    }
-                ],
-                "Monday": [
-                    {
-                        "hours_open_start": "11:00",
-                        "hours_open_end": "21:00"
-                    }
-                ],
-                "Thursday": [
-                    {
-                        "hours_open_start": "11:00",
-                        "hours_open_end": "21:00"
-                    }
-                ],
-                "Friday": [
-                    {
-                        "hours_open_start": "11:00",
-                        "hours_open_end": "21:00"
-                    }
-                ],
-                "Wednesday": [
-                    {
-                        "hours_open_start": "10:00",
-                        "hours_open_end": "13:00"
-                    }
-                ],
-                "Saturday": [
-                    {
-                        "hours_open_start": "12:00",
-                        "hours_open_end": "21:00"
-                    }
-                ]
-            },
-            "address": "3608 Fifth Ave",
-            "city": "Pittsburgh",
-            "image_url": " ",
-            "description": "Classic Thai & Japanese mains & clever sushi rolls presented in contemporary, colorful digs.",
-            "zip_code": "15213",
-            "menu_ids": [
-                "ea33e70e-1207-499e-bbe9-b9ed2323f932",
-                "41bdd3ce-4b21-4408-adc5-8fbee6484b36"
-            ],
-            "name": "Thai Hana",
-            "phone_number": "412-621-1100",
-            "id": "a322ce50-0860-11e8-8ccd-3b24d794a9b3",
-            "delivers": "yes",
-            "state": "PA",
-            "email": "thaihana99@gmail.com"
-        }
-    },
-    {
-        "statusCode": 200,
-        "message": "Deleted item successfully",
-        "Item": {
-            "country": "United States",
-            "website": "http://stack'd.com/",
-            "hours": {
-                "Monday": [
-                    {
-                        "hours_open_start": "11:00",
-                        "hours_open_end": "21:00"
-                    }
-                ],
-                "Tuesday": [
-                    {
-                        "hours_open_start": "11:00",
-                        "hours_open_end": "21:00"
-                    }
-                ],
-                "Wednesday": [
-                    {
-                        "hours_open_start": "10:00",
-                        "hours_open_end": "13:00"
-                    }
-                ]
-            },
-            "address": "200 Fifth Ave",
-            "city": "Pittsburgh",
-            "image_url": " ",
-            "description": "Build your own burger",
-            "zip_code": "15213",
-            "menu_ids": [],
-            "name": "Stack'd",
-            "phone_number": "412-621-1100",
-            "id": "a867d5e0-0860-11e8-8038-898b27a33038",
-            "delivers": "yes",
-            "state": "PA",
-            "email": "stackd@gmail.com"
-        }
-    }
-]
-```
+
 
 #### ```GET /restaurants/:id```
 ##### Parameters
