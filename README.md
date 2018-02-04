@@ -8,6 +8,10 @@
 * [Getting Setup](#setup)
 * [The API](#TheAPI) <br />
 	* [Restaurants](#restaurants)
+        * [/](#get-restaurants)
+        * [/:id](#get-restaurantsid)
+        * [/search](#get-restaurantssearch)
+        * [/:id/menus](#get-restaurantsidmenus)
 	* [Menu (TODO)](#menu)
 	* [MenuItem (TODO)](#menuitem)
 * [Unit Tests](#unittests)
@@ -24,7 +28,7 @@
 > #### Install node modules
 > ```npm install```
 
-> #### Replace access key id and secret key id (NOT REQUIRED)
+> #### (OPTIONAL) Replace access key id and secret key id
 > 	* navigate to ``config.json`` in the root directory <br />
 > 	* replace ``"accessKeyId"`` and ``"secretAccessKey"`` with your own. <br />
 > 	* Access keys can be found under IAM users in the AWS console <br />
