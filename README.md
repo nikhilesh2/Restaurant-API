@@ -48,6 +48,7 @@
 
 > #### All Done!
 > Just run ```npm run start``` to try out the API <br />
+> <br />
 > NOTE: Before using the API, it would be a good idea to run the unit tests to ensure everything is running smoothly using the following command: <br />
 >  ```npm run tests```
 
