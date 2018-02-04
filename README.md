@@ -34,7 +34,7 @@
 > 	* Access keys can be found under IAM users in the AWS console <br />
 
 
-> #### Get and run of DynamoDBLocal
+> #### Get and run DynamoDBLocal
 >	* [Download here](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/DynamoDBLocal.html#DynamoDBLocal.DownloadingAndRunning) <br />
 >	* Navigate to the directory where it is located and run it with the following command: <br />
 > ```java -jar dynamodb_local_latest/DynamoDBLocal.jar```
