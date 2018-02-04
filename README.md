@@ -124,6 +124,45 @@
 
 ##### Response Body
 
+#### ```DELETE /restaurants/:id```
+##### Parameters
+| Name | Type | Required | Description |
+| --- | --- | --- | --- |
+| id | string | Required | The id of the restaurant |
+
+##### Response Body
+
+
+#### ```GET /restaurants/search```
+##### Parameters
+| Name | Type | Required | Description |
+| --- | --- | --- | --- |
+| name | string | Optional | The name of the restaurant |
+| address | string | Optional| The street address of the Restaurant |
+| city | string | Optional | The city the Restaurant is located in |
+| zip_code | string | Optional | The zip code of the Restaurant |
+| country | string | Optional | The country the Restaurant is located in |
+| phone number | string | Optional | The phone number of the Restaurant |
+| email | string | Optional| The email of the Restaurant |
+| image_url | string | Optional | An image of the Restaurant |
+
+##### Response Body
+
+#### ```GET /restaurants/:id/menus```
+##### Parameters
+| Name | Type | Required | Description |
+| --- | --- | --- | --- |
+| id | string | Required | The id of the restaurant |
+
+##### Response Body
+
+#### ```DELETE /restaurants/:id/menus```
+##### Parameters
+| Name | Type | Required | Description |
+| --- | --- | --- | --- |
+| id | string | Required | The id of the restaurant |
+
+##### Response Body
 
 <a name="unittests" />
 
