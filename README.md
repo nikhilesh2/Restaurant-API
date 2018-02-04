@@ -129,45 +129,6 @@
         "statusCode": 200,
         "message": "Deleted item successfully",
         "Item": {
-            "hours": {
-                "Monday": [
-                    {
-                        "hours_open_start": "10:00",
-                        "hours_open_end": "13:00"
-                    },
-                    {
-                        "hours_open_start": "16:00",
-                        "hours_open_end": "17:00"
-                    }
-                ],
-                "Wednesday": [
-                    {
-                        "hours_open_start": "10:00",
-                        "hours_open_end": "13:00"
-                    }
-                ]
-            },
-            "image_url": "https://google.com",
-            "contact": {
-                "phone_number": "781-322-4440",
-                "email": "pizzaMart@gmail.com"
-            },
-            "name": "Pizza Mart",
-            "location": {
-                "country": "United States",
-                "address": "83 Aspen Rd",
-                "state": "MA",
-                "city": "Sharon",
-                "zip_code": "02067"
-            },
-            "id": "a31cdae0-0860-11e8-8ccd-3b24d794a9b3",
-            "delivers": "yes"
-        }
-    },
-    {
-        "statusCode": 200,
-        "message": "Deleted item successfully",
-        "Item": {
             "country": "United States",
             "website": "http://thaihana99.com/",
             "hours": {
@@ -223,45 +184,6 @@
             "delivers": "yes",
             "state": "PA",
             "email": "thaihana99@gmail.com"
-        }
-    },
-    {
-        "statusCode": 200,
-        "message": "Deleted item successfully",
-        "Item": {
-            "hours": {
-                "Monday": [
-                    {
-                        "hours_open_start": "10:00",
-                        "hours_open_end": "13:00"
-                    },
-                    {
-                        "hours_open_start": "16:00",
-                        "hours_open_end": "17:00"
-                    }
-                ],
-                "Wednesday": [
-                    {
-                        "hours_open_start": "10:00",
-                        "hours_open_end": "13:00"
-                    }
-                ]
-            },
-            "image_url": " ",
-            "contact": {
-                "phone_number": "781-322-4440",
-                "email": "pizzaMart@gmail.com"
-            },
-            "name": "Subway",
-            "location": {
-                "country": "United States",
-                "address": "83 Aspen Rd",
-                "state": "MA",
-                "city": "Sharon",
-                "zip_code": "02067"
-            },
-            "id": "a86cdef0-0860-11e8-8038-898b27a33038",
-            "delivers": "yes"
         }
     },
     {
