@@ -9,6 +9,7 @@
 * [The API](#TheAPI) <br />
 	* [Restaurants](#restaurants)
         * [/](#get-restaurants)
+            * [GET](#get-restaurants)
         * [/:id](#get-restaurantsid)
         * [/search](#get-restaurantssearch)
         * [/:id/menus](#get-restaurantsidmenus)
