@@ -40,7 +40,7 @@ menuItemRouter.route('/')
         })
     })
     
-    // add new menu
+    // add new menu item
     .post(function (req, res) {
        
         // // Ensure the request object is in the right from
@@ -55,15 +55,22 @@ menuItemRouter.route('/')
         // dynamoDB.put_query({TableName: TABLE_NAME, Item: req.body}, function(result) {
         //     res.status(result.statusCode).send(result);
         // });
-    });
+    })
+
+    // delete all menu items
+    .delete(function (req, res) {
+        resource.delete_all(TABLE_NAME, function(response) {
+            res.status(200).send(response);
+        })
+    })
 
 
 
-/* ======= MENU BY ID======= */
+/* ======= MENU ITEM BY ID======= */
 /* 
     This endpoint allows you to get detailed
-    data about Menu(s) based off either the
-    Menu ID or Restaurant ID 
+    data about a Menu Item based off the menu 
+    item id
 */
 menuItemRouter.route('/:id')
     

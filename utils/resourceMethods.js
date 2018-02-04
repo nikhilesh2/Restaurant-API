@@ -56,6 +56,21 @@ module.exports = {
             callback(data);
         });
 	},
+    update_item_by_id: function(TableName, id, attributeToUpdate, newValue, callback) {
+        const params = {
+            TableName,
+            Key: { id },
+            UpdateExpression: "SET " + attributeToUpdate + " = :newValue",
+            ExpressionAttributeValues: { 
+                ":newValue": newValue
+            },
+            ReturnValues: "ALL_OLD"
+        }
+        console.log(params);
+        dynamoDB.update_query(params, function(data) {
+            callback(data);
+        })
+    },
 	delete_all: function(TableName, callback) {
 		this.get_all(TableName, function(data) {
             const response = [];

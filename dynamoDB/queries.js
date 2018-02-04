@@ -49,6 +49,15 @@ module.exports = {
         else 					              callback({ statusCode: 200, message: "Deleted item successfully", Item: data.Attributes });
     });
 	},
+  update_query: function(params, callback) {
+
+    docClient.update(params, function(err, data) {
+      console.log(data);
+        if (err)                    callback({ statusCode: 404, message: "Something went wrong trying to delete the item" });
+        else if (!data.Attributes)  callback({ statusCode: 404, message: "Item to update not found" });
+        else                        callback({ statusCode: 200, message: "Updated item successfully", Item: data.Attributes });
+    });
+  },
 	retrieve_query_batch: function(keys, keyName, TableName, callback) {
 		// var theKeys = [];
 		// for(var i in keys)

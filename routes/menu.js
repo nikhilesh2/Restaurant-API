@@ -94,13 +94,37 @@ menuRouter.route('/:id')
             "ReturnValues": "ALL_OLD",
         };
 
+        var final_response;
         // make the query
         dynamoDB.delete_query(params, function(result) {
+
+            if(result.statusCode !== 200) res.status(result.statusCode).send(result);
             
-            // TODO: need to remove menu from the corresponding restaurant
-            var restaurant_id = result.Item.restaurant_id;
-       
-            res.status(result.statusCode).send(result);
+            else {
+                final_response = result;
+                
+                // need to remove menu from the corresponding restaurant
+                var restaurant_id = result.Item.restaurant_id;
+                
+                // Get the restaurant
+                resource.get_by_id("Restaurants", {id: restaurant_id}, function(response) {
+                   
+                    if(response.statusCode !== 200)  res.status(response.statusCode).send("Something went wrong");
+                    
+                    else {
+                        // Remove the menu id from menu_ids array 
+                        var menu_ids = response.data.menu_ids;
+                        var index = menu_ids.indexOf(req.params.id)
+                        menu_ids.splice(index, 1);
+                        
+                        // Update the menu_ids attribute of the restaurant with the new array
+                        resource.update_item_by_id("Restaurants", restaurant_id, 'menu_ids', menu_ids, function(result) {
+                             res.status(result.statusCode).send(final_response);
+                        })
+                       
+                    }
+                })
+            }
         })
 
     });
@@ -162,24 +186,26 @@ menuRouter.route('/:id/menu-items')
 
         });
     })
-    
+
+    .post(notAllowed())
+
     // TODO: delete all items in a menu
     .delete(function (req, res) {
-        // Set up Params
-        var params = {
-            TableName: TABLE_NAME,
-            Key: { "id": req.params.id },
-            "ReturnValues": "ALL_OLD",
-        };
+        // // Set up Params
+        // var params = {
+        //     TableName: TABLE_NAME,
+        //     Key: { "id": req.params.id },
+        //     "ReturnValues": "ALL_OLD",
+        // };
 
-        // make the query
-        dynamoDB.delete_query(params, function(result) {
+        // // make the query
+        // dynamoDB.delete_query(params, function(result) {
             
-            // TODO: need to remove menu from the corresponding restaurant
-            var restaurant_id = result.Item.restaurant_id;
+        //     // TODO: need to remove menu from the corresponding restaurant
+        //     var restaurant_id = result.Item.restaurant_id;
        
-            res.status(result.statusCode).send(result);
-        })
+        //     res.status(result.statusCode).send(result);
+        // })
 
     });
     

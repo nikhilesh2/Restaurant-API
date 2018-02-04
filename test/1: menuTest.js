@@ -102,7 +102,7 @@ describe('', function() {
 			
 			describe('GET', function() {
 
-				it('Should return menu', function(done) {
+				it('Should return a menu', function(done) {
 		 			request.get('/menus/' + SAMPLE_MENUS.data[0].id)
 		 			.expect(200)
 		 			.end(function(err, res) {
@@ -136,6 +136,63 @@ describe('', function() {
 		 	// 		.end(function(err, res) {
 		 	// 			res.body.should.have.property('statusCode').eql(405);
 		 	// 			res.body.should.have.property('message').eql('Method not allowed');
+		 	// 			done(err);
+		 	// 		});
+		 	// 	});
+			});
+		})
+
+		describe('/:id/menu-items', function() {
+
+			describe('GET', function() {
+
+
+				it('Should return menu items', function(done) {
+		 			request.get('/menus/' + SAMPLE_MENUS.data[0].id + '/menu-items')
+		 			.expect(200)
+		 			.end(function(err, res) {
+		 				res.body.should.have.property('count');
+		 				res.body.should.have.property('MenuItems');
+		 				res.body.MenuItems.should.be.a('array');
+
+		 				const menuItems = res.body.MenuItems;
+		 				for(var i in menuItems) {
+		 					menuItems[i].should.have.property('id');
+		 					menuItems[i].should.have.property('name');
+		 					menuItems[i].should.have.property('price')
+		 					menuItems[i].should.have.property('description')
+		 					menuItems[i].should.have.property('food_spec');
+		 					menuItems[i].food_spec.should.be.a('object');
+		 					menuItems[i].food_spec.should.have.property('isVegan');
+		 					menuItems[i].food_spec.should.have.property('isVegetarian');
+		 					menuItems[i].food_spec.should.have.property('spicy');
+		 					menuItems[i].food_spec.should.have.property('allergies');
+		 					menuItems[i].food_spec.allergies.should.be.a('array');
+		 				}
+		 				done(err);
+		 			});
+		 		});
+			})
+			describe('POST', function() {
+				it('Should return 405, method not allowed', function(done) {
+		 			request.post('/menus/' + SAMPLE_MENUS.data[0].id)
+		 			.expect(405)
+		 			.end(function(err, res) {
+		 				res.body.should.have.property('statusCode').eql(405);
+		 				res.body.should.have.property('message').eql('Method not allowed');
+		 				done(err);
+		 			});
+		 		});
+			});
+			//TODO
+			describe('DELETE', function() {
+				// it('Should delete all menu items', function(done) {
+		 	// 		request.delete('/menus/' + SAMPLE_MENUS.data[0].id + '/menu-items')
+		 	// 		.expect(200)
+		 	// 		.end(function(err, res) {
+		 	// 			console.log(res.body);
+		 	// 			// res.body.should.have.property('statusCode').eql(405);
+		 	// 			// res.body.should.have.property('message').eql('Method not allowed');
 		 	// 			done(err);
 		 	// 		});
 		 	// 	});
