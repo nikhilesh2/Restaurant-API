@@ -47,9 +47,9 @@
 > ```npm run delete-tables```
 
 > #### All Done!
-> NOTE: Before using the API, it would be a good idea to run the unit tests to ensure everything is running smoothly using the following command:
+> Just run ```npm run start``` to try out the API <br />
+> NOTE: Before using the API, it would be a good idea to run the unit tests to ensure everything is running smoothly using the following command: <br />
 >  ```npm run tests```
-> Just run ```npm run start``` to try out the API
 
 ## Unit Tests
 > #### I have created a handful of unit tests for each of the endpoints. Make sure no other processes are running on the same port.
