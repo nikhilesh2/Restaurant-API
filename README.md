@@ -148,13 +148,18 @@
 
 ##### Response Body
 
+
 #### ```GET /restaurants/:id/menus```
+##### Description
+###### Get all menus for a restaurant
 ##### Parameters
 | Name | Type | Required | Description |
 | --- | --- | --- | --- |
 | id | string | Required | The id of the restaurant |
 
 ##### Response Body
+
+
 
 #### ```DELETE /restaurants/:id/menus```
 ##### Parameters
