@@ -219,9 +219,9 @@ restaurantRouter.route('/:id/menus')
             // TODO: need to error check here
             var restaurant = result.Items[0];
             if(restaurant.menu_ids.length > 0) {
-                resource.update_item_by_id("Restaurants", restaurant.id, 'menu_ids', [], function(result) {
+                resource.update_item_by_id(TABLE_NAME, restaurant.id, 'menu_ids', [], function(result) {
 
-                    // need to delete all menus associated with the restaurant that was just deleted
+                    // need to remove all associated menus from Menus table
                     resource.delete_menus(restaurant.menu_ids, function(response) {
                         res.status(200).send(response);
                     })
@@ -229,7 +229,7 @@ restaurantRouter.route('/:id/menus')
                 })
             } 
             else {
-                res.status(200).send({statusCode: 200, message: 'Restaurant has no menus to remove'});
+                res.status(404).send({statusCode: 404, message: 'Restaurant has no menus to remove'});
             }
         });
     })

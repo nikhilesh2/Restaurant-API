@@ -86,6 +86,7 @@ menuRouter.route('/:id')
     .post(notAllowed())
 
     // delete menu based of menu id
+    // TODO: remove associated menu items
     .delete(function (req, res) {
         // Set up Params
         var params = {
@@ -147,6 +148,7 @@ menuRouter.route('/:id/menu-items')
         // make the query
         dynamoDB.retrieve_query(params, function(result) {
             const statusCode = result.Items ? 200 : 404;
+
             if(statusCode !== 200)  res.status(statusCode).send([]);
 
             var sections = result.Items[0].sections;
@@ -158,7 +160,7 @@ menuRouter.route('/:id/menu-items')
 
             // use menu ids to make batch query
             db.batchGetItem(params, function(err, data) {
-                if (err) res.send({statusCode: 400, message: 'Unable to get menu items.'})
+                if (err) res.status(404).send([])
                 else {
                     const res_menuItems = data.Responses.MenuItems;            
                     var count = 0;
@@ -191,6 +193,27 @@ menuRouter.route('/:id/menu-items')
 
     // TODO: delete all items in a menu
     .delete(function (req, res) {
+        resource.get_by_id(TABLE_NAME, req.params, function(result) {
+            if(result.statusCode !== 200)   res.status(result.statusCode).send(result);
+            else {
+                var menu = result.data;
+                var menu_item_ids = []
+                // remove all menu item ids 
+                for(var key in menu.sections)  {
+                    for(var i in menu.sections[key])   menu_item_ids.push(menu.sections[key][i]); // save the id
+                    menu.sections[key] = []; // erase the ids
+                    
+                } 
+                resource.update_item_by_id(TABLE_NAME, menu.id, 'sections', menu.sections, function(result) {
+
+                    // need to remove all associated menu items from MenuItems table
+                    resource.delete_menu_items(menu_item_ids, function(response) {
+                        res.status(200).send(response);
+                    })
+
+                })
+            }
+        })
         // // Set up Params
         // var params = {
         //     TableName: TABLE_NAME,

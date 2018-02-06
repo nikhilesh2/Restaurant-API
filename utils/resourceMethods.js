@@ -81,18 +81,31 @@ module.exports = {
 
          		// delete item
         		dynamoDB.delete_query({TableName, Key: { "id": items[index].id }, "ReturnValues": "ALL_OLD"}, function(result) {
-        			finished_requests++;
        				response.push(result);
-       				if(finished_requests >= items.length)        callback(response);
+       				if(++finished_requests >= items.length)        callback(response);
        			})
             }
 		})
 	},
+    delete_menu_items: function(item_ids, callback) {
+        const response = [];
+        var finished_requests = 0;
+
+        // loop through menu items and delete each one
+        for(var index in item_ids) {
+          
+            dynamoDB.delete_query({TableName: "MenuItems", Key: {"id": item_ids[index]}, "ReturnValues": "ALL_OLD"}, function(result) {
+                response.push(result);
+                if(++finished_requests >= item_ids.length)        callback(response);
+            })
+        }
+    },
     delete_menus: function(menu_ids, callback) {
         var finished_requests = 0;
         var finished_requests_sections = 0;
-        var finished_requests_items = 0;
+
         const response = [];
+        const delete_menu_items = this.delete_menu_items;
 
         // loop through each menu, deleting it and its associated menu items
         for(var index in menu_ids) {
@@ -105,32 +118,17 @@ module.exports = {
                 if(result.statusCode == 200) {
                     const sections = result.Item.sections;
                   
-                    
-                 
                     // loop through menu sections and delete each menu item
                     for(var key in sections) {
-                        
-                        // loop through each menu item and delete it
-                        for(var item_index in sections[key]) {
-                            dynamoDB.delete_query({TableName: "MenuItems", Key: { "id": sections[key][item_index]}, "ReturnValues": "ALL_OLD"}, function(menu_item_res) {
-                             
-                                result.metaData.menu_items.push(menu_item_res); // In case menu item was not successfully deleted, return back the menu item
-                                
-                                if(++finished_requests_items >= sections[key].length)  {
-                                    finished_requests_sections++;
-                                    finished_requests_items = 0
-                                } 
-                                if(finished_requests_sections >= Object.keys(sections).length) {
-                                    response.push(result);
-                                    finished_requests++;
-                                    finished_requests_sections = 0;
-                                }  
-                                if(finished_requests >= menu_ids.length)    callback(response);
-      
-                            })
-                              
-                        }
-                         
+                        delete_menu_items(sections[key], function(data) {
+                            result.metaData.menu_items.push(data);
+                            if (++finished_requests_sections >= Object.keys(sections).length) {
+                                response.push(result);
+                                finished_requests++;
+                                finished_requests_sections = 0;
+                            }
+                            if (finished_requests >= menu_ids.length)    callback(response);
+                        })
                     }
                 } 
                 else { 
