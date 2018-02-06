@@ -52,34 +52,9 @@ module.exports = {
   update_query: function(params, callback) {
 
     docClient.update(params, function(err, data) {
-      console.log(data);
         if (err)                    callback({ statusCode: 404, message: "Something went wrong trying to delete the item" });
         else if (!data.Attributes)  callback({ statusCode: 404, message: "Item to update not found" });
         else                        callback({ statusCode: 200, message: "Updated item successfully", Item: data.Attributes });
     });
   },
-	retrieve_query_batch: function(keys, keyName, TableName, callback) {
-		// var theKeys = [];
-		// for(var i in keys)
-		// 	theKeys.push({keyName: {S: keys[i]}});
-
-		// var params = {
-  // 			RequestItems: {
-  //   			TableName: {
-  //     				keys: theKeys,
-  //     				ProjectionExpression: 'id, type',
-  //   			}
-  // 			}
-		// };
-		// var return_obj = {};
-  //       docClient.query(params, function(err, data) {
-  //           if (err) {
-  //               console.error("Unable to query. Error:", JSON.stringify(err, null, 2));
-  //           } else {
-  //               if(data.Items.length !== 0)   return_obj = data;
-  //           }
-  //           callback(return_obj);
-  //       });
-         
-	}
 }

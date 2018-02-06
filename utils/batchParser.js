@@ -1,4 +1,5 @@
 module.exports = {
+	BATCH_MAX: 100,
 	parse_string_array: function(arr) {
 		var result = [];
 		for(i in arr.L)

@@ -37,12 +37,12 @@ describe('', function() {
 			});
 
 			describe('POST', function() {
-				before(function(done) {
-					console.log("\t  Clearing tables...")
-					execSync('npm run delete-tables && npm run create-tables');
-					done();
+				// before(function(done) {
+				// 	console.log("\t  Clearing tables...")
+				// 	execSync('npm run delete-tables && npm run create-tables');
+				// 	done();
 					
-				})
+				// })
 				after(function(done) {
 					console.log("\t  Repopulating tables...")
 					execSync('npm run populate-tables');
@@ -130,22 +130,30 @@ describe('', function() {
 			//TODO
 			describe('DELETE', function() {
 
-				// it('Should return 405, method not allowed', function(done) {
-		 	// 		request.post('/menus/' + SAMPLE_MENUS.data[0].id)
-		 	// 		.expect(405)
-		 	// 		.end(function(err, res) {
-		 	// 			res.body.should.have.property('statusCode').eql(405);
-		 	// 			res.body.should.have.property('message').eql('Method not allowed');
-		 	// 			done(err);
-		 	// 		});
-		 	// 	});
+				it('Should delete menu', function(done) {
+		 			request.delete('/menus/' + SAMPLE_MENUS.data[0].id)
+		 			.expect(200)
+		 			.end(function(err, res) {
+		 				
+		 				res.body.should.have.property('statusCode').eql(200);
+		 				res.body.Item.should.have.property('id').eql(SAMPLE_MENUS.data[0].id);
+		 				res.body.Item.should.have.property('restaurant_id').eql(SAMPLE_MENUS.data[0].restaurant_id);
+		 				res.body.Item.should.have.property('type').eql(SAMPLE_MENUS.data[0].type);
+		 				res.body.Item.should.have.property('hours').should.be.a('object');
+		 				res.body.Item.should.have.property('sections').should.be.a('object');
+		 				done(err);
+		 			});
+		 		});
 			});
 		})
 
 		describe('/:id/menu-items', function() {
-
+			before(function(done) {
+				console.log("\tRepopulating tables...")
+				execSync('npm run populate-tables');
+				done();
+			})
 			describe('GET', function() {
-
 
 				it('Should return menu items', function(done) {
 		 			request.get('/menus/' + SAMPLE_MENUS.data[0].id + '/menu-items')
@@ -184,18 +192,22 @@ describe('', function() {
 		 			});
 		 		});
 			});
-			//TODO
+
 			describe('DELETE', function() {
-				// it('Should delete all menu items', function(done) {
-		 	// 		request.delete('/menus/' + SAMPLE_MENUS.data[0].id + '/menu-items')
-		 	// 		.expect(200)
-		 	// 		.end(function(err, res) {
-		 	// 			console.log(res.body);
-		 	// 			// res.body.should.have.property('statusCode').eql(405);
-		 	// 			// res.body.should.have.property('message').eql('Method not allowed');
-		 	// 			done(err);
-		 	// 		});
-		 	// 	});
+				it('Should delete all menu items', function(done) {
+		 			request.delete('/menus/' + SAMPLE_MENUS.data[0].id + '/menu-items')
+		 			.expect(200)
+		 			.end(function(err, res) {
+		 				const deleted_items = res.body;
+		 				for(var i in deleted_items) {
+		 					deleted_items[i].should.have.property('statusCode').eql(200);
+		 					deleted_items[i].should.have.property('message').eql('Deleted item successfully');
+		 					deleted_items[i].should.have.property('Item');
+		 					deleted_items[i].Item.should.be.a('object');
+		 				}
+		 				done(err);
+		 			});
+		 		});
 			});
 		})
 

@@ -54,16 +54,45 @@ menuRouter.route('/')
             return res.status(400).send(verify_response);
         }
 
+        // create the new menu
         resource.create(TABLE_NAME, req.body, function(response) {
+            const restaurant_id = req.body.restaurant_id;
 
-            res.status(response.statusCode).send(response);
+            // get restaurant by restaurant_id
+            resource.get_by_id("Restaurants", {id: restaurant_id}, function(result) {
+
+                if(result.statusCode !== 200) res.status(result.statusCode).send(result);
+                const restaurant = result.data;
+                restaurant.menu_ids.push(response.Item[0].id);
+                
+                // Add the new menu to the restaurant
+                resource.update_item_by_id("Restaurants", restaurant_id, 'menu_ids', restaurant.menu_ids, function(result) {
+
+                    if(result.statusCode !== 200) res.status(result.statusCode).send(result);
+                    res.status(response.statusCode).send(response);
+                })
+             
+            });
+           
         });
     })
 
     // delete all menus 
     .delete(function (req, res) {
         resource.delete_all(TABLE_NAME, function(response) {
-            res.status(200).send(response);
+
+            // remove all of the menus for each restaurant
+            resource.get_all("Restaurants", function(result) {
+                const restaurants = result.data;
+                var requests_finished = 0;
+                for(var i in restaurants) {
+                    resource.update_item_by_id("Restaurants", restaurants[i].id, 'menu_ids', [], function(result) {
+                        if(++requests_finished >= restaurants.length) res.send(response);
+                    })
+                }
+                // res.status(response.statusCode).send(response.data);
+            })
+            // res.status(200).send(response);
         })
     })
 
@@ -144,47 +173,41 @@ menuRouter.route('/:id/menu-items')
         const params = generateQueryParams(TABLE_NAME, req.params);
         params.KeyConditionExpression = "#id = :id";
         delete params.FilterExpression
-       
+
         // make the query
         dynamoDB.retrieve_query(params, function(result) {
             const statusCode = result.Items ? 200 : 404;
-
-            if(statusCode !== 200)  res.status(statusCode).send([]);
+            if(statusCode !== 200)  return res.status(statusCode).send([]);
 
             var sections = result.Items[0].sections;
-            var params = { RequestItems: {"MenuItems": {Keys:[] }}};
+            var response = {count: 0, MenuItems: []};
+            var ids = [[]];
+            var index = 0;
+            var counter = 0;
+            var length = 0;
 
-            for(i in sections)
-                for(j in sections[i])
-                params.RequestItems.MenuItems.Keys.push({id: {S: sections[i][j]}});
-
-            // use menu ids to make batch query
-            db.batchGetItem(params, function(err, data) {
-                if (err) res.status(404).send([])
-                else {
-                    const res_menuItems = data.Responses.MenuItems;            
-                    var count = 0;
-                    for(i in res_menuItems) {
-                        const res_menuItem = res_menuItems[i];
-                        count++;
-                        menuItems.Items.push({
-                            id: res_menuItem.id.S, 
-                            menu_id: res_menuItem.menu_id.S,
-                            name: res_menuItem.name.S,
-                            price: res_menuItem.price.S ? res_menuItem.price.S : res_menuItem.price.N,
-                            description: res_menuItem.description.S,
-                            isVegan: res_menuItem.isVegan.BOOL,
-                            isVegetarian: res_menuItem.isVegan.BOOL,
-                            spicy: res_menuItem.spicy.S ? res_menuItem.spicy.S : res_menuItem.spicy.N,
-                            allergies: batchParser.parse_string_array(res_menuItem.allergies)
-                        });
+            // Must split up menu items into 
+            for(i in sections) {
+                for(j in sections[i]) {
+                    if(++counter >= batchParser.BATCH_MAX) {
+                        ids[++index] = [];
+                        counter = 0;
                     }
-                    
-                    // TODO: add avg_rating
-                    var formatted_menuItems = { count, MenuItems: formatter.MenuItems(menuItems) }
-                    res.send(formatted_menuItems);
-                } 
-            });
+                    ids[index].push(sections[i][j]);
+                    length++;
+                }
+            }
+            for(var i = 0; i < ids.length; i++) {
+                if(ids[i].length !== 0) {
+                    resource.get_batch_menuItems(ids[i], function(result) {
+                        response.count += result.count;
+                        Array.prototype.push.apply(response.MenuItems,result.MenuItems);
+
+                        if(response.count >= length)   res.send(response)
+                    })
+                }
+                else res.status(404).send([]);
+            }
 
         });
     })
@@ -214,21 +237,6 @@ menuRouter.route('/:id/menu-items')
                 })
             }
         })
-        // // Set up Params
-        // var params = {
-        //     TableName: TABLE_NAME,
-        //     Key: { "id": req.params.id },
-        //     "ReturnValues": "ALL_OLD",
-        // };
-
-        // // make the query
-        // dynamoDB.delete_query(params, function(result) {
-            
-        //     // TODO: need to remove menu from the corresponding restaurant
-        //     var restaurant_id = result.Item.restaurant_id;
-       
-        //     res.status(result.statusCode).send(result);
-        // })
 
     });
     

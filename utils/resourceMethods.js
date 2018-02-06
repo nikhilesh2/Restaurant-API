@@ -3,6 +3,7 @@ var formatter           = require('./formatter');
 var config              = require('../config.json');
 var generateQueryParams = require('./generateQueryParams');
 var generateID          = require('./generateID');
+var batchParser         = require('../utils/batchParser');
 
 AWS = require("aws-sdk");
 AWS.config.update(config.aws);
@@ -66,24 +67,27 @@ module.exports = {
             },
             ReturnValues: "ALL_OLD"
         }
-        console.log(params);
+
         dynamoDB.update_query(params, function(data) {
             callback(data);
         })
     },
+   
 	delete_all: function(TableName, callback) {
 		this.get_all(TableName, function(data) {
             const response = [];
             const items = data.data;
+            if(items.length == 0)   callback([]);
+            else {
+                var finished_requests = 0;
+                for(var index in items) {
 
-            var finished_requests = 0;
-            for(var index in items) {
-
-         		// delete item
-        		dynamoDB.delete_query({TableName, Key: { "id": items[index].id }, "ReturnValues": "ALL_OLD"}, function(result) {
-       				response.push(result);
-       				if(++finished_requests >= items.length)        callback(response);
-       			})
+                    // delete item
+                    dynamoDB.delete_query({TableName, Key: { "id": items[index].id }, "ReturnValues": "ALL_OLD"}, function(result) {
+                        response.push(result);
+                        if(++finished_requests >= items.length)        callback(response);
+                    })
+                }
             }
 		})
 	},
@@ -136,5 +140,39 @@ module.exports = {
                 } 
             })
         }
+    },
+    get_batch_menuItems: function(ids, callback) {
+        // set up params
+        var params = { RequestItems: {"MenuItems": {Keys:[] }}};
+        for(var i in ids)
+            params.RequestItems.MenuItems.Keys.push({id: {S: ids[i]}});
+        
+        const menuItems = {Items: []};
+        db.batchGetItem(params, function(err, data) {
+            if (err) { console.log(err); callback([]) }
+            else {
+                const res_menuItems = data.Responses.MenuItems;            
+                var count = 0;
+                for(i in res_menuItems) {
+                    const res_menuItem = res_menuItems[i];
+                    count++;
+                    menuItems.Items.push({
+                        id: res_menuItem.id.S, 
+                        menu_id: res_menuItem.menu_id.S,
+                        name: res_menuItem.name.S,
+                        price: res_menuItem.price.S ? res_menuItem.price.S : res_menuItem.price.N,
+                        description: res_menuItem.description.S,
+                        isVegan: res_menuItem.isVegan.BOOL,
+                        isVegetarian: res_menuItem.isVegan.BOOL,
+                        spicy: res_menuItem.spicy.S ? res_menuItem.spicy.S : res_menuItem.spicy.N,
+                        allergies: batchParser.parse_string_array(res_menuItem.allergies)
+                    });
+                }
+                
+                // TODO: add avg_rating
+                var formatted_menuItems = { count, MenuItems: formatter.MenuItems(menuItems) }
+                callback(formatted_menuItems);
+            } 
+        });
     }
 }

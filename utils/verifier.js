@@ -56,26 +56,26 @@ var formatResponse = function(messages) {
 }
 
 var verifySections = function(sections) {
-	try {	
-		sections = JSON.stringify(sections).replace(/'/g, '"');
-		sections = JSON.parse(sections);	
-	}
- 	catch(e) 	{	
- 		return "section object is not in proper JSON form";	
- 	}
+	// try {	
+	// 	sections = JSON.stringify(sections).replace(/'/g, '"');
+	// 	sections = JSON.parse(sections);	
+	// }
+ // 	catch(e) 	{	
+ // 		return "section object is not in proper JSON form";	
+ // 	}
 
-	if(typeof sections === 'object') {
-		for(var key in sections) {
-			if(typeof key !== 'string') return "section names must be strings";
+	// if(typeof sections === 'object') {
+	// 	for(var key in sections) {
+	// 		if(typeof key !== 'string') return "section names must be strings";
 
-			else {
-				for(var i in sections[key]) {					
-					if(typeof sections[key][i] !== 'string') "menu ids must be strings";
-				}
-			}
-		}
-	} 
-	else return "sections must be an object";
+	// 		else {
+	// 			for(var i in sections[key]) {					
+	// 				if(typeof sections[key][i] !== 'string') "menu ids must be strings";
+	// 			}
+	// 		}
+	// 	}
+	// } 
+	// else return "sections must be an object";
 	return null;
 }
 
