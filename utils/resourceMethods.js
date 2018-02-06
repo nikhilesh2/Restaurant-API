@@ -87,5 +87,56 @@ module.exports = {
        			})
             }
 		})
-	}
+	},
+    delete_menus: function(menu_ids, callback) {
+        var finished_requests = 0;
+        var finished_requests_sections = 0;
+        var finished_requests_items = 0;
+        const response = [];
+
+        // loop through each menu, deleting it and its associated menu items
+        for(var index in menu_ids) {
+            // delete menu
+            dynamoDB.delete_query({TableName: "Menus", Key: { "id": menu_ids[index]}, "ReturnValues": "ALL_OLD"}, function(result) {
+             
+                result.metaData = { menu_items: [] };
+
+                // menu delete was successful, so move on to delete menu items
+                if(result.statusCode == 200) {
+                    const sections = result.Item.sections;
+                  
+                    
+                 
+                    // loop through menu sections and delete each menu item
+                    for(var key in sections) {
+                        
+                        // loop through each menu item and delete it
+                        for(var item_index in sections[key]) {
+                            dynamoDB.delete_query({TableName: "MenuItems", Key: { "id": sections[key][item_index]}, "ReturnValues": "ALL_OLD"}, function(menu_item_res) {
+                             
+                                result.metaData.menu_items.push(menu_item_res); // In case menu item was not successfully deleted, return back the menu item
+                                
+                                if(++finished_requests_items >= sections[key].length)  {
+                                    finished_requests_sections++;
+                                    finished_requests_items = 0
+                                } 
+                                if(finished_requests_sections >= Object.keys(sections).length) {
+                                    response.push(result);
+                                    finished_requests++;
+                                    finished_requests_sections = 0;
+                                }  
+                                if(finished_requests >= menu_ids.length)    callback(response);
+      
+                            })
+                              
+                        }
+                         
+                    }
+                } 
+                else { 
+                    if(++finished_requests >= menu_ids.length)    callback(response);
+                } 
+            })
+        }
+    }
 }

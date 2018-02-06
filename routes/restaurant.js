@@ -207,8 +207,34 @@ restaurantRouter.route('/:id/menus')
 
     .post(notAllowed())
 
+    // delete all menus for a restaurant
+    // TODO: remove menus from menu table
+    .delete(function (req, res) {
+
+        const params = generateQueryParams(TABLE_NAME, req.params);
+        params.KeyConditionExpression = "#id = :id";
+        delete params.FilterExpression
+
+        dynamoDB.retrieve_query(params, function(result) {
+            // TODO: need to error check here
+            var restaurant = result.Items[0];
+            if(restaurant.menu_ids.length > 0) {
+                resource.update_item_by_id("Restaurants", restaurant.id, 'menu_ids', [], function(result) {
+
+                    // need to delete all menus associated with the restaurant that was just deleted
+                    resource.delete_menus(restaurant.menu_ids, function(response) {
+                        res.status(200).send(response);
+                    })
+
+                })
+            } 
+            else {
+                res.status(200).send({statusCode: 200, message: 'Restaurant has no menus to remove'});
+            }
+        });
+    })
+
 
 module.exports = {
   restaurantRouter: restaurantRouter
-};
-                         
+};                
