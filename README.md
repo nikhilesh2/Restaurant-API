@@ -82,7 +82,7 @@
 ##### Response Body
 
 
-#### POST
+### POST
 ##### Parameters
 | Name | Type | Required | Description |
 | --- | --- | --- | --- |
@@ -119,7 +119,7 @@
         ...
 }
 ```
-#### DELETE
+### DELETE
 ##### Parameters
 ###### NONE
 ##### Response Body
@@ -128,7 +128,7 @@
 
 ### ```/restaurants/:id```
 
-#### GET
+### GET
 ##### Parameters
 | Name | Type | Required | Description |
 | --- | --- | --- | --- |
@@ -138,7 +138,7 @@
 
 
 
-#### DELETE
+### DELETE
 ##### Parameters
 | Name | Type | Required | Description |
 | --- | --- | --- | --- |
@@ -148,7 +148,7 @@
 
 
 ### ```/restaurants/search```
-#### GET
+### GET
 ##### Parameters
 | Name | Type | Required | Description |
 | --- | --- | --- | --- |
@@ -164,7 +164,8 @@
 ##### Response Body
 
 
-#### ```GET /restaurants/:id/menus```
+### ```/restaurants/:id/menus```
+### GET
 ##### Parameters
 | Name | Type | Required | Description |
 | --- | --- | --- | --- |
@@ -173,8 +174,7 @@
 ##### Response Body
 
 
-
-#### ```DELETE /restaurants/:id/menus```
+### DELETE
 ##### Parameters
 | Name | Type | Required | Description |
 | --- | --- | --- | --- |
