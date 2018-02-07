@@ -76,13 +76,13 @@
 
 ### ```/restaurants```
 
-#### GET
+#### **GET**
 ##### Parameters
 ###### NONE
 ###### Response Body
 
 
-#### POST
+#### **POST**
 ##### Parameters
 | Name | Type | Required | Description |
 | --- | --- | --- | --- |
@@ -121,7 +121,7 @@
 ```
 #### DELETE
 ##### Parameters
-NONE
+None
 ##### Response Body
 
 
