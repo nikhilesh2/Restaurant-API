@@ -13,7 +13,10 @@
         * [/:id](#restaurantsid)
         * [/search](#restaurantssearch)
         * [/:id/menus](#restaurantsidmenus)
-	* [Menu (TODO)](#menu)
+	* [Menu](#menu)
+        * [/](#menus-1)
+        * [/:id](#menusid)
+        * [/:id/menu-items](#menusidmenu-items)
 	* [MenuItem (TODO)](#menuitem)
 
 
