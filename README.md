@@ -9,10 +9,10 @@
 * [The API](#TheAPI) <br />
 * [Unit Tests](#unit-tests)
 	* [Restaurants](#restaurants)
-        * [/](#get-restaurants)
-        * [/:id](#get-restaurantsid)
-        * [/search](#get-restaurantssearch)
-        * [/:id/menus](#get-restaurantsidmenus)
+        * [/](#restaurants-1)
+        * [/:id](#restaurantsid)
+        * [/search](#restaurantssearch)
+        * [/:id/menus](#restaurantsidmenus)
 	* [Menu (TODO)](#menu)
 	* [MenuItem (TODO)](#menuitem)
 
@@ -194,21 +194,25 @@
 | /menus/:id | Get a specific menu | Not allowed (405) | Delete a specific menu
 | menus/:id/menu-items | Get all menu items for a specific menu |  Not allowed (405) | Delete all menu items for a specific menu
 
-#### ```GET /menus```
+### ```/menus```
+
+### GET
 ##### Parameters
 ###### NONE
 
 ##### Response Body
 
 
-#### ```DELETE /menus```
+### DELETE
 ##### Parameters
 ###### NONE
 
 ##### Response Body
 
 
-#### ```GET /menus/:id```
+### ```/menus/:id```
+
+### GET
 ##### Parameters
 | Name | Type | Required | Description |
 | --- | --- | --- | --- |
@@ -217,7 +221,7 @@
 ##### Response Body
 
 
-#### ```DELETE /menus/:id```
+### DELETE
 ##### Parameters
 | Name | Type | Required | Description |
 | --- | --- | --- | --- |
@@ -226,7 +230,9 @@
 ##### Response Body
 
 
-#### ```GET /menus/:id/menu-items```
+### ```/menus/:id/menu-items```
+
+### GET
 ##### Parameters
 | Name | Type | Required | Description |
 | --- | --- | --- | --- |
@@ -235,7 +241,7 @@
 ##### Response Body
 
 
-#### ```DELETE /menus/:id/menu-items```
+### DELETE
 ##### Parameters
 | Name | Type | Required | Description |
 | --- | --- | --- | --- |
