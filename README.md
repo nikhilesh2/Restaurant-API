@@ -73,8 +73,8 @@
 | Resource | GET | POST | DELETE
 | --- | --- | --- | --- |
 | /restaurants | Get List of Restaurants | Create new Restaurant | Delete all Restaurants
-| /restaurants/:id | Get a specific Restaurant | Not allowed (405) | Delete a specific Restaurant
-| /restaurants/search | Search for a specific restaurant |  Not allowed (405) | Not allowed (405)
+| /restaurants/:id | Get a Restaurant | Not allowed (405) | Delete a Restaurant
+| /restaurants/search | Search for restaurant(s) |  Not allowed (405) | Not allowed (405)
 | /restaurants/:id/menus | Get all menus for a restaurant |  Not allowed (405) | Delete all menus for a restaurant
 | (TODO) /restaurants/:id/reviews | Get all reviews for a restaurant |  Create a new review for a restaurant | Delete all reviews for a restaurant
 
@@ -195,7 +195,7 @@
 | Resource | GET | POST | DELETE
 | --- | --- | --- | --- |
 | /menus | Get all menus | Create new menu | Delete all menus
-| /menus/:id | Get a specific menu | Not allowed (405) | Delete a specific menu
+| /menus/:id | Get a menu | Not allowed (405) | Delete a menu
 | menus/:id/menu-items | Get all menu items for a specific menu |  Not allowed (405) | Delete all menu items for a specific menu
 
 ### ```/menus```
@@ -264,7 +264,7 @@
 | --- | --- | --- | --- |
 | /menu-items | Get all menu items | Create new menu item | Delete all menu items
 | /menus/:id | Get a specific menu item | Not allowed (405) | Delete a specific menu item
-| menus/:id/menu-items | Get all menu items for a specific menu |  Not allowed (405) | Delete all menu items for a specific menu
+| menus/:id/menu-items | Get all menu items for a menu |  Not allowed (405) | Delete all menu items from a menu
 | (TODO) menus/:id/reviews | Get all reviews for menu item |  Create a new review for a specific menu item | Delete all reviews for menu item
 
 ### ```/menu-items```
