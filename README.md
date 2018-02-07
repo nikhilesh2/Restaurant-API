@@ -2,7 +2,7 @@
 
 ## Introduction
 
-> API for an online ordering system
+> Hi! This is an API for an online ordering system I am working on as a part of the Zappos coding challenge. I did my best to be as specific as possible in the documentation, but if you have any questions, let me know. 
 
 ## Table of Contents:
 * [Getting Setup](#setup)
