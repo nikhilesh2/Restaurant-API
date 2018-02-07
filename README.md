@@ -275,6 +275,19 @@
 
 ##### Response Body
 
+### POST
+#### Parameters
+| Name | Type | Required | Description |
+| --- | --- | --- | --- |
+| menu_id | string | Required | The id of the menu that the menu item will be added to|
+| name | string | Required| The name of the menu item |
+| price | number | Required | The price of the menu item |
+| section | string | Required | The section of the menu that the menu item is listed under |
+| description | string | Required | A description of the menu item |
+| isVegan | boolean | Required | Whether or not the menu item is vegan |
+| isVegetarian | boolean | Required| Whether or not the menu item is vegetarian |
+| spicy | number | Required | A number ranging from 1 to 10 of how spicy the food it |
+| allergies | array | Required | List of all potential allergens |
 
 ### DELETE
 ##### Parameters
