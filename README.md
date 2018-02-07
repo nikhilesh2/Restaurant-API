@@ -7,7 +7,6 @@
 ## Table of Contents:
 * [Getting Setup](#setup)
 * [The API](#TheAPI) <br />
-* [Unit Tests](#unit-tests)
 	* [Restaurants](#restaurants)
         * [/](#restaurants-1)
         * [/:id](#restaurantsid)
@@ -18,6 +17,8 @@
         * [/:id](#menusid)
         * [/:id/menu-items](#menusidmenu-items)
 	* [MenuItem (TODO)](#menuitem)
+* [Unit Tests](#unit-tests)
+* [Future work](#future-work)
 
 
 <a name="setup" />
@@ -55,11 +56,6 @@
 > Just run ```npm run start``` to try out the API <br />
 > <br />
 > NOTE: Before trying out the API, it would be a good idea to run the unit tests to ensure everything is running smoothly with the following command: <br />
->  ```npm run tests```
-
-## Unit Tests
-> #### I have created a handful of unit tests for each of the endpoints. Make sure no other processes are running on the same port.
-> #### Type in the following command to run the unit tests
 >  ```npm run tests```
 
 
@@ -286,7 +282,7 @@
 | description | string | Required | A description of the menu item |
 | isVegan | boolean | Required | Whether or not the menu item is vegan |
 | isVegetarian | boolean | Required| Whether or not the menu item is vegetarian |
-| spicy | number | Required | A number ranging from 1 to 10 of how spicy the food it |
+| spicy | number | Required | A number ranging from 1 to 10 of how spicy the food is |
 | allergies | array | Required | List of all potential allergens |
 
 ### DELETE
@@ -316,5 +312,13 @@
 ##### Response Body
 
 
+
+## Unit Tests
+> #### I have created a handful of unit tests for each of the endpoints. Make sure no other processes are running on the same port.
+> #### Type in the following command to run the unit tests
+>  ```npm run tests```
+
+
+## Future Work
 
 
