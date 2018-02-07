@@ -193,21 +193,21 @@
 | /menus/:id | Get a specific menu | Not allowed (405) | Delete a specific menu
 | menus/:id/menu-items | Get all menu items for a specific menu |  Not allowed (405) | Delete all menu items for a specific menu
 
-#### ```GET /menus```
+### ```GET /menus```
 ##### Parameters
 ###### NONE
 
 ##### Response Body
 
 
-#### ```DELETE /menus```
+### ```DELETE /menus```
 ##### Parameters
 ###### NONE
 
 ##### Response Body
 
 
-#### ```GET /menus/:id```
+### ```GET /menus/:id```
 ##### Parameters
 | Name | Type | Required | Description |
 | --- | --- | --- | --- |
@@ -216,7 +216,7 @@
 ##### Response Body
 
 
-#### ```DELETE /menus/:id```
+### ```DELETE /menus/:id```
 ##### Parameters
 | Name | Type | Required | Description |
 | --- | --- | --- | --- |
@@ -225,7 +225,7 @@
 ##### Response Body
 
 
-> #### ```GET /menus/:id/menu-items```
+#### ```GET /menus/:id/menu-items```
 ##### Parameters
 | Name | Type | Required | Description |
 | --- | --- | --- | --- |
