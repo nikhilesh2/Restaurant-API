@@ -76,7 +76,7 @@
 
 ### ```/restaurants```
 
-#### GET
+### GET
 ##### Parameters
 ###### NONE
 ##### Response Body
