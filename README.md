@@ -95,30 +95,12 @@
 | email | string | Required | The email of the Restaurant |
 | hours | object | Required | The hours in 24-hour time and days the restaurant is open. Restaurants will be considered closed during a specific day of the week if not provided. Below is an example of how to construct the object  |
 | image_url | string | Optional | An image of the Restaurant |
-###### NONE
+
 ###### Response Body
-
-
-
-
-#### ```POST /restaurants```
-##### Parameters
-| Name | Type | Required | Description |
-| --- | --- | --- | --- |
-| name | string | Required | The name of the restaurant |
-| address | string | Required| The street address of the Restaurant |
-| city | string | Required | The city the Restaurant is located in |
-| zip_code | string | Required | The zip code of the Restaurant |
-| country | string | Required | The country the Restaurant is located in |
-| phone number | string | Required | The phone number of the Restaurant |
-| email | string | Required | The email of the Restaurant |
-| hours | object | Required | The hours in 24-hour time and days the restaurant is open. Restaurants will be considered closed during a specific day of the week if not provided. Below is an example of how to construct the object  |
-| image_url | string | Optional | An image of the Restaurant |
-
 ##### Example of hours object
 ```
 "hours": {
-    	"Monday": [
+        "Monday": [
             {
                 "hours_open_start": "10:00",
                 "hours_open_end":  "13:00",
@@ -137,15 +119,13 @@
         ...
 }
 ```
-
-##### Response Body
-
-
-#### ```DELETE /restaurants```
+#### DELETE
 ##### Parameters
 ###### NONE
-
 ##### Response Body
+
+
+
 
 
 #### ```GET /restaurants/:id```
