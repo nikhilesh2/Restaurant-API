@@ -74,11 +74,18 @@
 | /restaurants/search | Search for a specific restaurant |  Not allowed (405) | Not allowed (405)
 | /restaurants/:id/menus | Get all menus for a restaurant |  Not allowed (405) | Delete all menus for a restaurant
 
-#### ```GET /restaurants```
+### ```/restaurants```
+
+#### GET
 ##### Parameters
 ###### NONE
+###### Response Body
 
-##### Response Body
+
+#### GET
+##### Parameters
+###### NONE
+###### Response Body
 
 
 
@@ -193,21 +200,21 @@
 | /menus/:id | Get a specific menu | Not allowed (405) | Delete a specific menu
 | menus/:id/menu-items | Get all menu items for a specific menu |  Not allowed (405) | Delete all menu items for a specific menu
 
-### ```GET /menus```
+#### ```GET /menus```
 ##### Parameters
 ###### NONE
 
 ##### Response Body
 
 
-### ```DELETE /menus```
+#### ```DELETE /menus```
 ##### Parameters
 ###### NONE
 
 ##### Response Body
 
 
-### ```GET /menus/:id```
+#### ```GET /menus/:id```
 ##### Parameters
 | Name | Type | Required | Description |
 | --- | --- | --- | --- |
@@ -216,7 +223,7 @@
 ##### Response Body
 
 
-### ```DELETE /menus/:id```
+#### ```DELETE /menus/:id```
 ##### Parameters
 | Name | Type | Required | Description |
 | --- | --- | --- | --- |
