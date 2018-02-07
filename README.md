@@ -76,13 +76,13 @@
 
 ### ```/restaurants```
 
-#### * GET
+#### GET
 ##### Parameters
 ###### NONE
 ##### Response Body
 
 
-#### * POST
+#### POST
 ##### Parameters
 | Name | Type | Required | Description |
 | --- | --- | --- | --- |
@@ -96,7 +96,7 @@
 | hours | object | Required | The hours in 24-hour time and days the restaurant is open. Restaurants will be considered closed during a specific day of the week if not provided. Below is an example of how to construct the object  |
 | image_url | string | Optional | An image of the Restaurant |
 
-###### Response Body
+##### Response Body
 ##### Example of hours object
 ```
 "hours": {
@@ -121,14 +121,24 @@
 ```
 #### DELETE
 ##### Parameters
-None
+###### NONE
+##### Response Body
+
+
+
+### ```/restaurants/:id```
+
+#### GET
+##### Parameters
+| Name | Type | Required | Description |
+| --- | --- | --- | --- |
+| id | string | Required | The id of the restaurant |
 ##### Response Body
 
 
 
 
-
-#### ```GET /restaurants/:id```
+#### DELETE
 ##### Parameters
 | Name | Type | Required | Description |
 | --- | --- | --- | --- |
@@ -136,16 +146,9 @@ None
 
 ##### Response Body
 
-#### ```DELETE /restaurants/:id```
-##### Parameters
-| Name | Type | Required | Description |
-| --- | --- | --- | --- |
-| id | string | Required | The id of the restaurant |
 
-##### Response Body
-
-
-#### ```GET /restaurants/search```
+### ```/restaurants/search```
+#### GET
 ##### Parameters
 | Name | Type | Required | Description |
 | --- | --- | --- | --- |
