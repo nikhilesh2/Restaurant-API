@@ -44,6 +44,30 @@ module.exports = {
 
 		return formatResponse(messages);
 		
+	},
+	verifyMenuItem_POST: function(params) {
+		const messages = [];
+		if(params == null) return {statusCode: 400, message: "Invalid request object"};
+		
+		var item = params;
+
+		if(item.id) 					messages.push("ID attribute should not be passed in");
+		
+		// Required
+		if(!item.menu_id)				messages.push("menu_id attribute must be set");
+		if(!item.name)					messages.push("name attribute must be set");
+		if(!item.price)					messages.push("price attribute must be set");
+		if(!item.section)				messages.push("section attribute must be set");
+		if(!item.description)			messages.push("description attribute must be set");
+		if(!item.isVegan)				messages.push("isVegan attribute must be set");
+		if(!item.isVegetarian)			messages.push("isVegetarian attribute must be set");
+		if(!item.spicy)					messages.push("spicy attribute must be set");
+		if(!item.allergies)				messages.push("allergies attribute must be set");
+
+		
+
+		return formatResponse(messages);
+		
 	}
 }
 

@@ -100,13 +100,6 @@ describe('Setting up Tests', function() {
 		 			});
 		 		});
 
-		 		// it('Should delete all restaurants (empty table)', function(done) {
-		 		// 	request.delete('/Restaurants')
-		 		// 	.expect(200)
-		 		// 	.end(function(err, res) {
-		 		// 		done(err);
-		 		// 	});
-		 		// });
 		 		after(function(done) {
 		 			execSync('node dev/populateTables.js');
 		 			done();
@@ -153,7 +146,7 @@ describe('Setting up Tests', function() {
 			 		request.delete('/Restaurants/' + SAMPLE_RESTAURANTS.data[0].id)
 			 		.expect(200)
 			 		.end(function(err, res) {
-			 			expect(res.body.Item).to.deep.equal(SAMPLE_RESTAURANTS.data[0]);
+			 			expect(res.body.Item).to.deep.equal(SAMPLE_RESTAURANTS.data[0]);			 		
 			 			done(err);
 			 		});
 			 	});
@@ -163,11 +156,13 @@ describe('Setting up Tests', function() {
 			 		request.delete('/Restaurants/BLAH')
 			 		.expect(404)
 			 		.end(function(err, res) {
+			 			console.log('done1');
 			 			expect(res.body).to.deep.equal({ statusCode: 404, message: 'Item not found' });
 			 			done(err);
 			 		});
 			 	});
 			 	after(function(done) {
+			 		console.log("\t  Repopulating tables...")
 			 		execSync('node dev/populateTables.js');
 		 			done();
 			 	})

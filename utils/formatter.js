@@ -59,7 +59,7 @@ module.exports = {
 			formatted_data.push({
 				id: item.id,
 				menu_id: item.menu_id,
-				type: item.type,
+				section: item.section,
 				name: item.name,
 				price: item.price,
 				description: item.description,

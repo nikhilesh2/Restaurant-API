@@ -1,20 +1,12 @@
 var cors                = require('cors');
 var express             = require('express');
 var menuRouter          = express.Router();
-var config              = require('../config.json');
 var generateID          = require('../utils/generateID');
 var verifiers           = require('../utils/verifier');
-var formatter           = require('../utils/formatter');
 var dynamoDB            = require('../dynamoDB/queries.js')
 var generateQueryParams = require('../utils/generateQueryParams');
 var resource            = require('../utils/resourceMethods');
 var batchParser         = require('../utils/batchParser');
-
-AWS = require("aws-sdk");
-AWS.config.update(config.aws);
-
-var db          = new AWS.DynamoDB();
-var docClient   = new AWS.DynamoDB.DocumentClient();
 
 
 menuRouter.all('*', cors());
@@ -84,15 +76,16 @@ menuRouter.route('/')
             // remove all of the menus for each restaurant
             resource.get_all("Restaurants", function(result) {
                 const restaurants = result.data;
+                if(restaurants.length === 0)    res.send(response);
+                
                 var requests_finished = 0;
                 for(var i in restaurants) {
                     resource.update_item_by_id("Restaurants", restaurants[i].id, 'menu_ids', [], function(result) {
                         if(++requests_finished >= restaurants.length) res.send(response);
                     })
                 }
-                // res.status(response.statusCode).send(response.data);
             })
-            // res.status(200).send(response);
+
         })
     })
 

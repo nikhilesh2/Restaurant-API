@@ -1,8 +1,7 @@
 const MenuItem_list = [
    {
         id: '5b1c89ae-c23b-4378-a8a9-27bdcd701cfa',
-        menu_id: 'ea33e70e-1207-499e-bbe9-b9ed2323f932',
-        type: 'Appetizer',
+        menu_id: '4ddb6b7a-d037-46c2-9178-add071663c07',
         name: "Spring Rolls",
         price: 6.95,
         description: "Fried dish containing minced pork, shredded carrot, bean sprouts and other vegetables served with a sauce similar to Worcestershire sauce.",
@@ -35,7 +34,7 @@ const MenuItem_list = [
     },
     {
         id: 'aef19556-cd87-408c-a069-0d71d7b4d6ae',
-        menu_id: '41bdd3ce-4b21-4408-adc5-8fbee6484b36',
+        menu_id: '4ddb6b7a-d037-46c2-9178-add071663c07',
         type: 'Appetizer',
         name: "Dumplings",
         price: 4.95,

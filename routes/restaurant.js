@@ -65,7 +65,18 @@ restaurantRouter.route('/')
     // delete all restaurants 
     .delete(function (req, res) {
         resource.delete_all(TABLE_NAME, function(response) {
-            res.status(200).send(response);
+            // delete all menus associated with each restaurant
+            const restaurants = response;
+            var requests_finished = 0;
+            if(restaurants.length === 0) return res.status(404).send(response);
+
+            for(var i in restaurants) {
+                response[i].metaData = { menus: [] };
+                resource.delete_menus(restaurants[i].Item.menu_ids, function(result) {
+                    if(result.length !== 0 )    response[i].metaData.menus.push(result);
+                    if(++requests_finished >= restaurants.length) return res.status(200).send(response);
+                })
+            }
         })
     })
 
@@ -82,11 +93,9 @@ restaurantRouter.route('/search')
 
         // Ensure there are parameters to search with
         if(Object.keys(req.body).length === 0)          return res.status(400).send([]);
-        
+
         //Ensure no empty strings were passed in
-        for(var key in req.body) if(req.body[key] === ''){
-            return res.status(400).end();
-        } 
+        for(var key in req.body) if(req.body[key] === '') return res.status(400).send([]);
 
         // generate the parameters for DB scan using the requested parameters
         const params = generateQueryParams(TABLE_NAME, req.body);
@@ -126,17 +135,13 @@ restaurantRouter.route('/:id')
 
     // Delete a Restaurant by ID
     .delete(function (req, res) {
-        
-        // Set up Params
-        var params = {
-            TableName: TABLE_NAME,
-            Key: { "id": req.params.id },
-            ReturnValues: "ALL_OLD"
-        };
+        resource.delete_by_id(TABLE_NAME, req.params.id, function(result) {
+            if(result.statusCode !== 200)  return res.status(404).send(result)
 
-         // make the query
-        dynamoDB.delete_query(params, function(result) {
-            res.status(result.statusCode).send(result);
+            // Delete associated menus
+            resource.delete_menus(result.Item.menu_ids, function(response) {
+                    res.status(200).send(result);
+            })
         })
     })
 
@@ -149,7 +154,6 @@ restaurantRouter.route('/:id/reviews')
     
     // Retrieve Restaurant by ID   
     .get(function (req, res) {
-
 
     })
 

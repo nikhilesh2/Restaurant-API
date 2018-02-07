@@ -57,6 +57,17 @@ module.exports = {
             callback(data);
         });
 	},
+    delete_by_id: function(TableName, id, callback) {
+        var params = {
+            TableName,
+            Key: { id },
+            ReturnValues: "ALL_OLD"
+        };
+        // make the query
+        dynamoDB.delete_query(params, function(result) {
+           callback(result);
+        })
+    },
     update_item_by_id: function(TableName, id, attributeToUpdate, newValue, callback) {
         const params = {
             TableName,
@@ -92,19 +103,26 @@ module.exports = {
 		})
 	},
     delete_menu_items: function(item_ids, callback) {
+        if(!item_ids || item_ids.length === 0) {
+            return callback([]);
+        }
+
         const response = [];
         var finished_requests = 0;
-
         // loop through menu items and delete each one
         for(var index in item_ids) {
-          
+       
             dynamoDB.delete_query({TableName: "MenuItems", Key: {"id": item_ids[index]}, "ReturnValues": "ALL_OLD"}, function(result) {
                 response.push(result);
-                if(++finished_requests >= item_ids.length)        callback(response);
+                finished_requests++;
+                if(finished_requests >= item_ids.length)       return callback(response);
             })
         }
     },
     delete_menus: function(menu_ids, callback) {
+
+        if(menu_ids === undefined || menu_ids.length === 0) return callback([]);
+
         var finished_requests = 0;
         var finished_requests_sections = 0;
 
@@ -115,7 +133,7 @@ module.exports = {
         for(var index in menu_ids) {
             // delete menu
             dynamoDB.delete_query({TableName: "Menus", Key: { "id": menu_ids[index]}, "ReturnValues": "ALL_OLD"}, function(result) {
-             
+
                 result.metaData = { menu_items: [] };
 
                 // menu delete was successful, so move on to delete menu items
@@ -135,8 +153,8 @@ module.exports = {
                         })
                     }
                 } 
-                else { 
-                    if(++finished_requests >= menu_ids.length)    callback(response);
+                else {
+                    if(++finished_requests >= menu_ids.length) return callback(response);
                 } 
             })
         }
