@@ -76,6 +76,7 @@
 | /restaurants/:id | Get a specific Restaurant | Not allowed (405) | Delete a specific Restaurant
 | /restaurants/search | Search for a specific restaurant |  Not allowed (405) | Not allowed (405)
 | /restaurants/:id/menus | Get all menus for a restaurant |  Not allowed (405) | Delete all menus for a restaurant
+| (TODO) /restaurants/:id/reviews | Get all reviews for a restaurant |  Create a new review for a restaurant | Delete all reviews for a restaurant
 
 ### ```/restaurants```
 
@@ -249,6 +250,55 @@
 | Name | Type | Required | Description |
 | --- | --- | --- | --- |
 | id | string | Required | The id of the menu |
+
+##### Response Body
+
+
+
+
+## Menu Items
+
+### Method Overview
+
+| Resource | GET | POST | DELETE
+| --- | --- | --- | --- |
+| /menu-items | Get all menu items | Create new menu item | Delete all menu items
+| /menus/:id | Get a specific menu item | Not allowed (405) | Delete a specific menu item
+| menus/:id/menu-items | Get all menu items for a specific menu |  Not allowed (405) | Delete all menu items for a specific menu
+| (TODO) menus/:id/reviews | Get all reviews for menu item |  Create a new review for a specific menu item | Delete all reviews for menu item
+
+### ```/menu-items```
+
+### GET
+##### Parameters
+###### NONE
+
+##### Response Body
+
+
+### DELETE
+##### Parameters
+###### NONE
+
+##### Response Body
+
+
+### ```/menu-items/:id```
+
+### GET
+##### Parameters
+| Name | Type | Required | Description |
+| --- | --- | --- | --- |
+| id | string | Required | The id of the menu item|
+
+##### Response Body
+
+
+### DELETE
+##### Parameters
+| Name | Type | Required | Description |
+| --- | --- | --- | --- |
+| id | string | Required | The id of the menu item |
 
 ##### Response Body
 
