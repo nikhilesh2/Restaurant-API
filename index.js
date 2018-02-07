@@ -21,7 +21,6 @@ app.use(pretty({ query: 'pretty' }));
 
 
 // Establish endpoints
-app.use('/dev', devRouter.devRouter);
 app.use('/restaurants', restaurantRouter.restaurantRouter);
 app.use('/menus', menuRouter.menuRouter);
 app.use('/menu-items', menuItemRouter.menuItemRouter);
