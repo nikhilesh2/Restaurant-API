@@ -121,7 +121,7 @@
 ```
 #### DELETE
 ##### Parameters
-###### NONE
+NONE
 ##### Response Body
 
 
