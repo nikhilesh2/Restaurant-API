@@ -225,7 +225,7 @@
 ##### Response Body
 
 
-#### ```GET /menus/:id/menu-items```
+> #### ```GET /menus/:id/menu-items```
 ##### Parameters
 | Name | Type | Required | Description |
 | --- | --- | --- | --- |
