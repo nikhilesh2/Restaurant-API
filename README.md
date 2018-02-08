@@ -327,5 +327,5 @@
 > Due to time constraints there were a few things I didn't get to implement that I have outlined below.
 1. Add reviews endpoint to restaurants and menu-items
 2. Add more exhaustive testing to all of the endpoints and "other" methods
-3. More extensive verifiers 
+3. Add More extensive verifiers 
 4. Optimize database using best dynamoDB practices

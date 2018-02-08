@@ -23,11 +23,7 @@ const notAllowed = function() {
 
 
 /* ======= MENUS ======= */
-/* 
-    This endpoint allows you to get detailed
-    data about Menu(s) based off either the
-    menu ID or RestaurantID 
-*/
+
 menuRouter.route('/')
     
     // retrieve all menus
@@ -91,11 +87,8 @@ menuRouter.route('/')
 
 
 
-/* ======= MENU BY ID======= */
-/* 
-    This endpoint allows you to get detailed
-    data about Menu(s) based off either the
-*/
+/* ======= MENU BY MENU_ID======= */
+
 menuRouter.route('/:id')
     
     // retrieve menu based of menu id
@@ -154,10 +147,7 @@ menuRouter.route('/:id')
 
 
 /* ======= MENU-ITEM BY MENU_ID======= */
-/* 
-    This endpoint allows access MenuItems
-    for a specific menu
-*/
+
 menuRouter.route('/:id/menu-items')
     
     .get(function (req, res) {

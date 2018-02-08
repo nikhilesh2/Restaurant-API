@@ -8,8 +8,6 @@ var port				= process.env.PORT || 5000;
 var restaurantRouter 	= require('./routes/restaurant');
 var menuRouter 			= require('./routes/menu');
 var menuItemRouter 		= require('./routes/menuItem');
-var devRouter 			= require('./routes/dev');
-
 
 
 // Configure app to be able to get the data from a POST

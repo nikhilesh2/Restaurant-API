@@ -23,6 +23,10 @@ var menuItemRouter = express.Router();
 const params = require('../models/Restaurant.js'); // TODO: replace with menuItem.js
 const TABLE_NAME = "MenuItems";
 
+const notAllowed = function() {
+  return function(req, res) { res.status(405).send({statusCode: 405, message: "Method not allowed"}); };
+}
+
 
 
 /* ======= MENU ITEMS ======= */
@@ -50,14 +54,14 @@ menuItemRouter.route('/')
         }
 
         req.body.id = generateID(); // create a unique id
-        console.log(req.body.section);
+
         // perform the query
         resource.create(TABLE_NAME, req.body, function(result) {
             const menu_id = result.Item[0].menu_id;
-            console.log(result);
             resource.get_by_id("Menus", {id: menu_id}, function(response) {
-                const menu = response.data;
+                if(response.statusCode === 404) return res.status(response.statusCode).send(response);
 
+                const menu = response.data;
                 if(menu.sections[req.body.section])   menu.sections[req.body.section].push(req.body.id);
                 else    menu.sections[req.body.section] = [req.body.id];
                 resource.update_item_by_id("Menus", menu_id, 'sections', menu.sections, function(response) {
@@ -120,6 +124,9 @@ menuItemRouter.route('/:id')
             }
         });
     })
+
+    .post(notAllowed())
+
     // delete menu item by id
     .delete(function (req, res) {
 
@@ -127,7 +134,7 @@ menuItemRouter.route('/:id')
             if(result.statusCode !== 200)  return res.status(result.statusCode).send(result);
 
             const menu_id = result.Item.menu_id;
-            console.log(menu_id);
+
             // Remove deleted menu item from menu
             resource.get_by_id("Menus", { id: menu_id } , function(response) {
                 const menu = response.data;

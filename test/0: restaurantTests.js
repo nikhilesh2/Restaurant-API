@@ -156,7 +156,6 @@ describe('Setting up Tests', function() {
 			 		request.delete('/Restaurants/BLAH')
 			 		.expect(404)
 			 		.end(function(err, res) {
-			 			console.log('done1');
 			 			expect(res.body).to.deep.equal({ statusCode: 404, message: 'Item not found' });
 			 			done(err);
 			 		});
