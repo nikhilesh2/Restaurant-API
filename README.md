@@ -205,14 +205,12 @@
 ##### Parameters
 ###### NONE
 
-##### Response Body
 
 
 ### DELETE
 ##### Parameters
 ###### NONE
 
-##### Response Body
 
 
 ### ```/menus/:id```
@@ -223,7 +221,6 @@
 | --- | --- | --- | --- |
 | id | string | Required | The id of the menu |
 
-##### Response Body
 
 
 ### DELETE
@@ -232,7 +229,6 @@
 | --- | --- | --- | --- |
 | id | string | Required | The id of the menu |
 
-##### Response Body
 
 
 ### ```/menus/:id/menu-items```
@@ -243,7 +239,6 @@
 | --- | --- | --- | --- |
 | id | string | Required | The id of the menu |
 
-##### Response Body
 
 
 ### DELETE
@@ -252,7 +247,6 @@
 | --- | --- | --- | --- |
 | id | string | Required | The id of the menu |
 
-##### Response Body
 
 
 
@@ -274,7 +268,6 @@
 ##### Parameters
 ###### NONE
 
-##### Response Body
 
 ### POST
 #### Parameters
@@ -294,7 +287,6 @@
 ##### Parameters
 ###### NONE
 
-##### Response Body
 
 
 ### ```/menu-items/:id```
@@ -305,7 +297,7 @@
 | --- | --- | --- | --- |
 | id | string | Required | The id of the menu item|
 
-##### Response Body
+
 
 
 ### DELETE
@@ -314,7 +306,6 @@
 | --- | --- | --- | --- |
 | id | string | Required | The id of the menu item |
 
-##### Response Body
 
 
 
