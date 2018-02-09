@@ -26,7 +26,6 @@ module.exports = {
             if (err) console.error("Unable to query. Error:", JSON.stringify(err, null, 2));
            	else {
 				 return_obj = data;
-                //if(data.Items.length !== 0)  
             }
             callback(return_obj);
         });
