@@ -107,7 +107,7 @@ menuItemRouter.route('/:id')
         // make the query
         dynamoDB.retrieve_query(params, function(result) {
             const statusCode = result.Items ? 200 : 404;
-            if(statusCode !== 200) return res.status(statusCode).send({});
+            if(statusCode !== 200) return res.status(statusCode).send([]);
    
             const unformatted_data = { Items: [result.Items[0]] };
             res.status(statusCode).send(formatter.MenuItems(unformatted_data)[0]);

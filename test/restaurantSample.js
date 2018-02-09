@@ -173,18 +173,14 @@ const restaurant_list = [
         "id": "a86cdef0-0860-11e8-8038-898b27a33038",
         "name": "Subway",
         "image_url": " ",
-        "delivers": "yes",
-        "location": {
-            "address": "83 Aspen Rd",
-            "city": "Sharon",
-            "state": "MA",
-            "zip_code": "02067",
-            "country": "United States"
-        },
-        "contact": {
-            "phone_number": "781-322-4440",
-            "email": "pizzaMart@gmail.com"
-        },
+        "delivers": "no",
+        "address": "2930 W Colorado Ave",
+        "city": "Colorado Springs",
+        "state": "CO",
+        "zip_code": "80904",
+        "country": "United States",
+        "phone_number": "719-475-7402",
+        "email": "subway@gmail.com",
         "hours": {
             "Monday": [
                 {
@@ -209,17 +205,13 @@ const restaurant_list = [
         "name": "Pizza Mart",
         "image_url": "https://google.com",
         "delivers": "yes",
-        "location": {
-            "address": "83 Aspen Rd",
-            "city": "Sharon",
-            "state": "MA",
-            "zip_code": "02067",
-            "country": "United States"
-        },
-        "contact": {
-            "phone_number": "781-322-4440",
-            "email": "pizzaMart@gmail.com"
-        },
+        "address": "831 Fairmount road",
+        "city": "Peabody",
+        "state": "MA",
+        "zip_code": "01242",
+        "country": "United States",
+        "phone_number": "719-548-1991",
+        "email": "pizzaMart@gmail.com",
         "hours": {
             "Monday": [
                 {
