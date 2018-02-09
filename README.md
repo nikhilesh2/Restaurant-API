@@ -91,6 +91,7 @@
 | Name | Type | Required | Description |
 | --- | --- | --- | --- |
 | name | string | Required | The name of the restaurant |
+| menu_ids | array | Optional| The menu ids for the restaurant |
 | address | string | Required| The street address of the Restaurant |
 | city | string | Required | The city the Restaurant is located in |
 | zip_code | string | Required | The zip code of the Restaurant |
