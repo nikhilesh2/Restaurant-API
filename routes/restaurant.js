@@ -23,7 +23,7 @@ var restaurantRouter = express.Router();
 const params = require('../models/Restaurant.js');
 const TABLE_NAME = "Restaurants";
 
-// TODO: put in own file
+
 const notAllowed = function() {
   return function(req, res) { res.status(405).send({statusCode: 405, message: "Method not allowed"}); };
 }
@@ -31,12 +31,8 @@ const notAllowed = function() {
 
 
 
-
 /* ======= RESTAURANTS ======= */
-/* 
-    This endpoint allows you to get detailed
-    data about Restaurants and add new ones. 
-*/
+
 restaurantRouter.route('/')
     
     // retrieve all restaurants 
@@ -65,11 +61,11 @@ restaurantRouter.route('/')
     // delete all restaurants 
     .delete(function (req, res) {
         resource.delete_all(TABLE_NAME, function(response) {
-            // delete all menus associated with each restaurant
             const restaurants = response;
             var requests_finished = 0;
             if(restaurants.length === 0) return res.status(404).send(response);
 
+            // delete all menus for each restaurant
             for(var i in restaurants) {
                 response[i].metaData = { menus: [] };
                 resource.delete_menus(restaurants[i].Item.menu_ids, function(result) {
@@ -82,17 +78,14 @@ restaurantRouter.route('/')
 
 
 /* ======= SEARCH ======= */
-/* 
-    This endpoint allows you search for
-    restaurants based off certain attributes. 
-*/
+
 restaurantRouter.route('/search')
 
     // Retrieve based of search values
     .get(function (req, res) {
 
         // Ensure there are parameters to search with
-        if(Object.keys(req.body).length === 0)          return res.status(400).send([]);
+        if(Object.keys(req.body).length === 0)            return res.status(400).send([]);
 
         //Ensure no empty strings were passed in
         for(var key in req.body) if(req.body[key] === '') return res.status(400).send([]);
@@ -117,11 +110,7 @@ restaurantRouter.route('/search')
 
 
 /* ======= RESTAURANT BY ID ======= */
-/* 
-    This endpoint allows you to perform
-    operations on a specific restaurant
-    by ID
-*/
+
 restaurantRouter.route('/:id')
 
     // Retrieve Restaurant by ID   
@@ -146,26 +135,28 @@ restaurantRouter.route('/:id')
     })
 
 /* ======= REVIEWS ======= */
-/* 
-    This endpoint allows you to retrieve
-    reviews of a restaurant.
-*/
+
+
 restaurantRouter.route('/:id/reviews')
     
-    // Retrieve Restaurant by ID   
-    .get(function (req, res) {
+    // TODO: retrieve all reviews for restaurant
+    .get(notAllowed())
 
-    })
+    // TODO: create a new review
+    .post(notAllowed())
+
+    // TODO: delete all reviews for a restaurant
+    .delete(notAllowed())
 
 
 /* ======= MENUS ======= */
-/* 
-    This endpoint allows you to retrieve
-    a restaurants' menus based on restaurant ID
-*/
+
 restaurantRouter.route('/:id/menus')
        
+    // get all of the menus for a restaurant
     .get(function (req, res) {
+
+        // set up our params
         const menus = {Items: []};
         const params = generateQueryParams(TABLE_NAME, req.params);
         params.KeyConditionExpression = "#id = :id";
@@ -212,7 +203,6 @@ restaurantRouter.route('/:id/menus')
     .post(notAllowed())
 
     // delete all menus for a restaurant
-    // TODO: remove menus from menu table
     .delete(function (req, res) {
 
         const params = generateQueryParams(TABLE_NAME, req.params);
@@ -220,7 +210,8 @@ restaurantRouter.route('/:id/menus')
         delete params.FilterExpression
 
         dynamoDB.retrieve_query(params, function(result) {
-            // TODO: need to error check here
+            if(result.statusCode !== 200)   return res.status(result.statusCode).send(result);
+
             var restaurant = result.Items[0];
             if(restaurant.menu_ids.length > 0) {
                 resource.update_item_by_id(TABLE_NAME, restaurant.id, 'menu_ids', [], function(result) {

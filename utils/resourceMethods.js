@@ -178,6 +178,7 @@ module.exports = {
                         id: res_menuItem.id.S, 
                         menu_id: res_menuItem.menu_id.S,
                         name: res_menuItem.name.S,
+                        section: res_menuItem.section.S,
                         price: res_menuItem.price.S ? res_menuItem.price.S : res_menuItem.price.N,
                         description: res_menuItem.description.S,
                         isVegan: res_menuItem.isVegan.BOOL,
@@ -186,8 +187,7 @@ module.exports = {
                         allergies: batchParser.parse_string_array(res_menuItem.allergies)
                     });
                 }
-                
-                // TODO: add avg_rating
+
                 var formatted_menuItems = { count, MenuItems: formatter.MenuItems(menuItems) }
                 callback(formatted_menuItems);
             } 

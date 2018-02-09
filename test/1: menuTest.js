@@ -37,12 +37,7 @@ describe('', function() {
 			});
 
 			describe('POST', function() {
-				// before(function(done) {
-				// 	console.log("\t  Clearing tables...")
-				// 	execSync('npm run delete-tables && npm run create-tables');
-				// 	done();
-					
-				// })
+
 				after(function(done) {
 					console.log("\t  Repopulating tables...")
 					execSync('npm run populate-tables');

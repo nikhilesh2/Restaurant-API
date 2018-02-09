@@ -30,11 +30,7 @@ const notAllowed = function() {
 
 
 /* ======= MENU ITEMS ======= */
-/* 
-    This endpoint allows you to get detailed
-    data about Menu(s) based off either the
-    menu ID or RestaurantID 
-*/
+
 menuItemRouter.route('/')
     
     // retrieve all menus
@@ -97,11 +93,7 @@ menuItemRouter.route('/')
 
 
 /* ======= MENU ITEM BY ID======= */
-/* 
-    This endpoint allows you to get detailed
-    data about a Menu Item based off the menu 
-    item id
-*/
+
 menuItemRouter.route('/:id')
     
     // retrieve menu item by menu item id
@@ -114,14 +106,11 @@ menuItemRouter.route('/:id')
      
         // make the query
         dynamoDB.retrieve_query(params, function(result) {
-
             const statusCode = result.Items ? 200 : 404;
-            if(statusCode !== 200) res.status(statusCode).send({});
+            if(statusCode !== 200) return res.status(statusCode).send({});
    
-            else   {
-                const unformatted_data = { Items: [result.Items[0]] };
-                res.status(statusCode).send(formatter.MenuItems(unformatted_data)[0]); // TODO: refactor this
-            }
+            const unformatted_data = { Items: [result.Items[0]] };
+            res.status(statusCode).send(formatter.MenuItems(unformatted_data)[0]);
         });
     })
 
@@ -139,16 +128,22 @@ menuItemRouter.route('/:id')
             resource.get_by_id("Menus", { id: menu_id } , function(response) {
                 const menu = response.data;
                 for(var key in menu.sections) {
-                    const index = menu.sections[key].indexOf(menu_id)
+
+                    // retrieve index of the menu item id
+                    const index = menu.sections[key].indexOf(req.params.id)
+                    
+                    // remove menu item from menu
                     if(index > -1)  menu.sections[key].splice(index, 1);
                 }
+
+                // update menu newly assigned menu items
                 resource.update_item_by_id("Menus", menu_id, 'sections', menu.sections, function(response) {
                     res.status(result.statusCode).send(result);
                 });
               
             })
         })
-    });
+    })
     
 
 module.exports = {

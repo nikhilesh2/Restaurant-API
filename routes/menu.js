@@ -157,7 +157,7 @@ menuRouter.route('/:id/menu-items')
         params.KeyConditionExpression = "#id = :id";
         delete params.FilterExpression
 
-        // make the query
+        // retireve the menu
         dynamoDB.retrieve_query(params, function(result) {
             const statusCode = result.Items ? 200 : 404;
             if(statusCode !== 200)  return res.status(statusCode).send([]);
@@ -169,7 +169,7 @@ menuRouter.route('/:id/menu-items')
             var counter = 0;
             var length = 0;
 
-            // Must split up menu items into 
+            // Must split up menu items into batches
             for(i in sections) {
                 for(j in sections[i]) {
                     if(++counter >= batchParser.BATCH_MAX) {
@@ -180,13 +180,14 @@ menuRouter.route('/:id/menu-items')
                     length++;
                 }
             }
+            // make the batch queries
             for(var i = 0; i < ids.length; i++) {
                 if(ids[i].length !== 0) {
                     resource.get_batch_menuItems(ids[i], function(result) {
                         response.count += result.count;
                         Array.prototype.push.apply(response.MenuItems,result.MenuItems);
 
-                        if(response.count >= length)   res.send(response)
+                        if(response.count >= length)  return res.status(200).send(response)
                     })
                 }
                 else res.status(404).send([]);
@@ -197,13 +198,14 @@ menuRouter.route('/:id/menu-items')
 
     .post(notAllowed())
 
-    // TODO: delete all items in a menu
+
     .delete(function (req, res) {
         resource.get_by_id(TABLE_NAME, req.params, function(result) {
             if(result.statusCode !== 200)   res.status(result.statusCode).send(result);
             else {
                 var menu = result.data;
                 var menu_item_ids = []
+
                 // remove all menu item ids 
                 for(var key in menu.sections)  {
                     for(var i in menu.sections[key])   menu_item_ids.push(menu.sections[key][i]); // save the id
@@ -216,14 +218,11 @@ menuRouter.route('/:id/menu-items')
                     resource.delete_menu_items(menu_item_ids, function(response) {
                         res.status(200).send(response);
                     })
-
                 })
             }
         })
-
     });
     
-
 module.exports = {
   menuRouter: menuRouter
 };
