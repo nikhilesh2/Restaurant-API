@@ -1,5 +1,5 @@
 node_modules/
 dynamodb_local_latest
-junk.js
 config.json
 *.db
+.DS_Store
