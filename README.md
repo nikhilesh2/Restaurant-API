@@ -51,7 +51,7 @@
 > Create and populate the tables with the following commands: <br />
 > ```npm run build-tables``` <br />
 > <br />
-> Here are some additional commands: <br />
+> Here are some additional commands that you may find helpful: <br />
 >   * ```npm run delete-tables``` - deletes all tables
 >   * ```npm run create-tables``` - creates the necessary tables
 >   * ```npm run populate-tables``` - populates tables with sample data
