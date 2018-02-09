@@ -330,3 +330,5 @@
 2. Add more exhaustive testing to all of the endpoints and "other" methods
 3. Add More extensive verifiers 
 4. Optimize database using best dynamoDB practices
+5. Replace UUID with custom integer id generator to speed up queries
+6. Add response body for each method in every endpoint to README
