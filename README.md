@@ -46,6 +46,7 @@
 >	* [Download here](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/DynamoDBLocal.html#DynamoDBLocal.DownloadingAndRunning) <br />
 >	* Navigate to the directory where it is located and run it with the following command: <br />
 > ```java -jar dynamodb_local_latest/DynamoDBLocal.jar```
+> Note: it should be running on port 8000
 
 > #### Setting up the database
 > Create and populate the tables with the following commands: <br />
