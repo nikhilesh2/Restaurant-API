@@ -304,8 +304,8 @@
 
 ## Unit Tests
 > #### I have created a handful of unit tests for each of the endpoints. Make sure no other processes are running on the same port.
-> #### Type in the following command to run the unit tests
->  ```npm run tests```
+#### Type in the following command to run the unit tests
+```npm run tests```
 
 
 ## Future Work
