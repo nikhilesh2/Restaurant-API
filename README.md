@@ -283,7 +283,7 @@
 | menu_id | string | Required | The id of the menu that the menu item will be added to|
 | name | string | Required| The name of the menu item |
 | price | number | Required | The price of the menu item |
-| section | string | Required | The section of the menu that the menu item is listed under. If section doesn't already exist in menu, a new one will be created |
+| section | string | Required | The section of the menu that the menu item is listed under. If the section doesn't already exist in menu, a new one will be created |
 | description | string | Required | A description of the menu item |
 | isVegan | boolean | Required | Whether or not the menu item is vegan |
 | isVegetarian | boolean | Required| Whether or not the menu item is vegetarian |
