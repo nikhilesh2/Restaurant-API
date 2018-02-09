@@ -13,10 +13,10 @@ menuRouter.all('*', cors());
 
 var menuRouter = express.Router();
 
-const params = require('../models/Restaurant.js'); // TODO: replace with menu.js
+const params = require('../models/Restaurant.js');
 const TABLE_NAME = "Menus";
 
-// TODO: put in own file
+
 const notAllowed = function() {
   return function(req, res) { res.status(405).send({statusCode: 405, message: "Method not allowed"}); };
 }
@@ -101,7 +101,6 @@ menuRouter.route('/:id')
     .post(notAllowed())
 
     // delete menu based of menu id
-    // TODO: remove associated menu items
     .delete(function (req, res) {
         // Set up Params
         var params = {

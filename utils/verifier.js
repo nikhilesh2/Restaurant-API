@@ -17,7 +17,6 @@ module.exports = {
 		if (!item.phone_number)			messages.push("phone_number attribute must be set");
 		if (!item.email)				messages.push("email attribute must be set");
 		if (!item.hours)				messages.push("hours Attribute must be set");
-		// if(!item.menus)					messages.push("menus Attribute must be set");
 
 		// Optional - however must check if 'delivers' has a value, then it should be either 'yes' or 'no'
 		if(item.delivers && 
@@ -40,7 +39,6 @@ module.exports = {
 		if(!item.restaurant_id)			messages.push("restaurant_id attribute must be set");
 
 		if (!item.sections)				messages.push("sections attribute must be set");
-		else 							messages.push(verifySections(item.sections));
 
 		return formatResponse(messages);
 		
@@ -70,34 +68,12 @@ module.exports = {
 }
 
 var formatResponse = function(messages) {
-	messages = messages[0] === null ? [] : messages;
 	return {
 		statusCode: messages.length === 0 ? 200 : 400,
 		messages: messages
 	}
 }
 
-var verifySections = function(sections) {
-	// try {	
-	// 	sections = JSON.stringify(sections).replace(/'/g, '"');
-	// 	sections = JSON.parse(sections);	
-	// }
- // 	catch(e) 	{	
- // 		return "section object is not in proper JSON form";	
- // 	}
 
-	// if(typeof sections === 'object') {
-	// 	for(var key in sections) {
-	// 		if(typeof key !== 'string') return "section names must be strings";
 
-	// 		else {
-	// 			for(var i in sections[key]) {					
-	// 				if(typeof sections[key][i] !== 'string') "menu ids must be strings";
-	// 			}
-	// 		}
-	// 	}
-	// } 
-	// else return "sections must be an object";
-	return null;
-}
 
