@@ -78,7 +78,7 @@ describe('', function() {
 					const response = verifiers.verifyMenu_POST(SAMPLE_MENUS.data[0]);
 
 					response.statusCode.should.eql(400);
-					response.messages.length.should.eql(2);
+					response.messages.length.should.eql(1);
 					response.messages[0].should.eql("ID attribute should not be passed in");
 					done();
 				})

@@ -9,8 +9,6 @@ var execSync 	= require('child_process').execSync;
 
 
 
-// var delTables 	= require('../dynamoDB/deleteTables');
-// var popTables 	= require('../dev/populateTables');
 const SAMPLE_RESTAURANTS 	= require('./restaurantSample');
 const SAMPLE_MENUS 	= require('./menuSample');
 
@@ -101,7 +99,7 @@ describe('Setting up Tests', function() {
 		 		});
 
 		 		after(function(done) {
-		 			execSync('node dev/populateTables.js');
+		 			execSync('npm run populate-tables');
 		 			done();
 		 		});
 		 	});
@@ -162,7 +160,7 @@ describe('Setting up Tests', function() {
 			 	});
 			 	after(function(done) {
 			 		console.log("\t  Repopulating tables...")
-			 		execSync('node dev/populateTables.js');
+			 		execSync('npm run populate-tables');
 		 			done();
 			 	})
 			 });
